@@ -1,21 +1,14 @@
 import React, { useState} from 'react';
 import './App.css';
+import Main from './components/main/main.js'
+import 'fontsource-roboto';
 
 function App() {
-  const [count,  setCount] = useState(0)
 
-  const increment = () => {
-    setCount(count + 1);
-  }
   
   return (
     <div className="App">
-      Update : Our page will be called Pied paper
-      Simple counter - 
-
-      Ooga booba { count }
-
-      <button onClick= {increment}> Increment </button>
+      <Main/>
     </div>
   );
 }
