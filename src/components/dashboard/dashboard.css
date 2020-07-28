@@ -1,0 +1,19 @@
+.dashboard{
+    display:flex;
+    height:60vh;
+    border-bottom: 1px solid black;
+}
+
+.left{
+    flex: .5
+}
+
+.right{
+    flex:.5;
+    display: flex;
+    align-content:center;
+
+    align-self: center;
+    justify-content: center;
+
+}
