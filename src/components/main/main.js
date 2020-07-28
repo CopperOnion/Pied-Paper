@@ -1,5 +1,21 @@
 import React , { useState} from 'react'
 import Navbar from "../nav/navbar"
+import Dashboard from "../dashboard/dashboard"
+
+import { createMuiTheme } from '@material-ui/core/styles';
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#000000',
+    },
+    secondary: {
+      main: '#f44336',
+    },
+  },
+});
+
 
 function Main() {
     const [count,  setCount] = useState(0)
@@ -9,13 +25,9 @@ function Main() {
     }
     return (
         <div>
-                <Navbar/>
-                Update : Our page will be called Pied paper
-                Simple counter - 
-
-                Ooga booba { count }
-
-                <button onClick= {increment}> Increment </button>
+          <Navbar theme={theme}/>
+          <Dashboard theme={theme}/>
+                
         </div>
     )
 }
