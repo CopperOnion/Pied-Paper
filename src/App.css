@@ -10,12 +10,16 @@ html,body{
   height:100%;
   font-family: "Roboto";
   font-weight: 300;
+  
 }
 
 body{
   width:70%;
   margin:auto;
+  overflow-x: hidden;
+
 }
+
 
 #root{
   height:100%;

@@ -32,7 +32,7 @@ function Dashboard({theme}) {
             </div>
             
 
-            <div classname= "smallbar">
+            <div className= "smallbar">
                 <ThemeProvider theme={theme}>
                     <Typography className={classes.title} variant="h4" color='primary'>
                         Truth-based news aggregator

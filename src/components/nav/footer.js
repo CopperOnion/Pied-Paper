@@ -3,10 +3,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 
 import './footer.css'
 const useStyles = makeStyles((theme) => ({
@@ -47,7 +44,7 @@ function Footer({theme}) {
                             
                             {
                                 topics.map(el => (
-                                <li>
+                                <li key={el}>
                                     <Typography className={classes.title} variant="body2" color='primary'>
                                         {el}
                                     </Typography>
