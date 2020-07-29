@@ -1,0 +1,11 @@
+.menubar ul{
+    margin-block-end: none;
+    margin-block-start: none;
+    margin:0;
+    padding: 0;
+}
+.menubar li{
+    display: inline;
+    color:black;
+    margin-right: 1vw;
+}

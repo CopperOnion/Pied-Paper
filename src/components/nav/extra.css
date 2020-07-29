@@ -1,0 +1,18 @@
+.extra ul{
+    margin-block-end: none;
+    margin-block-start: none;
+    margin-bottom:10vh;
+    padding: 0;
+}
+.extra li{
+    display: inline;
+    color:black;
+    margin-right: 1vw;
+}
+
+.extra{
+    display:flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}

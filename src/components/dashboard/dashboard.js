@@ -3,7 +3,6 @@ import Typography from '@material-ui/core/Typography';
 import { ThemeProvider } from '@material-ui/styles';
 
 import { makeStyles } from '@material-ui/core/styles';
-import DailyCard from './card/card'
 
 import './dashboard.css'
 
@@ -22,26 +21,26 @@ function Dashboard({theme}) {
 
     return (
         <div className = "dashboard">
-            <div className = "left">
+   
+            
+            <div className="top">
                 <ThemeProvider theme={theme}>
-                    <Typography className={classes.title} variant="h1" color='primary'>
+                    <Typography className={classes.title} variant="h2" color='primary'>
                         Pied Paper
                     </Typography>
+                </ThemeProvider>
+            </div>
+            
 
-                    <Typography className={classes.title} variant="h5" color='primary'>
-                        The only source of news
+            <div classname= "smallbar">
+                <ThemeProvider theme={theme}>
+                    <Typography className={classes.title} variant="h4" color='primary'>
+                        Truth-based news aggregator
                     </Typography>
                 </ThemeProvider>
-
             </div>
 
 
-            <div className = "right">
-
-                <DailyCard theme={theme}/>
-                
-            </div>
-        
         </div>
     )
 }

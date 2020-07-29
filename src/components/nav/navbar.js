@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import InstagramIcon from '@material-ui/icons/Instagram';
-
+import MenuIcon from '@material-ui/icons/Menu'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,12 +38,16 @@ function Navbar({theme}) {
                   <Toolbar variant="dense" >
 
                       <IconButton edge="start" className={classes.menuButton} color="primary" aria-label="menu">
-                        <AccessTimeIcon />
+                        <MenuIcon/>
                       </IconButton>
+
+                      <AccessTimeIcon className={classes.loginButton} color="primary" />
 
                       <Typography className={classes.title} variant="subtitle1" color='primary'>
                           {date}
                       </Typography>
+
+
                       <Button  className={classes.loginButton} color="black">Login</Button>
 
                       <InstagramIcon color="primary" />
