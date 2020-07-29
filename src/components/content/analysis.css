@@ -1,0 +1,23 @@
+.analysis{
+    background-color:navajowhite;
+    display:flex;
+    height:70vh;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+
+    overflow-x: hidden;
+    margin-left: -20vw;
+    margin-right: -20vw;
+
+    left:0;
+}
+
+.analysis .text{
+    margin-left: 20vw;
+    margin-right: 20vw;
+    width:70vw;
+    color:black;
+    display: flex;
+    overflow:hidden;
+    padding:3vw;
+}

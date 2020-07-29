@@ -48,7 +48,7 @@ function Navbar({theme}) {
                       </Typography>
 
 
-                      <Button  className={classes.loginButton} color="black">Login</Button>
+                      <Button  className={classes.loginButton} color="primary">Login</Button>
 
                       <InstagramIcon color="primary" />
 
@@ -68,6 +68,7 @@ function returnDay(day){
     case 4: return "Thursday";
     case 5: return "Friday";
     case 6: return "Saturday";
+    default: return;
   }
 }
 
@@ -85,6 +86,7 @@ function returnMonth(month){
     case 9: return "October";
     case 10: return "November";
     case 11: return "December";
+    default: return;
   }
 }
 
