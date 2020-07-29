@@ -1,0 +1,23 @@
+.footer{
+    margin-top:1vh;
+
+    display:flex;
+    flex-direction:column;
+    border-bottom: solid 1px black;
+}
+
+.footer li{
+    color:black;
+    margin-top: .5vh;
+}
+
+.footer ul{
+
+    list-style-type: none;
+    margin-block-end: none;
+    margin-block-start: none;
+    margin:0;
+    padding: 0;
+    margin-bottom:3vh;
+
+}
