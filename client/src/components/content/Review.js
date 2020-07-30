@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Card from '../card/card'
+import axios from "axios";
+
 import './review.css'
 
 
@@ -13,6 +15,13 @@ export default class Review extends Component {
     }
     
     render() {
+
+        axios
+            .get("/api/getList")
+            .then(res => console.log(res)) // re-direct to login on successful register
+            .catch(err => console.log(err))
+            
+
         return (
             <div className="review">
                 <div className="left">

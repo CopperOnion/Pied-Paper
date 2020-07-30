@@ -1,11 +1,12 @@
 const Pool = require("pg").Pool;
 
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "api",
+  user: "wejgjhiuiahuhh",
+  host: "ec2-34-193-117-204.compute-1.amazonaws.com",
+  database: "de20i26pohuek0",
   password: "0412",
-  port: 5433,
+  port: 5432,
+  sslmode:require
 });
 
 const getUsers = (req, res) => {
