@@ -16,7 +16,7 @@ router.get("/users" ,(req, res) => {
         if (error) {
             throw error;
         }
-
+        console.log(res)
         res.status(200).json(result.rows);
     });
 })
