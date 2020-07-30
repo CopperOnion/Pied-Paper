@@ -14,17 +14,19 @@ export default class Review extends Component {
         }
     }
     
+    componentDidMount(){
+        axios
+        .get("/api/news/users",{
+            headers: {Accept: 'application/json' }
+            }
+        )
+        .then(res => console.log(...res.data)) // re-direct to login on successful register
+        .catch(err => console.log(err))
+    
+    }
     render() {
 
-        axios
-            .get("/api/news/users",{
-                headers: {Accept: 'application/json' }
-
-                }
-            )
-            .then(res => console.log(res)) // re-direct to login on successful register
-            .catch(err => console.log(err))
-            
+        
 
         return (
             <div className="review">
