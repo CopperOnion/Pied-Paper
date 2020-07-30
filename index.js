@@ -3,9 +3,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const db = require("./queries");
 const cors = require("cors");
-
-const news = require("./routes/news");
-
+const News = require("./routes/news")
 const app = express();
 
 // Serve the static files from the React app
@@ -30,6 +28,8 @@ app.use(cors());
 app.options('*', cors());
 
 // Routes
+app.use("/api/news", News);
+
 const port = process.env.PORT || 5000;
 
 if ( process.env.PORT){
@@ -37,17 +37,16 @@ if ( process.env.PORT){
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
   });
-  app.use("/api/news", news);  
 }
-else{
-  app.get("/api/news/users", db.getUsers);
-  /* app.get("/users", localdb.getUsers);
-  app.get("/users/:id", localdb.getUserById);
-  app.post("/users", localdb.createUser);
-  app.put("/users/:id", localdb.updateUser);
-  app.delete("/users/:id", localdb.deleteUser); */
 
-}
+// These stuff works locally but gotta make it work globally
+
+/*app.get("/api/news/users", db.getUsers);
+app.get("/users", localdb.getUsers);
+app.get("/users/:id", localdb.getUserById);
+app.post("/users", localdb.createUser);
+app.put("/users/:id", localdb.updateUser);
+app.delete("/users/:id", localdb.deleteUser); */
 
 app.listen(port);
 
