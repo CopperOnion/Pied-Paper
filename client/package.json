@@ -11,6 +11,7 @@
     "d3": "^5.16.0",
     "d3-dsv": "^1.2.0",
     "fontsource-roboto": "^2.2.6",
+    "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
