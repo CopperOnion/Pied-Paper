@@ -23,6 +23,11 @@
   "dependencies": {
     "concurrently": "^5.2.0",
     "express": "^4.17.1",
+<<<<<<< Updated upstream
     "nodemon": "^2.0.4"
+=======
+    "pg": "^8.3.0",
+    "postgresql": "0.0.1"
+>>>>>>> Stashed changes
   }
 }
