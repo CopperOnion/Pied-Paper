@@ -17,7 +17,7 @@ export default class Review extends Component {
     render() {
 
         axios
-            .get("/api/getList")
+            .get("/api/news/users")
             .then(res => console.log(res)) // re-direct to login on successful register
             .catch(err => console.log(err))
             
