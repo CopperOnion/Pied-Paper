@@ -28,6 +28,17 @@ router.get("/users", (req, res )=>{
 
 })
 
+router.post("/insert", (req, res )=>{
+  const values = ['ironman', 'ooga@gmail.com']
+  client.query('INSERT INTO users(name,email) VALUES ($1, $2)', values, function(err, result) {
+      if (err) throw err;
+      for (let row of result.rows) {
+        console.log(JSON.stringify(row));
+      }
+      res.status(200).json(result.rows);
+  });
+})
+
 router.get("/retrieve", (req, res )=>{
   newsapi.v2.everything({
     q: 'covid',

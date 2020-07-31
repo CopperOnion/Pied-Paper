@@ -13,6 +13,10 @@ export default class Content extends Component {
     }
 
     componentDidMount(){
+        /* 
+        Fetches the users ( currently serves no purpose)
+        
+        */
         axios
         .get("/api/news/users",{
             headers: {Accept: 'application/json' }
@@ -21,6 +25,11 @@ export default class Content extends Component {
         .then(res => console.log(res.data)) // re-direct to login on successful register
         .catch(err => console.log(err))
     
+
+        /* 
+        Fetches the news using axios
+        
+        */
         axios
         .get("/api/news/retrieve",{
             headers: {Accept: 'application/json' }
@@ -28,24 +37,41 @@ export default class Content extends Component {
         )
         .then(res => {
             this.setState(
-                { news:  [...res.data.articles] },
-                () => console.log( this.state)
+                { news:  [...res.data.articles] }
               )
+        }) 
+        .catch(err => console.log(err))
+
+    }
+
+    handleClick = () =>{
+        axios
+        .post("/api/news/insert",{
+            headers: {Accept: 'application/json' }
+            }
+        )
+        .then(res => {
+
         }) 
         .catch(err => console.log(err))
 
     }
     render() {
         let cardlist
+
+        /* 
+        Maps the news that were retrieved into a list
+        
+        */
         if (this.state.news){
             let news = this.state.news;
-            console.log(news)
-
             cardlist = 
             <ul>
-                {news.map((e)=>(
-                    <li key={e.source}>
-                    <Card title={e.title} 
+                {news.map((e,i)=>(
+                    <li key={i}>
+                    <Card 
+                          key={i}
+                          title={e.title} 
                           description = {e.description}
                           image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'} 
                           theme={this.props.theme}/> 
@@ -57,6 +83,7 @@ export default class Content extends Component {
         return (
             <div className="content">
                 <div className="left">
+                    <button onClick={this.handleClick}>TEST insert</button>
                     {cardlist}
 
                 </div>
