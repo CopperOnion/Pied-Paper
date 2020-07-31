@@ -1,0 +1,3 @@
+Link to fake and real news datasets (as CSV files):
+
+https://www.kaggle.com/clmentbisaillon/fake-and-real-news-dataset/activity
