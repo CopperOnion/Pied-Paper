@@ -6,6 +6,7 @@ const cors = require("cors");
 const News = require("./routes/news")
 const app = express();
 
+//e5bc086901ee4a3fbda77b9c49634c3a NEWSAPI
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));
 
@@ -15,13 +16,6 @@ app.use(
     extended: true,
   })
 );
-// An api endpoint that returns a short list of items
-app.get("/api/getList", (req, res) => {
-  var list = ["item1", "item2", "item3"];
-  res.json(list);
-  console.log("Sent list of items");
-});
-
 
 // Cors
 app.use(cors());
