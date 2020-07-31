@@ -3,7 +3,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const db = require("./queries");
 const cors = require("cors");
-const News = require("./routes/news")
+const News = require("./routes/news");
 const app = express();
 
 //e5bc086901ee4a3fbda77b9c49634c3a NEWSAPI
@@ -19,17 +19,17 @@ app.use(
 
 // Cors
 app.use(cors());
-app.options('*', cors());
+app.options("*", cors());
 
 // Routes
 app.use("/api/news", News);
 
 const port = process.env.PORT || 5000;
 
-if ( process.env.PORT){
+if (process.env.PORT) {
   // Handles any requests that don't match the ones above
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname + "/client/build/index.html"));
   });
 }
 

@@ -5,9 +5,8 @@ const pool = new Pool({
   host: "localhost",
   database: "api",
   password: "0412",
-  port: 5432
+  port: 5432,
 });
-
 
 const getUsers = (req, res) => {
   pool.query("SELECT * FROM users ORDER BY id ASC", (error, result) => {
