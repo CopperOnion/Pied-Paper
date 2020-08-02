@@ -37,26 +37,34 @@ router.get("/retrieve", (req, res) => {
   newsapi.v2
     .everything({
       q: "covid",
-      from: "2020-06-30",
-      to: "2020-07-05",
+      from: "2020-07-25",
+      to: "2020-07-30",
       language: "en",
     })
     .then((response) => {
-      res.send(response);
-      /*TO DO
-      /send response to the database so that the new news articles can be stored
-      let news = response.articles
-      
-      THERE IS AN ISSUE HERE, DB REQUIRES LIST, BUT API GIVES A LIST OF OBJECTS
-      news.map((article) => client.query("INSERT INTO placeholdDB (placeholdDATA, TF) VALUES ($1, $2) ON CONFLICT (placeholdDATA) DO NOTHING RETURNING *", [article, "True"],
-      function (err, result){
-        if (err) throw err;
-      }))
+
+      /*
+        send response to the database so that the new news articles can be stored
+        TO DO:- MOVE THIS SO THAT THE NEWS API DOESN'T GET PINGED EVERY TIME NEWS IS REQUESTED
+              - IMPLEMENT CATEGORY NEWS SERVICE
+              - IMPLEMENT DATE TIMEFRAME SEARCH I.E. 1 DAY, 1 WEEK, 1 MONTH, THE FREE API DOESN'T SERVE NEWS OLDER THAN A MONTH
       */
+      const news = response.articles
+
+      news.map((article) => client.query("INSERT INTO news (articles, truefalse) VALUES ($1, $2) ON CONFLICT (articles) DO NOTHING", [article, 1],
+        function (err, result) {
+          if (err) throw err;
+        }))
     })
     .catch((err) => {
       console.log(err);
     });
+
+  client.query("SELECT * FROM news", (err, result) => {
+    if (err) throw err;
+
+    res.status(200).json(result.rows)
+  })
 });
 
 module.exports = router;
