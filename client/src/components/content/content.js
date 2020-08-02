@@ -8,7 +8,7 @@ export default class Content extends Component {
         super(props)
     
         this.state = {
-             news : ''
+             news : ["kek"]
         }
     }
 
@@ -30,7 +30,8 @@ export default class Content extends Component {
         Fetches the news using axios
         
         */
-        axios
+
+        /* axios
         .get("/api/news/retrieve",{
             headers: {Accept: 'application/json' }
             }
@@ -40,7 +41,7 @@ export default class Content extends Component {
                 { news:  [...res.data.articles] }
               )
         }) 
-        .catch(err => console.log(err))
+        .catch(err => console.log(err)) */
 
     }
 
@@ -71,9 +72,9 @@ export default class Content extends Component {
                     <li key={i}>
                     <Card 
                           key={i}
-                          title={e.title} 
-                          description = {e.description}
-                          image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'} 
+                          title={"test"} 
+                          description = {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation "}
+                          image={'https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/11/05/11/tnol8.jpg?w968h681'} 
                           theme={this.props.theme}/> 
                     </li>
                 ))}
@@ -83,7 +84,6 @@ export default class Content extends Component {
         return (
             <div className="content">
                 <div className="left">
-                    <button onClick={this.handleClick}>TEST insert</button>
                     {cardlist}
 
                 </div>
