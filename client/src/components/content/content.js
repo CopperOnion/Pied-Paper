@@ -6,54 +6,58 @@ import axios from "axios";
 export default class Content extends Component {
     constructor(props) {
         super(props)
-    
+
         this.state = {
-             news : ''
+            news: ''
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
+
+        //GET request to express server for the NEWS API users?
         axios
-        .get("/api/news/users",{
-            headers: {Accept: 'application/json' }
+            .get("/api/news/users", {
+                headers: { Accept: 'application/json' }
             }
-        )
-        .then(res => console.log(res.data)) // re-direct to login on successful register
-        .catch(err => console.log(err))
-    
+            )
+            .then(res => console.log(res.data)) // re-direct to login on successful register
+            .catch(err => console.log(err))
+
+        //GET request to express server for the NEWS API to return new articles
         axios
-        .get("/api/news/retrieve",{
-            headers: {Accept: 'application/json' }
+            .get("/api/news/retrieve", {
+                headers: { Accept: 'application/json' }
             }
-        )
-        .then(res => {
-            this.setState(
-                { news:  [...res.data.articles] },
-                () => console.log( this.state)
-              )
-        }) 
-        .catch(err => console.log(err))
+            )
+            .then(res => {
+                this.setState(
+                    //the news route now returns a list of objects with keys "articles" and "truefalse"
+                    { news: [...res.data] },
+                    () => console.log(this.state)
+                )
+            })
+            .catch(err => console.log(err))
 
     }
     render() {
         let cardlist
-        if (this.state.news){
+        if (this.state.news) {
             let news = this.state.news;
             console.log(news)
 
-            cardlist = 
-            <ul>
-                {news.map((e)=>(
-                    <li key={e.source}>
-                    <Card title={e.title} 
-                          description = {e.description}
-                          image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'} 
-                          theme={this.props.theme}/> 
-                    </li>
-                ))}
-            </ul>
+            cardlist =
+                <ul>
+                    {news.map((e) => (
+                        <li key={e.articles.source}>
+                            <Card title={e.articles.title}
+                                description={e.articles.description}
+                                image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
+                                theme={this.props.theme} />
+                        </li>
+                    ))}
+                </ul>
         }
-        
+
         return (
             <div className="content">
                 <div className="left">
