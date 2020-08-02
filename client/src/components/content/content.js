@@ -6,81 +6,58 @@ import axios from "axios";
 export default class Content extends Component {
     constructor(props) {
         super(props)
-    
+
         this.state = {
-             news : ["kek"]
+            news: ''
         }
     }
 
-    componentDidMount(){
-        /* 
-        Fetches the users ( currently serves no purpose)
-        
-        */
+    componentDidMount() {
+
+        //GET request to express server for the NEWS API users?
         axios
-        .get("/api/news/users",{
-            headers: {Accept: 'application/json' }
+            .get("/api/news/users", {
+                headers: { Accept: 'application/json' }
             }
-        )
-        .then(res => console.log(res.data)) // re-direct to login on successful register
-        .catch(err => console.log(err))
-    
+            )
+            .then(res => console.log(res.data)) // re-direct to login on successful register
+            .catch(err => console.log(err))
 
-        /* 
-        Fetches the news using axios
-        
-        */
-
-        /* axios
-        .get("/api/news/retrieve",{
-            headers: {Accept: 'application/json' }
-            }
-        )
-        .then(res => {
-            this.setState(
-                { news:  [...res.data.articles] }
-              )
-        }) 
-        .catch(err => console.log(err)) */
-
-    }
-
-    handleClick = () =>{
+        //GET request to express server for the NEWS API to return new articles
         axios
-        .post("/api/news/insert",{
-            headers: {Accept: 'application/json' }
+            .get("/api/news/retrieve", {
+                headers: { Accept: 'application/json' }
             }
-        )
-        .then(res => {
-
-        }) 
-        .catch(err => console.log(err))
+            )
+            .then(res => {
+                this.setState(
+                    //the news route now returns a list of objects with keys "articles" and "truefalse"
+                    { news: [...res.data] },
+                    () => console.log(this.state)
+                )
+            })
+            .catch(err => console.log(err))
 
     }
     render() {
         let cardlist
-
-        /* 
-        Maps the news that were retrieved into a list
-        
-        */
-        if (this.state.news){
+        if (this.state.news) {
             let news = this.state.news;
-            cardlist = 
-            <ul>
-                {news.map((e,i)=>(
-                    <li key={i}>
-                    <Card 
-                          key={i}
-                          title={"test"} 
-                          description = {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation "}
-                          image={'https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/11/05/11/tnol8.jpg?w968h681'} 
-                          theme={this.props.theme}/> 
-                    </li>
-                ))}
-            </ul>
+            console.log(news)
+
+            cardlist =
+                <ul>
+                    {news.map((e) => (
+                        <li key={e.articles.source}>
+                            <Card title={e.articles.title}
+                                description={e.articles.description}
+                                image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
+                                theme={this.props.theme} />
+                        </li>
+                    ))}
+                </ul>
         }
-        
+
         return (
             <div className="content">
                 <div className="left">
