@@ -20,37 +20,40 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard({title,description, image, theme}) {
+export default function MediaCard({ title, description, image, theme, publishdate }) {
   const classes = useStyles();
 
   return (
     <ThemeProvider theme={theme}>
 
-        <Card elevation={3} className={classes.root}>
-            <CardActionArea>
-                <CardMedia
-                className={classes.media}
-                image= {image}
-                title= {title}
-                />
-                <CardContent>
-                <Typography gutterBottom variant="h6" component="h3">
-                    {title}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    {description}
-                </Typography>
-                </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary">
-                Share
+      <Card elevation={3} className={classes.root}>
+        <CardActionArea>
+          <CardMedia
+            className={classes.media}
+            image={image}
+            title={title}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h6" component="h3">
+              {title}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {description}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Button size="small" color="primary">
+            Share
                 </Button>
-                <Button size="small" color="primary">
-                Learn More
+          <Button size="small" color="primary">
+            Learn More
                 </Button>
-            </CardActions>
-        </Card>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {publishdate}
+          </Typography>
+        </CardActions>
+      </Card>
     </ThemeProvider>
 
   );
