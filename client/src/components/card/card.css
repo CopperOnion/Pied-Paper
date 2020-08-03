@@ -10,7 +10,7 @@ h5{
 p{
     margin-block-start: 0em;
     margin-block-end: 0em;
-    font-size:10;
+    font-size:.8em;
 
 }
 
@@ -18,6 +18,3 @@ p .description:hover{
     cursor : "pointer"
 }
 
-p .description{
-    color:red
-}
