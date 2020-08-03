@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
   root: {
     maxWidth: '100%',
-    marginTop: '2vh'
+    marginBottom: '2vh'
   },
   media: {
     height: 140,
