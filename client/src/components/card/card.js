@@ -76,9 +76,9 @@ export default function MediaCard({ title, description, image, theme, onClickCar
 
                     <p>
                     {description}
-                    {publishdate}
                     </p>
 
+                    <h6>{publishdate}</h6>
 
 
                 </div>
