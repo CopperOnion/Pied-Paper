@@ -14,11 +14,8 @@ const useStyles = makeStyles({
       marginBottom:"1em"
     },
     display:'flex',
-    borderBottom:'1px solid black',
-    borderRadius:'0',
-  },
-  'root:hover':{
-    cursor: 'pointer'
+    marginTop:'1vw',
+    paddingLeft: "1em"
   },
   media: {
     width: '100%',
@@ -31,7 +28,6 @@ const useStyles = makeStyles({
     alignItems: 'flex-start',
     padding:0,
     marginRight:'1em',
-    height: "500px"
 
   },
 
@@ -41,30 +37,16 @@ const useStyles = makeStyles({
     alignItems: 'flex-start',
     padding:0,
     marginRight:'1em',
-    borderRight:'1px solid black',
-    borderRadius:'0',
     paddingRight: '1em',
-    height: "500px",
+    borderBottom:'1px solid rgba(0,0,0,0.3)',
+    borderRadius:'0',
 
   },
 
   cardaction_left:{
-    padding:"2% 0",
     display:'flex',
-    flex:.3,
-    '&:hover': {
-      cursor: "pointer",
-    }
   },
 
-  cardaction_right:{
-    padding:"2% 0",
-    display:'flex',
-    flex:.7,
-    '&:hover': {
-      cursor: "pointer",
-    }
-  },
   title:{
     marginBottom:"1em"
   },
@@ -76,10 +58,10 @@ export default function MediaCard({title,description, image, theme}) {
 
   return (
     <ThemeProvider theme={theme}>
-        
+
         <Card elevation={0} className={classes.root}>
          
-            <div onClick={ () => {window.location.href = "www.youtube.com"}} className={classes.cardaction_left}>
+            <div className={classes.cardaction_left}>
                
                 <CardContent className={classes.left}>
                     <div className={classes.title}>
@@ -92,27 +74,6 @@ export default function MediaCard({title,description, image, theme}) {
 
                     <p>
                     {description}
-                    </p>
-
-
-
-                </CardContent>
-
-            </div>
-
-            <div className={classes.cardaction_right}>
-               
-                <CardContent className={classes.right}>
-                    <div className={classes.title}>
-                      <h2>  {title} </h2>
-                      <h5>The verge</h5>
-
-
-                    </div>
-                    
-
-                    <p>
-                    {description}
 
 
                     </p>
@@ -122,6 +83,7 @@ export default function MediaCard({title,description, image, theme}) {
                 </CardContent>
 
             </div>
+
 
         </Card>
     </ThemeProvider>

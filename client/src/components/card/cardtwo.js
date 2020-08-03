@@ -15,10 +15,7 @@ const useStyles = makeStyles({
     },
     display:'flex',
     borderBottom:'1px solid black',
-    borderRadius:'0',
-  },
-  'root:hover':{
-    cursor: 'pointer'
+    borderRadius:'0'
   },
   media: {
     width: '100%',
@@ -31,7 +28,6 @@ const useStyles = makeStyles({
     alignItems: 'flex-start',
     padding:0,
     marginRight:'1em',
-    height: "500px"
 
   },
 
@@ -43,27 +39,23 @@ const useStyles = makeStyles({
     marginRight:'1em',
     borderRight:'1px solid black',
     borderRadius:'0',
-    paddingRight: '1em',
-    height: "500px",
-
+    paddingRight: '1em'
   },
 
   cardaction_left:{
     padding:"2% 0",
     display:'flex',
-    flex:.3,
-    '&:hover': {
-      cursor: "pointer",
+    flex:.6,
+    content:{
+      
     }
+    
   },
 
   cardaction_right:{
     padding:"2% 0",
     display:'flex',
-    flex:.7,
-    '&:hover': {
-      cursor: "pointer",
-    }
+    flex:.4
   },
   title:{
     marginBottom:"1em"
@@ -76,10 +68,10 @@ export default function MediaCard({title,description, image, theme}) {
 
   return (
     <ThemeProvider theme={theme}>
-        
+
         <Card elevation={0} className={classes.root}>
          
-            <div onClick={ () => {window.location.href = "www.youtube.com"}} className={classes.cardaction_left}>
+            <div className={classes.cardaction_left}>
                
                 <CardContent className={classes.left}>
                     <div className={classes.title}>
@@ -92,6 +84,8 @@ export default function MediaCard({title,description, image, theme}) {
 
                     <p>
                     {description}
+
+
                     </p>
 
 

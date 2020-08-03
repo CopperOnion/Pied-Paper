@@ -1,17 +1,16 @@
 .content{
     display:flex;
-    margin-top:2vh;
 }
 
-.left{
+.content .left{
     margin-right: 1vw;
     padding-right:1vw;
-    border-right:1px solid rgba(0,0,0,.3);
     flex: .7;
 }
 
-.right{
+.content .right{
     flex: .3;
+    border-left:1px solid rgba(0,0,0,.3);
 
 }
 
