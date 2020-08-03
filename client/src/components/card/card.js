@@ -55,7 +55,7 @@ const useStyles = makeStyles({
   
 });
 
-export default function MediaCard({title,description, image, theme, onClickCard}) {
+export default function MediaCard({ title, description, image, theme, onClickCard, publishdate }) {
   const classes = useStyles();
 
   return (
@@ -76,12 +76,16 @@ export default function MediaCard({title,description, image, theme, onClickCard}
 
                     <p>
                     {description}
+                    {publishdate}
                     </p>
 
 
 
                 </div>
 
+                
+               
+                
                 <CardMedia
                   className={classes.media}
                   image={image}

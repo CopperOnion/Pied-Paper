@@ -51,7 +51,8 @@ router.get("/retrieve", (req, res) => {
       */
       const news = response.articles
 
-      news.map((article) => client.query("INSERT INTO news (articles, truefalse) VALUES ($1, $2) ON CONFLICT (articles) DO NOTHING", [article, 1],
+      news.map((article) => client.query(
+        "INSERT INTO news (articles, truefalse, publish_date) VALUES ($1, $2, $3) ON CONFLICT (articles) DO NOTHING", [article, 1, article.publishedAt],
         function (err, result) {
           if (err) throw err;
         }))
