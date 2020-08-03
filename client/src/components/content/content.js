@@ -45,6 +45,11 @@ export default class Content extends Component {
             })
             .catch(err => console.log(err))
 
+       
+    }
+
+    clickHandler = () =>{
+        console.log("kek")
     }
     render() {
         let cardlist
@@ -56,11 +61,13 @@ export default class Content extends Component {
             cardlist =
                 <ul>
                     {news.map((e) => (
-                        <li key={e.articles.source}>
-                            <Card title={e.articles.title}
+                        <li  key={e.articles.title} style= {{    marginRight: '2vw'}}>
+                            <Card  title={e.articles.title}
                                 description={e.articles.description}
                                 image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
-                                theme={this.props.theme} />
+                                theme={this.props.theme} 
+                                onClickCard={()=>this.clickHandler()}
+                                />
                         </li>
                     ))}
                 </ul>
@@ -70,37 +77,7 @@ export default class Content extends Component {
         return (
             <div className="content">
                 <div className="left">
-                    <Card title={"TEST"}
-                                description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "}
-                                image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
-                                theme={this.props.theme} />
-
-                    <Cardtwo title={"TEST"}
-                                description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "}
-                                image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
-                                theme={this.props.theme} />
-
-                   
-                    <Cardthree title={"TEST"}
-                                description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "}
-                                image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
-                                theme={this.props.theme} />
-
-                    <Cardfour title={"TEST"}
-                                description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "}
-                                image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
-                                theme={this.props.theme} />
-
-
-                    <Cardtwo title={"TEST"}
-                                description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "}
-                                image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
-                                theme={this.props.theme} /> 
-
-                    <Card title={"TEST"}
-                        description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "}
-                        image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
-                        theme={this.props.theme} />           
+                    {cardlist}          
                 </div>
 
                 <div className="right">

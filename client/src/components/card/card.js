@@ -16,62 +16,46 @@ const useStyles = makeStyles({
     display:'flex',
     borderBottom:'1px solid black',
     borderRadius:'0',
+    padding:0,
+    
   },
+  '.MuiCardContent-root:last-child' :{
+    padding: 0
+  },
+
   'root:hover':{
     cursor: 'pointer'
   },
   media: {
-    width: '100%',
     height: '100px',
     flex:.3,
-  },
-  right:{
-    display:'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    padding:0,
-    marginRight:'1em',
-    height: "500px"
-
+    right:0
   },
 
-  left:{
+  content:{
     display:'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    padding:0,
-    marginRight:'1em',
-    borderRight:'1px solid black',
-    borderRadius:'0',
-    paddingRight: '1em',
-    height: "500px",
-
-  },
-
-  cardaction_left:{
-    padding:"2% 0",
-    display:'flex',
-    flex:.3,
-    '&:hover': {
-      cursor: "pointer",
-    }
-  },
-
-  cardaction_right:{
-    padding:"2% 0",
-    display:'flex',
+    
     flex:.7,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  },
+
+  cardaction:{
+    padding:"4% 0",
+    width:'100%',
+    display:'flex',
     '&:hover': {
       cursor: "pointer",
     }
   },
+
   title:{
     marginBottom:"1em"
   },
   
 });
 
-export default function MediaCard({title,description, image, theme}) {
+export default function MediaCard({title,description, image, theme, onClickCard}) {
   const classes = useStyles();
 
   return (
@@ -79,11 +63,11 @@ export default function MediaCard({title,description, image, theme}) {
         
         <Card elevation={0} className={classes.root}>
          
-            <div onClick={ () => {window.location.href = "www.youtube.com"}} className={classes.cardaction_left}>
+            <div onClick={onClickCard} className={classes.cardaction}>
                
-                <CardContent className={classes.left}>
+                <div className={classes.content}>
                     <div className={classes.title}>
-                      <h2>  {title} </h2>
+                      <h3>  {title} </h3>
                       <h5>The verge</h5>
 
 
@@ -96,32 +80,16 @@ export default function MediaCard({title,description, image, theme}) {
 
 
 
-                </CardContent>
+                </div>
 
+                <CardMedia
+                  className={classes.media}
+                  image={image}
+                  title="Contemplative Reptile"
+                />
             </div>
 
-            <div className={classes.cardaction_right}>
-               
-                <CardContent className={classes.right}>
-                    <div className={classes.title}>
-                      <h2>  {title} </h2>
-                      <h5>The verge</h5>
-
-
-                    </div>
-                    
-
-                    <p>
-                    {description}
-
-
-                    </p>
-
-
-
-                </CardContent>
-
-            </div>
+           
 
         </Card>
     </ThemeProvider>
