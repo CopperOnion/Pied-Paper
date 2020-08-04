@@ -14,7 +14,7 @@ const useStyles = makeStyles({
       marginBottom:"1em"
     },
     display:'flex',
-    flex:.24,
+    
     borderRadius:0
   },
   left:{
@@ -22,10 +22,9 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     alignItems: 'flex-start',
     paddingTop: '2vh',
-    marginRight:'1em',
-    paddingRight: '1em',
-    borderRadius:'0',
-    borderLeft:'solid 6px #62a87c'
+    marginRight:'2em',
+    paddingRight: '2em',
+    
   },
 
   cardaction_left:{
@@ -33,14 +32,16 @@ const useStyles = makeStyles({
   },
 
   title:{
-    h2:{
-      backgroundColor:'green',
-    },
-    marginBottom:"1em"
+    borderRadius:'0',
+    borderLeft:'solid 6px #62a87c',
+    marginBottom:"1em",
+    paddingLeft:"1em"
+
   },
 
   heading:{
-    marginBlockStart: 0     
+    marginBlockStart: 0     ,
+    marginBlockEnd: '.2em'
   }
   
 });

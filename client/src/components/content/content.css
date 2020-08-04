@@ -3,18 +3,18 @@
 }
 
 .content .left{
-
-    flex: .7;
+    padding: 0 2em;
+    flex: .71;
 }
 
 .content .right{
     position: fixed;
     right: 0;
-    width: 23vw;
+    width: 21vw;
     height: 100vh;
-    display:flex;
-    flex-direction:column;
-    padding:2vh 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .content li{

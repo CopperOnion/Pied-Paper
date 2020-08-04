@@ -41,7 +41,7 @@ const useStyles = makeStyles({
   },
 
   cardaction: {
-    padding: "2% 0",
+    padding: "3% 0",
     width: '100%',
     display: 'flex',
     '&:hover': {
