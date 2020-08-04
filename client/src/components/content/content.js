@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import Card from '../card/card'
+import Pagination from '../card/pagination'
+import Opinion from '../card/opinion'
+
+
 import './content.css'
 import axios from "axios";
 
@@ -20,7 +24,9 @@ export default class Content extends Component {
         super(props)
 
         this.state = {
-            news: ''
+            news: '',
+            postsperpage: 5,
+            currentpage :1 ,
         }
     }
 
@@ -43,57 +49,74 @@ export default class Content extends Component {
             )
             .then(res => {
                 this.setState(
-                    /*the news route now returns a list of objects with keys
-                        res.data = [
-                            {
-                                articles: "foo bar"
-                                truefalse: 0 or 1
-                                category: NULL for now
-                                publish_date
-                            }
-                            ... and so on
-                        ]
-                    */
                     { news: [...res.data] },
                     () => console.log(this.state)
                 )
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err))  
+    }
 
+    clickHandler = () =>{
+        console.log("kek")
+    }
+
+    //Change page 
+    paginate = (page) =>{
+        console.log(page)
+        this.setState({
+            currentpage : page
+        })
     }
     render() {
-        let cardlist
+        let cardlist = <ul></ul>
         if (this.state.news) {
             let news = this.state.news;
-            console.log(news)
-
+            let indexLast = this.state.currentpage * this.state.postsperpage
+            let indexFirst =  indexLast- this.state.postsperpage
+            news = news.slice(indexFirst, indexLast);
             cardlist =
                 <ul>
                     {news.map((e) => (
-                        <li key={e.articles.source}>
-                            <Card title={e.articles.title}
+                        <li  key={e.articles.title} style= {{    marginRight: '2vw'}}>
+                            <Card  title={e.articles.title}
                                 description={e.articles.description}
                                 image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
                                 theme={this.props.theme}
+                                onClickCard={()=>this.clickHandler()}
                                 publishdate={parseDate(e.publish_date)} />
                         </li>
                     ))}
                 </ul>
+            
         }
 
         return (
             <div className="content">
                 <div className="left">
-                    {cardlist}
+                    <Pagination postsPerPage={this.state.postsperpage} totalPosts={this.state.news.length} paginate = {this.paginate}/>
+                    <div className="drawer">
+                        Test
+
+
+                    </div>
+                    {cardlist}    
 
                 </div>
 
                 <div className="right">
-                    <h2>Opinions</h2>
-                    <Card image={'https://i.kym-cdn.com/entries/icons/original/000/027/435/E59625D2-FF44-429D-B33F-2D4FFF318811.jpeg'} theme={this.props.theme}> </Card>
-                    <Card image={'https://i.kym-cdn.com/entries/icons/original/000/027/435/E59625D2-FF44-429D-B33F-2D4FFF318811.jpeg'} theme={this.props.theme}> </Card>
-                    <Card image={'https://i.kym-cdn.com/entries/icons/original/000/027/435/E59625D2-FF44-429D-B33F-2D4FFF318811.jpeg'} theme={this.props.theme}> </Card>
-                    <Card image={'https://i.kym-cdn.com/entries/icons/original/000/027/435/E59625D2-FF44-429D-B33F-2D4FFF318811.jpeg'} theme={this.props.theme}> </Card>
+                    <Opinion
+                        title={"Opinion"}
+                        description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "}
+                        image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
+                        theme={this.props.theme}
+                    />
+                    <Opinion
+                        title={"Opinion"}
+                        description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "}
+                        image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
+                        theme={this.props.theme}
+                    />
+                    
 
                 </div>
             </div>

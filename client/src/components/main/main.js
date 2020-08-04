@@ -26,15 +26,25 @@ function Main() {
     return (
         <>
           <Navbar theme={theme}/>
-          <Dashboard theme={theme}/>
-          <Menubar theme={theme}/>
-   
-          <Content theme={theme}/>
-          <Analysis theme={theme}/>
-          <Review theme={theme}/>
 
-          <Footer theme={theme}/>
-          <Extra theme={theme}/>
+          <div style={{display:'flex'}}> 
+
+            <div style={{display:'flex', flex:'.5',flexDirection:'column'}}>
+              <Dashboard theme={theme}/>
+            </div>
+
+    
+            <div style={{display:'flex', flex:'.5', flexDirection:'column'}}>
+              <Content theme={theme}/>
+              <Analysis theme={theme}/>
+              {/* <Review theme={theme}/> */}
+
+            </div>
+
+
+          </div>
+          {/* <Footer theme={theme}/>*/}
+          <Extra theme={theme}/> 
 
         </>
     )

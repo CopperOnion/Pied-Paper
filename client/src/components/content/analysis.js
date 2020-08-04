@@ -24,14 +24,14 @@ export class Analysis extends Component {
             <div className="analysis">
                 
                 <div className="text">
-                    <h1>Analysis</h1>
+                    {/* <h1>Analysis</h1>
                     <VictoryBar
                         data={data}
                         // data accessor for x values
                         x="quarter"
                         // data accessor for y values
                         y="earnings"
-                    />
+                    /> */}
                 </div>
             </div>
         )

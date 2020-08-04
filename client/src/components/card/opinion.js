@@ -14,39 +14,37 @@ const useStyles = makeStyles({
       marginBottom:"1em"
     },
     display:'flex',
-    borderBottom:'1px solid black',
-    borderRadius:'0',
-    padding:0,
-    
-  },
-  '.MuiCardContent-root:last-child' :{
-    padding: 0
-  },
-
-  'root:hover':{
-    cursor: 'pointer'
+    marginTop:'1vw',
+    paddingLeft: "1em"
   },
   media: {
+    width: '100%',
     height: '100px',
     flex:.3,
-    right:0
   },
-
-  content:{
+  right:{
     display:'flex',
-    
-    flex:.7,
     flexDirection: 'column',
     alignItems: 'flex-start',
+    padding:0,
+    marginRight:'1em',
+
   },
 
-  cardaction:{
-    padding:"2% 0",
-    width:'100%',
+  left:{
     display:'flex',
-    '&:hover': {
-      cursor: "pointer",
-    }
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    padding:0,
+    marginRight:'1em',
+    paddingRight: '1em',
+    borderBottom:'1px solid rgba(0,0,0,0.3)',
+    borderRadius:'0',
+
+  },
+
+  cardaction_left:{
+    display:'flex',
   },
 
   title:{
@@ -55,19 +53,19 @@ const useStyles = makeStyles({
   
 });
 
-export default function MediaCard({ title, description, image, theme, onClickCard, publishdate }) {
+export default function MediaCard({title,description, image, theme}) {
   const classes = useStyles();
 
   return (
     <ThemeProvider theme={theme}>
-        
+
         <Card elevation={0} className={classes.root}>
          
-            <div onClick={onClickCard} className={classes.cardaction}>
+            <div className={classes.cardaction_left}>
                
-                <div className={classes.content}>
+                <CardContent className={classes.left}>
                     <div className={classes.title}>
-                      <h3>  {title} </h3>
+                      <h2>  {title} </h2>
                       <h5>The verge</h5>
 
 
@@ -76,24 +74,16 @@ export default function MediaCard({ title, description, image, theme, onClickCar
 
                     <p>
                     {description}
+
+
                     </p>
 
-                    <h6>{publishdate}</h6>
 
 
-                </div>
+                </CardContent>
 
-                
-               
-                
-                <CardMedia
-                  className={classes.media}
-                  image={image}
-                  title="Contemplative Reptile"
-                />
             </div>
 
-           
 
         </Card>
     </ThemeProvider>
