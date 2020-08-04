@@ -14,33 +14,18 @@ const useStyles = makeStyles({
       marginBottom:"1em"
     },
     display:'flex',
-    marginTop:'1vw',
-    paddingLeft: "1em"
+    flex:.24,
+    borderRadius:0
   },
-  media: {
-    width: '100%',
-    height: '100px',
-    flex:.3,
-  },
-  right:{
-    display:'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    padding:0,
-    marginRight:'1em',
-
-  },
-
   left:{
     display:'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    padding:0,
+    paddingTop: '2vh',
     marginRight:'1em',
     paddingRight: '1em',
-    borderBottom:'1px solid rgba(0,0,0,0.3)',
     borderRadius:'0',
-
+    borderLeft:'solid 6px #62a87c'
   },
 
   cardaction_left:{
@@ -48,8 +33,15 @@ const useStyles = makeStyles({
   },
 
   title:{
+    h2:{
+      backgroundColor:'green',
+    },
     marginBottom:"1em"
   },
+
+  heading:{
+    marginBlockStart: 0     
+  }
   
 });
 
@@ -65,7 +57,7 @@ export default function MediaCard({title,description, image, theme}) {
                
                 <CardContent className={classes.left}>
                     <div className={classes.title}>
-                      <h2>  {title} </h2>
+                      <h2 className={classes.heading}>  {title} </h2>
                       <h5>The verge</h5>
 
 

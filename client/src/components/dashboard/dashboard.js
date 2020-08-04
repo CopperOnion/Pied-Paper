@@ -31,7 +31,7 @@ function Dashboard({theme}) {
             <div className = "dashboard">
 
                 <div>
-                    <Typography className={classes.title} variant="OVERLINE" color='primary'>
+                    <Typography className={classes.title} style={{marginLeft: '3px'}}variant="overline" color='primary'>
                             {date}
                     </Typography>
                     

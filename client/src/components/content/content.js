@@ -25,7 +25,7 @@ export default class Content extends Component {
 
         this.state = {
             news: '',
-            postsperpage: 5,
+            postsperpage: 20,
             currentpage: 1,
         }
     }
@@ -88,7 +88,7 @@ export default class Content extends Component {
             cardlist =
                 <ul>
                     {news.map((e) => (
-                        <li key={e.articles.title} style={{ marginRight: '2vw' }}>
+                        <li key={e.articles.title} >
                             <Card title={e.articles.title}
                                 publication={e.articles.source.name}
                                 description={e.articles.description}
@@ -109,24 +109,30 @@ export default class Content extends Component {
                     <Pagination postsPerPage={this.state.postsperpage} totalPosts={this.state.news.length} paginate = {this.paginate}/>
                   
                     {cardlist}    
+                    <Pagination postsPerPage={this.state.postsperpage} totalPosts={this.state.news.length} paginate = {this.paginate}/>
 
                 </div>
 
                 <div className="right">
                     <Opinion
                         title={"Opinion"}
-                        description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "}
+                        description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "}
                         image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
                         theme={this.props.theme}
                     />
                     <Opinion
                         title={"Opinion"}
-                        description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "}
+                        description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "}
                         image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
                         theme={this.props.theme}
                     />
 
-
+                    <Opinion
+                        title={"Opinion"}
+                        description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "}
+                        image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
+                        theme={this.props.theme}
+                    />  
                 </div>
             </div>
         )
