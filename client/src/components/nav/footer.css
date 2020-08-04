@@ -1,8 +1,9 @@
 .footer{
-    margin-top:4vh;
-
-    display:flex;
-    flex-direction:column;
+    margin: auto;
+    width: 80%;
+    margin-top: 4vh;
+    display: flex;
+    flex-direction: column;
     border-bottom: solid 1px black;
 }
 

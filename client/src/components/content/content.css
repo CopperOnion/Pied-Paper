@@ -1,17 +1,15 @@
 .content{
     display:flex;
-    margin-top:2vh;
 }
 
-.left{
-    margin-right: 1vw;
-    padding-right:1vw;
-    border-right:1px solid rgba(0,0,0,.3);
+.content .left{
+
     flex: .7;
 }
 
-.right{
+.content .right{
     flex: .3;
+    border-left:1px solid rgba(0,0,0,.3);
 
 }
 
@@ -26,4 +24,18 @@
 
     margin: 0;
     padding:0;
+}
+
+.content .drawer{
+    display:none;
+    position: fixed; 
+    top: 0; 
+    right:0; 
+
+    height: 100%; 
+    width: 300px; 
+    background: #f5f5f5; 
+    overflow-x: hidden; 
+    padding: 20px; 
+
 }

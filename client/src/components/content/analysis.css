@@ -1,13 +1,13 @@
 .analysis{
-    background-color:navajowhite;
+    background-color:#E3B23C;
     display:flex;
-    height:70vh;
-    margin-top: 5vh;
+    height:80vh;
+    margin-top: 20vh;
     margin-bottom: 5vh;
 
     overflow-x: hidden;
     margin-left: -20vw;
-    margin-right: -20vw;
+    margin-right: -17vw;
 
     left:0;
 }
