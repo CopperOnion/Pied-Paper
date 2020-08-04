@@ -94,7 +94,11 @@ export default class Content extends Component {
             <div className="content">
                 <div className="left">
                     <Pagination postsPerPage={this.state.postsperpage} totalPosts={this.state.news.length} paginate = {this.paginate}/>
+                    <div className="drawer">
+                        Test
 
+
+                    </div>
                     {cardlist}    
 
                 </div>
