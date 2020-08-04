@@ -38,7 +38,7 @@ function Navbar({theme}) {
     return (
         <>
             <ThemeProvider theme={theme}>
-              <AppBar  elevation={0}  style={{ backgroundColor: 'transparent' , borderBottom: 'solid 1px black' }} position="static">
+              <AppBar position="static" elevation={0}  style={{ backgroundColor: 'transparent' , borderBottom: 'solid 1px black' }} >
                   <Toolbar variant="dense" >
 
                   

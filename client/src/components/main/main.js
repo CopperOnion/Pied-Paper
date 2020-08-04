@@ -8,7 +8,7 @@ import Extra from "../nav/extra"
 import Analysis from '../content/analysis'
 import Review from '../content/Review.js'
 import { createMuiTheme } from '@material-ui/core/styles';
-
+import './main.css'
 
 const theme = createMuiTheme({
   palette: {
@@ -27,16 +27,16 @@ function Main() {
         <>
           <Navbar theme={theme}/>
 
-          <div style={{display:'flex'}}> 
+          <div className='main_container'> 
 
-            <div style={{display:'flex', flex:'.5',flexDirection:'column'}}>
+            <div className='main_left'>
               <Dashboard theme={theme}/>
             </div>
 
     
-            <div style={{display:'flex', flex:'.5', flexDirection:'column'}}>
+            <div className='main_right'>
               <Content theme={theme}/>
-              <Analysis theme={theme}/>
+              {/* <Analysis theme={theme}/> */}
               {/* <Review theme={theme}/> */}
 
             </div>

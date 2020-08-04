@@ -90,15 +90,12 @@ export default class Content extends Component {
             
         }
 
+        //TODO: card expands when clicked upon with more content
         return (
             <div className="content">
                 <div className="left">
                     <Pagination postsPerPage={this.state.postsperpage} totalPosts={this.state.news.length} paginate = {this.paginate}/>
-                    <div className="drawer">
-                        Test
-
-
-                    </div>
+                  
                     {cardlist}    
 
                 </div>
