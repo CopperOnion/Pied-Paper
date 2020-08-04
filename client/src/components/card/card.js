@@ -10,92 +10,92 @@ import './card.css'
 
 const useStyles = makeStyles({
   root: {
-    '.MuiTypography-gutterBottom':{
-      marginBottom:"1em"
+    '.MuiTypography-gutterBottom': {
+      marginBottom: "1em"
     },
-    display:'flex',
-    borderBottom:'1px solid black',
-    borderRadius:'0',
-    padding:0,
-    
+    display: 'flex',
+    borderBottom: '1px solid black',
+    borderRadius: '0',
+    padding: 0,
+
   },
-  '.MuiCardContent-root:last-child' :{
+  '.MuiCardContent-root:last-child': {
     padding: 0
   },
 
-  'root:hover':{
+  'root:hover': {
     cursor: 'pointer'
   },
   media: {
     height: '100px',
-    flex:.3,
-    right:0
+    flex: .3,
+    right: 0
   },
 
-  content:{
-    display:'flex',
-    
-    flex:.7,
+  content: {
+    display: 'flex',
+
+    flex: .7,
     flexDirection: 'column',
     alignItems: 'flex-start',
   },
 
-  cardaction:{
-    padding:"2% 0",
-    width:'100%',
-    display:'flex',
+  cardaction: {
+    padding: "2% 0",
+    width: '100%',
+    display: 'flex',
     '&:hover': {
       cursor: "pointer",
     }
   },
 
-  title:{
-    marginBottom:"1em"
+  title: {
+    marginBottom: "1em"
   },
-  
+
 });
 
-export default function MediaCard({ title, description, image, theme, onClickCard, publishdate }) {
+export default function MediaCard({ title, publication, description, image, theme, onClickCard, publishdate, category }) {
   const classes = useStyles();
 
   return (
     <ThemeProvider theme={theme}>
-        
-        <Card elevation={0} className={classes.root}>
-         
-            <div onClick={onClickCard} className={classes.cardaction}>
-               
-                <div className={classes.content}>
-                    <div className={classes.title}>
-                      <h3>  {title} </h3>
-                      <h5>The verge</h5>
+
+      <Card elevation={0} className={classes.root}>
+
+        <div onClick={onClickCard} className={classes.cardaction}>
+
+          <div className={classes.content}>
+            <div className={classes.title}>
+              <h3>  {title} </h3>
+              <h5>The verge</h5>
 
 
-                    </div>
-                    
-
-                    <p>
-                    {description}
-                    </p>
-
-                    <h6>{publishdate}</h6>
-
-
-                </div>
-
-                
-               
-                
-                <CardMedia
-                  className={classes.media}
-                  image={image}
-                  title="Contemplative Reptile"
-                />
             </div>
 
-           
 
-        </Card>
+            <p>
+              {description}
+            </p>
+
+            <h6>{publishdate}<br />{category}</h6>
+
+
+          </div>
+
+
+
+
+          <CardMedia
+            className={classes.media}
+            image={image}
+            title="Contemplative Reptile"
+          />
+        </div>
+
+
+
+      </Card>
     </ThemeProvider>
 
   );

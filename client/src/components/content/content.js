@@ -26,7 +26,7 @@ export default class Content extends Component {
         this.state = {
             news: '',
             postsperpage: 5,
-            currentpage :1 ,
+            currentpage: 1,
         }
     }
 
@@ -48,23 +48,34 @@ export default class Content extends Component {
             }
             )
             .then(res => {
+                /*the news route now returns a list of objects with keys
+                        res.data = [
+                            {
+                                articles: "foo bar"
+                                truefalse: 0 or 1
+                                category: "general"
+                                publish_date: ISO8601 format
+                            }
+                            ... and so on
+                        ]
+                    */
                 this.setState(
                     { news: [...res.data] },
                     () => console.log(this.state)
                 )
             })
-            .catch(err => console.log(err))  
+            .catch(err => console.log(err))
     }
 
-    clickHandler = () =>{
+    clickHandler = () => {
         console.log("kek")
     }
 
     //Change page 
-    paginate = (page) =>{
+    paginate = (page) => {
         console.log(page)
         this.setState({
-            currentpage : page
+            currentpage: page
         })
     }
     render() {
@@ -72,34 +83,36 @@ export default class Content extends Component {
         if (this.state.news) {
             let news = this.state.news;
             let indexLast = this.state.currentpage * this.state.postsperpage
-            let indexFirst =  indexLast- this.state.postsperpage
+            let indexFirst = indexLast - this.state.postsperpage
             news = news.slice(indexFirst, indexLast);
             cardlist =
                 <ul>
                     {news.map((e) => (
-                        <li  key={e.articles.title} style= {{    marginRight: '2vw'}}>
-                            <Card  title={e.articles.title}
+                        <li key={e.articles.title} style={{ marginRight: '2vw' }}>
+                            <Card title={e.articles.title}
+                                publication={e.articles.source.name}
                                 description={e.articles.description}
                                 image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
                                 theme={this.props.theme}
-                                onClickCard={()=>this.clickHandler()}
-                                publishdate={parseDate(e.publish_date)} />
+                                onClickCard={() => this.clickHandler()}
+                                publishdate={parseDate(e.publish_date)}
+                                category={e.category} />
                         </li>
                     ))}
                 </ul>
-            
+
         }
 
         return (
             <div className="content">
                 <div className="left">
-                    <Pagination postsPerPage={this.state.postsperpage} totalPosts={this.state.news.length} paginate = {this.paginate}/>
+                    <Pagination postsPerPage={this.state.postsperpage} totalPosts={this.state.news.length} paginate={this.paginate} />
                     <div className="drawer">
                         Test
 
 
                     </div>
-                    {cardlist}    
+                    {cardlist}
 
                 </div>
 
@@ -116,7 +129,7 @@ export default class Content extends Component {
                         image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
                         theme={this.props.theme}
                     />
-                    
+
 
                 </div>
             </div>
