@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
      
     },
     marginTop: '3vh',
+    marginBottom: '3vh',
     display:'flex',
     alignItems:'center',
     justifyContent: 'center'

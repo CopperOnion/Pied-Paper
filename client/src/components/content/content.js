@@ -103,7 +103,6 @@ export default class Content extends Component {
 
         }
 
-        //TODO: card expands when clicked upon with more content
         return (
             <div className="content">
                 <div className="left">

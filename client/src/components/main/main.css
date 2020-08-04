@@ -2,8 +2,10 @@
     position: fixed;
     width: 20vw;
     left: 0;
-    top:75px;
-    height: 100%;
+    height: 100vh;
+    top:0;
+    /* background-color: #9d79bc; */
+    background-color:#b19cd9
 }
 
 .main_right{

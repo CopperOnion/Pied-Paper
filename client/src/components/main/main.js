@@ -1,5 +1,4 @@
 import React , { } from 'react'
-import Navbar from "../nav/navbar"
 import Dashboard from "../dashboard/dashboard"
 import Menubar from "../nav/toolbar"
 import Content from "../content/content"
@@ -25,10 +24,8 @@ const theme = createMuiTheme({
 function Main() {
     return (
         <>
-          <Navbar theme={theme}/>
-
           <div className='main_container'> 
-
+      
             <div className='main_left'>
               <Dashboard theme={theme}/>
             </div>
