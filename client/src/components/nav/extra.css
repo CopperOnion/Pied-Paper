@@ -1,8 +1,8 @@
 .extra ul{
-    margin-block-end: none;
-    margin-block-start: none;
     padding: 0;
-    margin-block-start: 8em;
+    margin-block-start: 4em;
+    margin-block-end: 2em;
+
 }
 .extra li{
     display: inline;

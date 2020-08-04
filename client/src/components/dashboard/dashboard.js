@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     title: {
       flexGrow: 1,
       marginBottom: '2vh',
-      marginTop: '2vh'
+      marginTop: '4vh'
 
     },
     list:{
@@ -31,7 +31,7 @@ function Dashboard({theme}) {
             <div className = "dashboard">
 
                 <div>
-                    <Typography className={classes.title} style={{marginLeft: '3px'}}variant="overline" color='primary'>
+                    <Typography className={classes.title} style={{marginLeft: '4px'}}variant="overline" color='primary'>
                             {date}
                     </Typography>
                     
