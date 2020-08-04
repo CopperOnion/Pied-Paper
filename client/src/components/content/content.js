@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import Card from '../card/card'
-import Cardtwo from '../card/cardtwo'
-import Cardthree from '../card/cardthree'
-import Cardfour from '../card/cardfour'
-
+import Pagination from '../card/pagination'
 import Opinion from '../card/opinion'
 
 
@@ -27,7 +24,9 @@ export default class Content extends Component {
         super(props)
 
         this.state = {
-            news: ''
+            news: '',
+            postsperpage: 5,
+            currentpage :1 ,
         }
     }
 
@@ -50,36 +49,31 @@ export default class Content extends Component {
             )
             .then(res => {
                 this.setState(
-                    /*the news route now returns a list of objects with keys
-                        res.data = [
-                            {
-                                articles: "foo bar"
-                                truefalse: 0 or 1
-                                category: NULL for now
-                                publish_date
-                            }
-                            ... and so on
-                        ]
-                    */
                     { news: [...res.data] },
                     () => console.log(this.state)
                 )
             })
-            .catch(err => console.log(err))
-
-       
+            .catch(err => console.log(err))  
     }
 
     clickHandler = () =>{
         console.log("kek")
     }
+
+    //Change page 
+    paginate = (page) =>{
+        console.log(page)
+        this.setState({
+            currentpage : page
+        })
+    }
     render() {
-        let cardlist
-        let test
+        let cardlist = <ul></ul>
         if (this.state.news) {
             let news = this.state.news;
-            console.log(news)
-
+            let indexLast = this.state.currentpage * this.state.postsperpage
+            let indexFirst =  indexLast- this.state.postsperpage
+            news = news.slice(indexFirst, indexLast);
             cardlist =
                 <ul>
                     {news.map((e) => (
@@ -99,7 +93,10 @@ export default class Content extends Component {
         return (
             <div className="content">
                 <div className="left">
-                    {cardlist}          
+                    <Pagination postsPerPage={this.state.postsperpage} totalPosts={this.state.news.length} paginate = {this.paginate}/>
+
+                    {cardlist}    
+
                 </div>
 
                 <div className="right">
@@ -115,24 +112,7 @@ export default class Content extends Component {
                         image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
                         theme={this.props.theme}
                     />
-                    <Opinion
-                        title={"Opinion"}
-                        description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "}
-                        image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
-                        theme={this.props.theme}
-                    />
-                    <Opinion
-                        title={"Opinion"}
-                        description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "}
-                        image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
-                        theme={this.props.theme}
-                    />
-                    <Opinion
-                        title={"Opinion"}
-                        description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "}
-                        image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
-                        theme={this.props.theme}
-                    />
+                    
 
                 </div>
             </div>

@@ -17,15 +17,7 @@ function Extra({theme}) {
                     <Toolbar className="extra" style={{minHeight:'32px'}}variant="dense" >
                         <ul>
                             <li>
-                                Team
-                            </li>
-
-                            <li>
-                                Technology
-                            </li>
-
-                            <li>
-                                devpost
+                               Submission for 2020 Pytorch summer hackathon
                             </li>
                         </ul>
                     </Toolbar>

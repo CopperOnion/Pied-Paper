@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
       marginBottom: '2vh'
     },
+    list:{
+        marginBottom: '1vh'
+    }
   }));
 
 
@@ -37,6 +40,24 @@ function Dashboard({theme}) {
                 <ThemeProvider theme={theme}>
                     <Typography className={classes.title} variant="h5" color='primary'>
                         Truth-based news aggregator
+                    </Typography>
+                </ThemeProvider>
+            </div>
+
+            <div className= "smallbar">
+                <ThemeProvider theme={theme}>
+                    <Typography className={classes.list} variant="subtitle2" color='primary'>
+                        World
+                    </Typography>
+
+                    <Typography className={classes.list} variant="subtitle2" color='primary'>
+                        Business
+                    </Typography>
+                    <Typography className={classes.list} variant="subtitle2" color='primary'>
+                        Entertainment
+                    </Typography>
+                    <Typography className={classes.list} variant="subtitle2" color='primary'>
+                        Covid
                     </Typography>
                 </ThemeProvider>
             </div>

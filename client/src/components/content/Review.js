@@ -1,8 +1,4 @@
 import React, { Component } from 'react'
-import Card from '../card/card'
-
-import axios from "axios";
-
 import './review.css'
 
 

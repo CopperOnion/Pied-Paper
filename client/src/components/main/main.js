@@ -37,14 +37,14 @@ function Main() {
             <div style={{display:'flex', flex:'.5', flexDirection:'column'}}>
               <Content theme={theme}/>
               <Analysis theme={theme}/>
-              <Review theme={theme}/>
+              {/* <Review theme={theme}/> */}
 
             </div>
 
 
           </div>
-          <Footer theme={theme}/>
-          <Extra theme={theme}/>
+          {/* <Footer theme={theme}/>*/}
+          <Extra theme={theme}/> 
 
         </>
     )

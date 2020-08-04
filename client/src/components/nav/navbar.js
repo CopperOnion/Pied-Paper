@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
     title: {
       flexGrow: 1,
     },
+    info: {
+      marginLeft: '1vw'
+    }
+
   }));
 
 function Navbar({theme}) {
@@ -37,9 +41,7 @@ function Navbar({theme}) {
               <AppBar  elevation={0}  style={{ backgroundColor: 'transparent' , borderBottom: 'solid 1px black' }} position="static">
                   <Toolbar variant="dense" >
 
-                      <IconButton edge="start" className={classes.menuButton} color="primary" aria-label="menu">
-                        <MenuIcon/>
-                      </IconButton>
+                  
 
                       <AccessTimeIcon className={classes.loginButton} color="primary" />
 
@@ -48,10 +50,17 @@ function Navbar({theme}) {
                       </Typography>
 
 
-                      <Button  className={classes.loginButton} color="primary">Login</Button>
 
                       <InstagramIcon color="primary" />
 
+                      <Typography className={classes.info} variant="subtitle1" color='primary'>
+                          About
+                      </Typography>
+
+
+                      <Typography className={classes.info} variant="subtitle1" color='primary'>
+                          Team
+                      </Typography>
                   </Toolbar>
               </AppBar>
             </ThemeProvider>
