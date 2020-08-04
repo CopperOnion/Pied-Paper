@@ -29,7 +29,7 @@ function Dashboard({theme}) {
             
             <div className="top">
                 <ThemeProvider theme={theme}>
-                    <Typography className={classes.title} variant="h2" color='primary'>
+                    <Typography className={classes.title} variant="h3" color='primary'>
                         Pied Paper
                     </Typography>
                 </ThemeProvider>

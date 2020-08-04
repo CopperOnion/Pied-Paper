@@ -27,6 +27,7 @@ export default function PaginationControlled({postsPerPage, totalPosts , paginat
   return (
     <div className={classes.root}>
       <Pagination showFirstButton showLastButton shape="rounded" size="small" count={pageTotal} page={page} onChange={handleChange} />
+      5 per page
     </div>
   );
 }
