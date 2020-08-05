@@ -1,9 +1,8 @@
 .dashboard{
-    display:flex;
+    display: flex;
     flex-direction: column;
-    padding:3vh 3vw;
-    height:100vh
-    
+    padding: 3vh 2vw;
+    height: 100vh;
 }
 
 .dashboard .info{

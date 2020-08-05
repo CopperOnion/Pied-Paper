@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     display: 'flex',
     borderBottom: '1px solid black',
     borderRadius: '0',
-    padding: 0,
+    padding: 0
 
   },
   '.MuiCardContent-root:last-child': {

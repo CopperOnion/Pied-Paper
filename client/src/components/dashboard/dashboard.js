@@ -12,8 +12,8 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
       flexGrow: 1,
-      marginBottom: '2vh',
-      marginTop: '4vh'
+      marginBottom: '5vh',
+      marginTop: '3vh'
 
     },
     list:{
@@ -21,7 +21,11 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
+/* 
+TODO: GIVE MORE POWER TO THE DASHBOARD ( make the background darker and font white)
 
+
+*/
 function Dashboard({theme}) {
     const classes = useStyles();
     const date = `${returnDay(new Date().getDay())}, ${new Date().getDate()} ${returnMonth(new Date().getMonth())} ${new Date().getFullYear()}`;
@@ -31,38 +35,38 @@ function Dashboard({theme}) {
             <div className = "dashboard">
 
                 <div>
-                    <Typography className={classes.title} style={{marginLeft: '4px'}}variant="overline" color='primary'>
+                    <Typography className={classes.title} style={{marginLeft: '4px'}}variant="overline" color='secondary'>
                             {date}
                     </Typography>
                     
                     <div className="top">
-                        <Typography className={classes.title} variant="h3" color='primary'>
+                        <Typography className={classes.title} variant="h2" color='secondary'>
                             Pied Paper
                         </Typography>
                     </div>
                     
 
                     <div className= "smallbar">
-                        <Typography className={classes.title} variant="h5" color='primary'>
+                        <Typography className={classes.title} variant="h5" color='secondary'>
                             Truth-based news aggregator
                         </Typography>
                     </div>
 
                     <div className= "smallbar">
-                        <Typography className={classes.list} variant="subtitle2" color='primary'>
+                        <Typography className={classes.list} variant="subtitle2" color='secondary'>
                             General
                         </Typography>
-                        <Typography className={classes.list} variant="subtitle2" color='primary'>
+                        <Typography className={classes.list} variant="subtitle2" color='secondary'>
                             World
                         </Typography>
 
-                        <Typography className={classes.list} variant="subtitle2" color='primary'>
+                        <Typography className={classes.list} variant="subtitle2" color='secondary'>
                             Business
                         </Typography>
-                        <Typography className={classes.list} variant="subtitle2" color='primary'>
+                        <Typography className={classes.list} variant="subtitle2" color='secondary'>
                             Entertainment
                         </Typography>
-                        <Typography className={classes.list} variant="subtitle2" color='primary'>
+                        <Typography className={classes.list} variant="subtitle2" color='secondary'>
                             Covid
                         </Typography>
                     </div>
@@ -70,12 +74,12 @@ function Dashboard({theme}) {
                 
 
                 <div className= "info">
-                     <Typography className={classes.info} variant="subtitle1" color='primary'>
+                     <Typography className={classes.info} variant="subtitle1" color='secondary'>
                           About
                       </Typography>
 
 
-                      <Typography className={classes.info} variant="subtitle1" color='primary'>
+                      <Typography className={classes.info} variant="subtitle1" color='secondary'>
                           Team
                       </Typography>
                 </div>

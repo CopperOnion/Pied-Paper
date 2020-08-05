@@ -1,16 +1,16 @@
 .main_left{
     position: fixed;
-    width: 20vw;
+    width: 23vw;
     left: 0;
     height: 100vh;
     top:0;
     /* background-color: #9d79bc; */
-    background-color:#a29cd9
+    background-color:#861657;
+    color:white
 }
 
 .main_right{
-    width:77vw;
-    right: 0;
+    width:75vw;
 }
 
 .main_container{

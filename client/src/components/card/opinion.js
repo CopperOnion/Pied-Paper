@@ -14,21 +14,23 @@ const useStyles = makeStyles({
       marginBottom:"1em"
     },
     display:'flex',
-    
-    borderRadius:0
+    height:'100px',
+    borderRadius:0,
+    marginBottom : '4vh'
+
   },
   left:{
     display:'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    paddingTop: '2vh',
+    padding: 0,
     marginRight:'2em',
-    paddingRight: '2em',
-    
+    width: '100vh'
   },
 
   cardaction_left:{
     display:'flex',
+    width: '100vw'
   },
 
   title:{
