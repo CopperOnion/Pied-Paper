@@ -59,7 +59,7 @@ const useStyles = makeStyles({
 
 });
 
-export default function MediaCard({ title, publication, description, image, theme, onClickCard, publishdate, category, url }) {
+export default function MediaCard({ title, publication, description, image, theme,publishdate, category}) {
   const classes = useStyles();
 
   return (
@@ -72,7 +72,7 @@ export default function MediaCard({ title, publication, description, image, them
           <div className={classes.content}>
             <div className={classes.title}>
               <h3>  {title} </h3>
-              <h5> {publication}</h5>
+              <h5>  {category} / {publication}</h5>
 
 
             </div>
@@ -82,7 +82,7 @@ export default function MediaCard({ title, publication, description, image, them
               {description}
             </p>
 
-            <h6>{publishdate}<br />{category}</h6>
+            <h6>{publishdate}</h6>
 
 
           </div>
