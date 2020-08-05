@@ -3,9 +3,7 @@
 }
 
 .content .left{
-    padding-left:2.5em;
-
-    padding-right:3em;
+    padding:2em 3em;
     flex: .71;
 }
 
@@ -44,4 +42,8 @@
     overflow-x: hidden; 
     padding: 20px; 
 
+}
+
+a{
+    text-decoration: none;
 }

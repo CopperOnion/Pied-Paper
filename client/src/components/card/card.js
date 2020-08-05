@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import './card.css'
 
@@ -16,15 +15,16 @@ const useStyles = makeStyles({
     display: 'flex',
     borderBottom: '1px solid black',
     borderRadius: '0',
-    padding: 0
-
+    padding: 0,
+    transition:'transform .4s',
+    overflow:'visible'
   },
   '.MuiCardContent-root:last-child': {
     padding: 0
   },
 
   'root:hover': {
-    cursor: 'pointer'
+    
   },
   media: {
     height: '100px',
@@ -44,8 +44,12 @@ const useStyles = makeStyles({
     padding: "3% 0",
     width: '100%',
     display: 'flex',
+    transition:'transform 1s',
+
     '&:hover': {
       cursor: "pointer",
+      transform: 'scale(1.05)'
+
     }
   },
 
@@ -55,7 +59,7 @@ const useStyles = makeStyles({
 
 });
 
-export default function MediaCard({ title, publication, description, image, theme, onClickCard, publishdate, category }) {
+export default function MediaCard({ title, publication, description, image, theme, onClickCard, publishdate, category, url }) {
   const classes = useStyles();
 
   return (
@@ -63,12 +67,12 @@ export default function MediaCard({ title, publication, description, image, them
 
       <Card elevation={0} className={classes.root}>
 
-        <div onClick={onClickCard} className={classes.cardaction}>
+        <div /* onClick={()=> onClickCard(url)} */ className={classes.cardaction}>
 
           <div className={classes.content}>
             <div className={classes.title}>
               <h3>  {title} </h3>
-              <h5>The verge</h5>
+              <h5> {publication}</h5>
 
 
             </div>

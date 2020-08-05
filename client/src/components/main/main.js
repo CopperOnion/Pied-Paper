@@ -1,11 +1,7 @@
 import React , { } from 'react'
 import Dashboard from "../dashboard/dashboard"
-import Menubar from "../nav/toolbar"
 import Content from "../content/content"
-import Footer from "../nav/footer"
 import Extra from "../nav/extra"
-import Analysis from '../content/analysis'
-import Review from '../content/Review.js'
 import { createMuiTheme } from '@material-ui/core/styles';
 import './main.css'
 

@@ -67,8 +67,8 @@ export default class Content extends Component {
             .catch(err => console.log(err))
     }
 
-    clickHandler = () => {
-        console.log("kek")
+    clickHandler = (url) => {
+        window.location = url
     }
 
     //Change page 
@@ -77,6 +77,12 @@ export default class Content extends Component {
         this.setState({
             currentpage: page
         })
+    }
+
+    //Scroll to the top 
+    scrollup = ()=>{
+        window.scrollTo(0, 0);
+
     }
     render() {
         let cardlist = <ul></ul>
@@ -89,14 +95,16 @@ export default class Content extends Component {
                 <ul>
                     {news.map((e) => (
                         <li key={e.articles.title} >
-                            <Card title={e.articles.title}
-                                publication={e.articles.source.name}
-                                description={e.articles.description}
-                                image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
-                                theme={this.props.theme}
-                                onClickCard={() => this.clickHandler()}
-                                publishdate={parseDate(e.publish_date)}
-                                category={e.category} />
+                            <a href={e.articles.url}>
+                                <Card title={e.articles.title}
+                                    publication={e.articles.source.name}
+                                    description={e.articles.description}
+                                    image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
+                                    theme={this.props.theme}
+                                    publishdate={parseDate(e.publish_date)}
+                                    category={e.category} 
+                                />
+                            </a>
                         </li>
                     ))}
                 </ul>
@@ -106,10 +114,14 @@ export default class Content extends Component {
         return (
             <div className="content">
                 <div className="left">
-                    <Pagination postsPerPage={this.state.postsperpage} totalPosts={this.state.news.length} paginate = {this.paginate}/>
                   
                     {cardlist}    
-                    <Pagination postsPerPage={this.state.postsperpage} totalPosts={this.state.news.length} paginate = {this.paginate}/>
+                    <Pagination 
+                        postsPerPage={this.state.postsperpage} 
+                        totalPosts={this.state.news.length} 
+                        paginate = {this.paginate}
+                        scrollup = {this.scrollup}
+                    />
 
                 </div>
 

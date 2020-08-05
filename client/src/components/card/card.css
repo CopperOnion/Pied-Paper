@@ -17,8 +17,6 @@ p{
     font-size:.8em;
 
 }
-
-p .description:hover{
-    cursor : "pointer"
+.MuiCard-root {
+    overflow: visible;
 }
-
