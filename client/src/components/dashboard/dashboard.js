@@ -50,7 +50,7 @@ function Dashboard({theme}) {
                     
                     <div className="top">
                         <Typography style={{fontWeight:"500"}}className={classes.title} variant="h2" color='secondary'>
-                            <Link style={{color:'#f50057'}}to="/">Pied Paper</Link>
+                            <Link style={{color:'#90FFDC'}}to="/">Pied Paper</Link>
 
                         </Typography>
                     </div>
@@ -86,12 +86,12 @@ function Dashboard({theme}) {
                 <div className= "info">
 
                      <Typography className={classes.info} variant="h6" color='secondary'>
-                        <Link style={{color:'#f50057'}}to="/about">About</Link>
+                        <Link style={{color:'#90FFDC'}}to="/about">About</Link>
                       </Typography>
 
 
                       <Typography className={classes.info} variant="h6" color='secondary'>
-                        <Link style={{color:'#f50057'}}to="/about">Team</Link>
+                        <Link style={{color:'#90FFDC'}}to="/about">Team</Link>
                       </Typography>
                 </div>
 

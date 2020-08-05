@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 
   title:{
     borderRadius:'0',
-    borderLeft:'solid 6px #62a87c',
+    borderLeft:'solid 6px #8AC4FF',
     marginBottom:"1em",
     paddingLeft:"1em"
 
