@@ -4,6 +4,11 @@ import { ThemeProvider } from '@material-ui/styles';
 
 import { makeStyles } from '@material-ui/core/styles';
 
+import {
+    Link
+  } from "react-router-dom";
+
+  
 import './dashboard.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -13,12 +18,16 @@ const useStyles = makeStyles((theme) => ({
     title: {
       flexGrow: 1,
       marginBottom: '5vh',
-      marginTop: '3vh'
-
+      marginTop: '3vh',
+      
     },
     list:{
         marginBottom: '1vh'
+    },
+    h2:{
+        fontWeight:"500"
     }
+
   }));
 
 /* 
@@ -40,14 +49,15 @@ function Dashboard({theme}) {
                     </Typography>
                     
                     <div className="top">
-                        <Typography className={classes.title} variant="h2" color='secondary'>
-                            Pied Paper
+                        <Typography style={{fontWeight:"500"}}className={classes.title} variant="h2" color='secondary'>
+                            <Link style={{color:'#f50057'}}to="/">Pied Paper</Link>
+
                         </Typography>
                     </div>
                     
 
                     <div className= "smallbar">
-                        <Typography className={classes.title} variant="h5" color='secondary'>
+                        <Typography style={{fontWeight:"600"}} className={classes.title} variant="h5" color='secondary'>
                             Truth-based news aggregator
                         </Typography>
                     </div>
@@ -74,13 +84,14 @@ function Dashboard({theme}) {
                 
 
                 <div className= "info">
-                     <Typography className={classes.info} variant="subtitle1" color='secondary'>
-                          About
+
+                     <Typography className={classes.info} variant="h6" color='secondary'>
+                        <Link style={{color:'#f50057'}}to="/about">About</Link>
                       </Typography>
 
 
-                      <Typography className={classes.info} variant="subtitle1" color='secondary'>
-                          Team
+                      <Typography className={classes.info} variant="h6" color='secondary'>
+                        <Link style={{color:'#f50057'}}to="/about">Team</Link>
                       </Typography>
                 </div>
 
