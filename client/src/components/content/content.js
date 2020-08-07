@@ -166,12 +166,11 @@ class Content extends Component {
         TODO: Add a meta analysis factor: 
         Do users agree with the take of the ML? display the results
         
-        
+        TODO: Add a label at the top of cardlist : ALL news, TECHNOLOGY NEWS ... etc
         */
         return (
             <div className="content">
                 <div className="left">
-                  
                     {cardlist}    
                     <Pagination 
                         postsPerPage={this.state.postsperpage} 
