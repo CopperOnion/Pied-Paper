@@ -1,7 +1,6 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
-const db = require("./queries");
 const cors = require("cors");
 const News = require("./routes/news");
 const app = express();
@@ -20,7 +19,7 @@ app.use(
 // Cors
 app.use(cors());
 app.options("*", cors());
-
+  
 // Routes
 app.use("/api/news", News);
 

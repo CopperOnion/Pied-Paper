@@ -97,6 +97,12 @@ router.get("/users", (req, res) => {
   });
 });
 
+
+/* 
+  TODO: Change retrieve to a POST so that it retrieves only the 
+  selected category of news
+
+*/
 //the express router receives a request from the react client, and pings the news api
 //for news articles. Then the packaged news articles are sent back as an object.
 router.get("/retrieve", (req, res) => {

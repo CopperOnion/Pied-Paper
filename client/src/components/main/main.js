@@ -2,6 +2,7 @@ import React , { } from 'react'
 import Dashboard from "../dashboard/dashboard"
 import Content from "../content/content"
 import About from "../content/about"
+import Team from '../content/team'
 
 import Extra from "../nav/extra"
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -19,7 +20,7 @@ const theme = createMuiTheme({
       main: '#000000',
     },
     secondary: {
-      main: '#90FFDC',
+      main: 'rgb(144, 255, 220)',
     },
   },
 });
@@ -42,6 +43,10 @@ function Main() {
                 </Route>
                 <Route path="/about">
                   <About theme={theme}/>
+                </Route>
+
+                <Route path="/team">
+                  <Team theme={theme}/>
                 </Route>
               </Switch>
   

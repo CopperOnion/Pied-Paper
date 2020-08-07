@@ -48,17 +48,6 @@ export default class Content extends Component {
             }
             )
             .then(res => {
-                /*the news route now returns a list of objects with keys
-                        res.data = [
-                            {
-                                articles: "foo bar"
-                                truefalse: 0 or 1
-                                category: "general"
-                                publish_date: ISO8601 format
-                            }
-                            ... and so on
-                        ]
-                    */
                 this.setState(
                     { news: [...res.data] },
                     () => console.log(this.state)
@@ -84,6 +73,20 @@ export default class Content extends Component {
         window.scrollTo(0, 0);
 
     }
+
+    showmore = (index) =>{
+        console.log(index)
+        var element = document.getElementsByClassName(index);
+        element[0].classList.remove("notdisplayed");
+        element[0].classList.add("displayed");
+    }
+
+    showless = (index) =>{
+        var element = document.getElementsByClassName(index);
+        element[0].classList.remove("displayed");
+        element[0].classList.add("notdisplayed");
+    }
+
     render() {
         let cardlist = <ul></ul>
         if (this.state.news) {
@@ -92,25 +95,37 @@ export default class Content extends Component {
             let indexFirst = indexLast - this.state.postsperpage
             news = news.slice(indexFirst, indexLast);
             cardlist =
+
                 <ul>
-                    {news.map((e) => (
-                        <li key={e.articles.title} >
+                    {news.map((e,i) => (
+                        <li onMouseOver={()=>this.showmore("attached"+i)} onMouseOut={()=>this.showless("attached"+i)} key={e.articles.title} >
                             <a href={e.articles.url}>
                                 <Card title={e.articles.title}
-                                    publication={e.articles.source.name}
                                     description={e.articles.description}
                                     image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
                                     theme={this.props.theme}
-                                    publishdate={parseDate(e.publish_date)}
                                     category={e.category} 
                                 />
                             </a>
+                            <div className={`attached`+i + ' notdisplayed' }>
+                                <h6>{parseDate(e.publish_date)}</h6>
+                                <h6>This is very certainly fake news</h6>
+                                <button>Agree</button>
+                                <button>Disagree</button>
+                                <h4 onMouseOver={()=>this.showmore("source"+i)} >Hover to see source</h4>
+                                <h4 className={`source`+i +' notdisplayed'}>{e.articles.source.name}</h4>
+                            </div>
                         </li>
                     ))}
                 </ul>
-
         }
 
+        /* 
+        TODO: Add a meta analysis factor: 
+        Do users agree with the take of the ML? display the results
+        
+        
+        */
         return (
             <div className="content">
                 <div className="left">

@@ -91,7 +91,7 @@ function Dashboard({theme}) {
 
 
                       <Typography className={classes.info} variant="h6" color='secondary'>
-                        <Link style={{color:'#90FFDC'}}to="/about">Team</Link>
+                        <Link style={{color:'#90FFDC'}}to="/team">Team</Link>
                       </Typography>
                 </div>
 

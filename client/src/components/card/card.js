@@ -13,8 +13,8 @@ const useStyles = makeStyles({
       marginBottom: "1em"
     },
     display: 'flex',
-    borderBottom: '1px solid black',
-    borderRadius: '0',
+    flexDirection:'column',
+
     padding: 0,
     transition:'transform .4s',
     overflow:'visible'
@@ -41,14 +41,14 @@ const useStyles = makeStyles({
   },
 
   cardaction: {
-    padding: "3% 0",
+    paddingTop: "3%",
     width: '100%',
     display: 'flex',
     transition:'transform 1s',
 
     '&:hover': {
       cursor: "pointer",
-      transform: 'scale(1.05)'
+      transform: ''
 
     }
   },
@@ -58,8 +58,11 @@ const useStyles = makeStyles({
   },
 
 });
+/* 
+TODO: Add a detail tab that expands upon hover ( separate from the original card)
 
-export default function MediaCard({ title, publication, description, image, theme,publishdate, category}) {
+*/
+export default function MediaCard({ title, description, image, theme, category}) {
   const classes = useStyles();
 
   return (
@@ -67,12 +70,12 @@ export default function MediaCard({ title, publication, description, image, them
 
       <Card elevation={0} className={classes.root}>
 
-        <div /* onClick={()=> onClickCard(url)} */ className={classes.cardaction}>
+        <div  className={classes.cardaction}>
 
           <div className={classes.content}>
             <div className={classes.title}>
               <h3>  {title} </h3>
-              <h5>  {category} / {publication}</h5>
+              <h5>  {category} </h5>
 
 
             </div>
@@ -82,7 +85,6 @@ export default function MediaCard({ title, publication, description, image, them
               {description}
             </p>
 
-            <h6>{publishdate}</h6>
 
 
           </div>
@@ -97,6 +99,7 @@ export default function MediaCard({ title, publication, description, image, them
           />
         </div>
 
+        
 
 
       </Card>
