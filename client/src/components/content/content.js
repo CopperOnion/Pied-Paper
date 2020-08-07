@@ -78,37 +78,37 @@ class Content extends Component {
             .catch(err => console.log(err))
     }
 
-    componentWillReceiveProps(nprops){
+    componentWillReceiveProps(nprops) {
         if (nprops.topic.topic) {
             //GET request to express server for the NEWS API to return new articles
             axios
-            .post("/api/news/retrievecat", nprops.topic,{
-                headers: { Accept: 'application/json' }
-            }
-            )
-            .then(res => {
-                this.setState(
-                    { news: [...res.data] },
-                    () => console.log(this.state)
+                .get("/api/news/retrievecat", nprops.topic, {
+                    headers: { Accept: 'application/json' }
+                }
                 )
-            })
-            .catch(err => console.log(err))
-        } 
+                .then(res => {
+                    this.setState(
+                        { news: [...res.data] },
+                        () => console.log(this.state)
+                    )
+                })
+                .catch(err => console.log(err))
+        }
         if (nprops.topic.order) {
             //GET request to express server for the NEWS API to return new articles
             axios
-            .get("/api/news/retrieveorder", {
-                headers: { Accept: 'application/json' }
-            }
-            )
-            .then(res => {
-                this.setState(
-                    { news: [...res.data] },
-                    () => console.log(this.state)
+                .get("/api/news/retrieveorder", {
+                    headers: { Accept: 'application/json' }
+                }
                 )
-            })
-            .catch(err => console.log(err))
-        } 
+                .then(res => {
+                    this.setState(
+                        { news: [...res.data] },
+                        () => console.log(this.state)
+                    )
+                })
+                .catch(err => console.log(err))
+        }
     }
 
     //Change page 
@@ -118,13 +118,13 @@ class Content extends Component {
         })
     }
 
-    showmore = (index) =>{
+    showmore = (index) => {
         var element = document.getElementsByClassName(index);
         element[0].classList.remove("notdisplayed");
         element[0].classList.add("displayed");
     }
 
-    showless = (index) =>{
+    showless = (index) => {
         var element = document.getElementsByClassName(index);
         element[0].classList.remove("displayed");
         element[0].classList.add("notdisplayed");
@@ -140,8 +140,8 @@ class Content extends Component {
             cardlist =
 
                 <ul>
-                    {news.map((e,i) => (
-                        <li onMouseOver={()=>this.showmore("attached"+i)} onMouseOut={()=>this.showless("attached"+i)} key={e.articles.title} >
+                    {news.map((e, i) => (
+                        <li onMouseOver={() => this.showmore("attached" + i)} onMouseOut={() => this.showless("attached" + i)} key={e.articles.title} >
                             <a href={e.articles.url}>
                                 <Card title={e.articles.title}
                                     description={e.articles.description}
@@ -149,13 +149,13 @@ class Content extends Component {
                                     theme={this.props.theme}
                                 />
                             </a>
-                            <div className={`attached`+i + ' notdisplayed' }>
+                            <div className={`attached` + i + ' notdisplayed'}>
                                 <h6>{parseDate(e.publish_date)}</h6>
                                 <h6>This is very certainly fake news</h6>
                                 <button>Agree</button>
                                 <button>Disagree</button>
-                                <h4 onMouseOver={()=>this.showmore("source"+i)} >Hover to see source</h4>
-                                <h4 className={`source`+i +' notdisplayed'}>{e.articles.source.name}</h4>
+                                <h4 onMouseOver={() => this.showmore("source" + i)} >Hover to see source</h4>
+                                <h4 className={`source` + i + ' notdisplayed'}>{e.articles.source.name}</h4>
                             </div>
                         </li>
                     ))}
@@ -171,12 +171,13 @@ class Content extends Component {
         return (
             <div className="content">
                 <div className="left">
-                    {cardlist}    
-                    <Pagination 
-                        postsPerPage={this.state.postsperpage} 
-                        totalPosts={this.state.news.length} 
-                        paginate = {this.paginate}
-                        scrollup = {() => {window.scrollTo(0, 0);}}
+
+                    {cardlist}
+                    <Pagination
+                        postsPerPage={this.state.postsperpage}
+                        totalPosts={this.state.news.length}
+                        paginate={this.paginate}
+                        scrollup={() => { window.scrollTo(0, 0); }}
                     />
 
                 </div>
@@ -200,14 +201,14 @@ class Content extends Component {
                         description={"Lorem ipsum dolor sit amet"}
                         image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
                         theme={this.props.theme}
-                    />  
+                    />
 
                     <Opinion
                         title={"Opinion"}
                         description={"Lorem ipsum dolor sit amet"}
                         image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
                         theme={this.props.theme}
-                    />  
+                    />
                 </div>
             </div>
         )
@@ -216,12 +217,12 @@ class Content extends Component {
 
 
 const mapStateToProps = state => ({
-    topic : state.topic,
-    order : state.order
+    topic: state.topic,
+    order: state.order
 })
 
 export default connect(
     mapStateToProps,
-{ }
+    {}
 )(withRouter(Content));
 
