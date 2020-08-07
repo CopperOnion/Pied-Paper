@@ -97,6 +97,8 @@ router.get("/users", (req, res) => {
   });
 });
 
+
+
 //the express router receives a request from the react client, and pings the news api
 //for news articles. Then the packaged news articles are sent back as an object.
 router.get("/retrieve", (req, res) => {
@@ -106,5 +108,30 @@ router.get("/retrieve", (req, res) => {
     res.status(200).json(result.rows)
   })
 });
+
+/* 
+  this request is used for retrieving only certain kind of news
+
+*/
+router.post("/retrievecat", (req, res) => {
+  client.query(`SELECT * FROM news WHERE category = \'${req.body.topic}\' `, (err, result) => {
+    if (err) throw err;
+
+    res.status(200).json(result.rows)
+  })
+});
+
+/* 
+  this request is used for retrieving news in order
+
+*/
+router.get("/retrieveorder", (req, res) => {
+  client.query(`SELECT * FROM news ORDER BY Publish_date DESC`, (err, result) => {
+    if (err) throw err;
+    console.log("googk")
+    res.status(200).json(result.rows)
+  })
+});
+
 
 module.exports = router;

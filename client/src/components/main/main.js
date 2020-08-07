@@ -1,14 +1,22 @@
 import React , { } from 'react'
-import Navbar from "../nav/navbar"
 import Dashboard from "../dashboard/dashboard"
-import Menubar from "../nav/toolbar"
 import Content from "../content/content"
-import Footer from "../nav/footer"
-import Extra from "../nav/extra"
-import Analysis from '../content/analysis'
-import Review from '../content/Review.js'
-import { createMuiTheme } from '@material-ui/core/styles';
+import About from "../content/about"
+import Team from '../content/team'
 
+import Extra from "../nav/extra"
+import { createMuiTheme } from '@material-ui/core/styles';
+import './main.css'
+
+
+import { Provider } from "react-redux";
+import store from "../../store";
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 const theme = createMuiTheme({
   palette: {
@@ -16,7 +24,7 @@ const theme = createMuiTheme({
       main: '#000000',
     },
     secondary: {
-      main: '#f44336',
+      main: 'rgb(144, 255, 220)',
     },
   },
 });
@@ -24,29 +32,43 @@ const theme = createMuiTheme({
 
 function Main() {
     return (
-        <>
-          <Navbar theme={theme}/>
+      <Provider store={store}>
 
-          <div style={{display:'flex'}}> 
-
-            <div style={{display:'flex', flex:'.5',flexDirection:'column'}}>
+        <Router>
+          <div className='main_container'> 
+      
+            <div className='main_left'>
               <Dashboard theme={theme}/>
             </div>
 
     
-            <div style={{display:'flex', flex:'.5', flexDirection:'column'}}>
-              <Content theme={theme}/>
-              <Analysis theme={theme}/>
-              {/* <Review theme={theme}/> */}
+            <div className='main_right'>
+              <Switch>
+                <Route exact path="/">
+                  <Content theme={theme}/>
+                </Route>
+                <Route path="/about">
+                  <About theme={theme}/>
+                </Route>
 
+                <Route path="/team">
+                  <Team theme={theme}/>
+                </Route>
+              </Switch>
+  
             </div>
 
 
           </div>
           {/* <Footer theme={theme}/>*/}
-          <Extra theme={theme}/> 
+          
+          <Route exact path="/">
+            <Extra theme={theme}/> 
+          </Route>
 
-        </>
+        </Router>
+        </Provider>
+
     )
 }
 

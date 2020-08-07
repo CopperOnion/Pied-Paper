@@ -3,14 +3,20 @@
 }
 
 .content .left{
-
-    flex: .7;
+    padding:2em 3em;
+    flex: .71;
 }
 
 .content .right{
-    flex: .3;
-    border-left:1px solid rgba(0,0,0,.3);
-
+    position: fixed;
+    right: 0;
+    margin: 4vh 0;
+    width: 21vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    
 }
 
 .content li{
@@ -22,8 +28,6 @@
     margin-block-end: 0;
     padding-inline-start: 0;
 
-    margin: 0;
-    padding:0;
 }
 
 .content .drawer{
@@ -38,4 +42,8 @@
     overflow-x: hidden; 
     padding: 20px; 
 
+}
+
+a{
+    text-decoration: none;
 }

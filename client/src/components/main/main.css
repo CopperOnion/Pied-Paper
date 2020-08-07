@@ -1,0 +1,20 @@
+.main_left{
+    position: fixed;
+    width: 23vw;
+    left: 0;
+    height: 100vh;
+    top:0;
+    /* background-color: #9d79bc; */
+    background-color:#861657;
+    color:white
+}
+
+.main_right{
+    width:75vw;
+}
+
+.main_container{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}

@@ -2,6 +2,12 @@ h3{
     margin-block-start: 0em;
     margin-block-end: .35em;
 }
+
+h4{
+    margin-block-start: 0em;
+    margin-block-end: .0em;
+}
+
 h5{
     margin-block-start: 0em;
     margin-block-end: 0em;
@@ -17,8 +23,21 @@ p{
     font-size:.8em;
 
 }
+.MuiCard-root {
+    overflow: visible;
+}
 
-p .description:hover{
-    cursor : "pointer"
+.displayed{
+    overflow: hidden;
+    max-height: 100px;
+    transition: max-height .3s;
+
+}
+
+.notdisplayed{
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .3s ease-out;
+
 }
 

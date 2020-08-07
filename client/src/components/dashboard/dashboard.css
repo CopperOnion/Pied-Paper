@@ -1,9 +1,22 @@
 .dashboard{
-    display:flex;
+    display: flex;
     flex-direction: column;
-    align-content:center;
-    align-self: center;
-    justify-content: center;
-    padding:2vh 3vw;
-    margin-top:4vh;
+    padding: 3vh 2vw;
+    height: 100vh;
+}
+
+.dashboard .info{
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 8vh;
+}
+
+.dashboard .info h6{
+    margin-right: 2vw;
+
+}
+
+.dashboard .top {
+    margin-bottom: 2vh;
 }

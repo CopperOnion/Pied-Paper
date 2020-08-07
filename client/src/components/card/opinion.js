@@ -4,7 +4,6 @@ import { ThemeProvider } from '@material-ui/styles';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import './card.css'
 
 
@@ -14,42 +13,37 @@ const useStyles = makeStyles({
       marginBottom:"1em"
     },
     display:'flex',
-    marginTop:'1vw',
-    paddingLeft: "1em"
-  },
-  media: {
-    width: '100%',
-    height: '100px',
-    flex:.3,
-  },
-  right:{
-    display:'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    padding:0,
-    marginRight:'1em',
+    height:'100px',
+    borderRadius:0,
+    marginBottom : '4vh'
 
   },
-
   left:{
     display:'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    padding:0,
-    marginRight:'1em',
-    paddingRight: '1em',
-    borderBottom:'1px solid rgba(0,0,0,0.3)',
-    borderRadius:'0',
-
+    padding: 0,
+    marginRight:'2em',
+    width: '100vh'
   },
 
   cardaction_left:{
     display:'flex',
+    width: '100vw'
   },
 
   title:{
-    marginBottom:"1em"
+    borderRadius:'0',
+    borderLeft:'solid 6px #8AC4FF',
+    marginBottom:"1em",
+    paddingLeft:"1em"
+
   },
+
+  heading:{
+    marginBlockStart: 0     ,
+    marginBlockEnd: '.2em'
+  }
   
 });
 
@@ -65,7 +59,7 @@ export default function MediaCard({title,description, image, theme}) {
                
                 <CardContent className={classes.left}>
                     <div className={classes.title}>
-                      <h2>  {title} </h2>
+                      <h2 className={classes.heading}>  {title} </h2>
                       <h5>The verge</h5>
 
 

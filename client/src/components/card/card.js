@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import './card.css'
 
@@ -14,17 +13,18 @@ const useStyles = makeStyles({
       marginBottom: "1em"
     },
     display: 'flex',
-    borderBottom: '1px solid black',
-    borderRadius: '0',
-    padding: 0,
+    flexDirection:'column',
 
+    padding: 0,
+    transition:'transform .4s',
+    overflow:'visible'
   },
   '.MuiCardContent-root:last-child': {
     padding: 0
   },
 
   'root:hover': {
-    cursor: 'pointer'
+    
   },
   media: {
     height: '100px',
@@ -41,11 +41,15 @@ const useStyles = makeStyles({
   },
 
   cardaction: {
-    padding: "2% 0",
+    paddingTop: "3%",
     width: '100%',
     display: 'flex',
+    transition:'transform 1s',
+
     '&:hover': {
       cursor: "pointer",
+      transform: ''
+
     }
   },
 
@@ -54,8 +58,11 @@ const useStyles = makeStyles({
   },
 
 });
+/* 
+TODO: Add a detail tab that expands upon hover ( separate from the original card)
 
-export default function MediaCard({ title, publication, description, image, theme, onClickCard, publishdate, category }) {
+*/
+export default function MediaCard({ title, description, image, theme}) {
   const classes = useStyles();
 
   return (
@@ -63,14 +70,11 @@ export default function MediaCard({ title, publication, description, image, them
 
       <Card elevation={0} className={classes.root}>
 
-        <div onClick={onClickCard} className={classes.cardaction}>
+        <div  className={classes.cardaction}>
 
           <div className={classes.content}>
             <div className={classes.title}>
               <h3>  {title} </h3>
-              <h5>The verge</h5>
-
-
             </div>
 
 
@@ -78,7 +82,6 @@ export default function MediaCard({ title, publication, description, image, them
               {description}
             </p>
 
-            <h6>{publishdate}<br />{category}</h6>
 
 
           </div>
@@ -93,6 +96,7 @@ export default function MediaCard({ title, publication, description, image, them
           />
         </div>
 
+        
 
 
       </Card>

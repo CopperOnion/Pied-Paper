@@ -1,0 +1,9 @@
+.team{
+    position: fixed;
+    background-color: white;
+    right: 0;
+    top: 0;
+    width: 77vw;
+    height: 100vw;
+    transition: right 1s;
+}

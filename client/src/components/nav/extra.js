@@ -13,7 +13,7 @@ function Extra({theme}) {
         <>
             <ThemeProvider theme={theme}>
               <div>
-                <AppBar  elevation={0}  style={{ backgroundColor: 'transparent' , borderBottom: 'solid 1px black' }} position="static">
+                <AppBar  elevation={0}  style={{ backgroundColor: 'transparent' }} position="static">
                     <Toolbar className="extra" style={{minHeight:'32px'}}variant="dense" >
                         <ul>
                             <li>
