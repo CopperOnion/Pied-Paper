@@ -50,11 +50,31 @@ async function getCategories() {
 // the news api is pinged everytime the app gets started, which should be however often heroku shuts down and has to restart.
 async function getNews() {
   await getCategories();
+
+  //get today's date
+  let currentDate = new Date()
+  const dd1 = String(currentDate.getDate()).padStart(2, '0')      //day and month give number datatypes, pad to strings only
+  const mm1 = String(currentDate.getMonth() + 1).padStart(2, '0') //january returns 0
+  const yyyy1 = currentDate.getFullYear()
+
+  //get date of 30 days prior to today
+  let monthDate = new Date().setDate(currentDate.getDate() - 30) //returns milliseconds
+  monthDate = new Date(monthDate)                                //parse to actual date format
+  const dd2 = String(monthDate.getDate()).padStart(2, '0')
+  const mm2 = String(monthDate.getMonth() + 1).padStart(2, '0')
+  const yyyy2 = monthDate.getFullYear()
+
+  //"yyyy-mm-dd"
+  currentDate = yyyy1 + "-" + mm1 + "-" + dd1
+  monthDate = yyyy2 + "-" + mm2 + "-" + dd2
+  console.log(currentDate)
+  console.log(monthDate)
+
   newsapi.v2
     .topHeadlines({
       //q: "covid",
-      from: "2020-07-25",
-      to: "2020-07-30",
+      from: monthDate,
+      to: currentDate,
       language: "en",
     })
     .then((response) => {
@@ -72,7 +92,7 @@ async function getNews() {
         client.query(
           "INSERT INTO news (articles, truefalse, category, publish_date) VALUES ($1, $2, $3, $4) ON CONFLICT (articles) DO NOTHING",
           [article, 1, siteID[article.source.id] || siteName[article.source.name] || 'general', article.publishedAt],
-          function (err, result) {
+          (err, result) => {
             if (err) throw err;
           })
       })
@@ -109,11 +129,22 @@ router.get("/retrieve", (req, res) => {
   })
 });
 
+
+//retrieve news by date interval of 1 day, 1 week, 1 month
+router.get("/retrievetime", (req, res) => {
+  client.query(`SELECT * FROM news WHERE publish_date > now() - interval \'${req.body.time}\'`,
+    (err, result) => {
+      if (err) throw err;
+
+      res.status(200).json(result.rows)
+    })
+});
+
 /* 
   this request is used for retrieving only certain kind of news
 
 */
-router.post("/retrievecat", (req, res) => {
+router.get("/retrievecat", (req, res) => {
   client.query(`SELECT * FROM news WHERE category = \'${req.body.topic}\' `, (err, result) => {
     if (err) throw err;
 
@@ -126,7 +157,7 @@ router.post("/retrievecat", (req, res) => {
 
 */
 router.get("/retrieveorder", (req, res) => {
-  client.query(`SELECT * FROM news ORDER BY Publish_date DESC`, (err, result) => {
+  client.query(`SELECT * FROM news ORDER BY publish_date DESC`, (err, result) => {
     if (err) throw err;
     console.log("googk")
     res.status(200).json(result.rows)
