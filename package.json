@@ -32,6 +32,12 @@
     "nodemon": "^2.0.4",
     "pg": "^8.3.0",
     "postgresql": "0.0.1",
-    "react-router": "^5.2.0"
+    "react-redux": "^7.2.1",
+    "react-router": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.8"
   }
 }

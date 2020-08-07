@@ -8,6 +8,10 @@ import Extra from "../nav/extra"
 import { createMuiTheme } from '@material-ui/core/styles';
 import './main.css'
 
+
+import { Provider } from "react-redux";
+import store from "../../store";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -28,6 +32,8 @@ const theme = createMuiTheme({
 
 function Main() {
     return (
+      <Provider store={store}>
+
         <Router>
           <div className='main_container'> 
       
@@ -61,6 +67,8 @@ function Main() {
           </Route>
 
         </Router>
+        </Provider>
+
     )
 }
 

@@ -1,11 +1,33 @@
 import React, { Component } from 'react'
+
+/* 
+Importing components
+
+*/
 import Card from '../card/card'
 import Pagination from '../card/pagination'
 import Opinion from '../card/opinion'
 
+/* 
+Redux related stuff
 
+*/
+import { withRouter } from "react-router";
+import { connect } from "react-redux";
+
+
+/* 
+Data fetching stuff
+
+*/
 import './content.css'
 import axios from "axios";
+
+
+/* 
+Date parser
+
+*/
 
 function parseDate(date) {
     const MM = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -19,7 +41,7 @@ function parseDate(date) {
     return xx
 }
 
-export default class Content extends Component {
+class Content extends Component {
     constructor(props) {
         super(props)
 
@@ -56,26 +78,47 @@ export default class Content extends Component {
             .catch(err => console.log(err))
     }
 
-    clickHandler = (url) => {
-        window.location = url
+    componentWillReceiveProps(nprops){
+        if (nprops.topic.topic) {
+            //GET request to express server for the NEWS API to return new articles
+            axios
+            .post("/api/news/retrievecat", nprops.topic,{
+                headers: { Accept: 'application/json' }
+            }
+            )
+            .then(res => {
+                this.setState(
+                    { news: [...res.data] },
+                    () => console.log(this.state)
+                )
+            })
+            .catch(err => console.log(err))
+        } 
+        if (nprops.topic.order) {
+            //GET request to express server for the NEWS API to return new articles
+            axios
+            .get("/api/news/retrieveorder", {
+                headers: { Accept: 'application/json' }
+            }
+            )
+            .then(res => {
+                this.setState(
+                    { news: [...res.data] },
+                    () => console.log(this.state)
+                )
+            })
+            .catch(err => console.log(err))
+        } 
     }
 
     //Change page 
     paginate = (page) => {
-        console.log(page)
         this.setState({
             currentpage: page
         })
     }
 
-    //Scroll to the top 
-    scrollup = ()=>{
-        window.scrollTo(0, 0);
-
-    }
-
     showmore = (index) =>{
-        console.log(index)
         var element = document.getElementsByClassName(index);
         element[0].classList.remove("notdisplayed");
         element[0].classList.add("displayed");
@@ -104,7 +147,6 @@ export default class Content extends Component {
                                     description={e.articles.description}
                                     image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
                                     theme={this.props.theme}
-                                    category={e.category} 
                                 />
                             </a>
                             <div className={`attached`+i + ' notdisplayed' }>
@@ -135,7 +177,7 @@ export default class Content extends Component {
                         postsPerPage={this.state.postsperpage} 
                         totalPosts={this.state.news.length} 
                         paginate = {this.paginate}
-                        scrollup = {this.scrollup}
+                        scrollup = {() => {window.scrollTo(0, 0);}}
                     />
 
                 </div>
@@ -172,4 +214,15 @@ export default class Content extends Component {
         )
     }
 }
+
+
+const mapStateToProps = state => ({
+    topic : state.topic,
+    order : state.order
+})
+
+export default connect(
+    mapStateToProps,
+{ }
+)(withRouter(Content));
 

@@ -62,7 +62,7 @@ const useStyles = makeStyles({
 TODO: Add a detail tab that expands upon hover ( separate from the original card)
 
 */
-export default function MediaCard({ title, description, image, theme, category}) {
+export default function MediaCard({ title, description, image, theme}) {
   const classes = useStyles();
 
   return (
@@ -75,9 +75,6 @@ export default function MediaCard({ title, description, image, theme, category})
           <div className={classes.content}>
             <div className={classes.title}>
               <h3>  {title} </h3>
-              <h5>  {category} </h5>
-
-
             </div>
 
 

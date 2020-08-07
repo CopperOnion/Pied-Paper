@@ -30,7 +30,7 @@ p{
 .displayed{
     overflow: hidden;
     max-height: 100px;
-    transition: max-height .3s ease-in;
+    transition: max-height .3s;
 
 }
 

@@ -4,6 +4,9 @@ import { ThemeProvider } from '@material-ui/styles';
 
 import { makeStyles } from '@material-ui/core/styles';
 
+import { connect } from 'react-redux'
+import { setCurrentTopic , setOrdering} from '../../actions'
+
 import {
     Link
   } from "react-router-dom";
@@ -35,7 +38,7 @@ TODO: GIVE MORE POWER TO THE DASHBOARD ( make the background darker and font whi
 
 
 */
-function Dashboard({theme}) {
+function Dashboard({dispatch,theme}) {
     const classes = useStyles();
     const date = `${returnDay(new Date().getDay())}, ${new Date().getDate()} ${returnMonth(new Date().getMonth())} ${new Date().getFullYear()}`;
 
@@ -63,22 +66,24 @@ function Dashboard({theme}) {
                     </div>
 
                     <div className= "smallbar">
-                        <Typography className={classes.list} variant="subtitle2" color='secondary'>
+                        <Typography onClick={()=>{dispatch(setCurrentTopic("general"))}} className={classes.list} variant="subtitle2" color='secondary'>
                             General
                         </Typography>
-                        <Typography className={classes.list} variant="subtitle2" color='secondary'>
-                            World
+                        <Typography onClick={()=>{dispatch(setCurrentTopic("technology"))}} className={classes.list} variant="subtitle2" color='secondary'>
+                            Technology
                         </Typography>
 
-                        <Typography className={classes.list} variant="subtitle2" color='secondary'>
+                        <Typography onClick={()=>{dispatch(setCurrentTopic("business"))}} className={classes.list} variant="subtitle2" color='secondary'>
                             Business
                         </Typography>
-                        <Typography className={classes.list} variant="subtitle2" color='secondary'>
+                        <Typography onClick={()=>{dispatch(setCurrentTopic("entertainment"))}} className={classes.list} variant="subtitle2" color='secondary'>
                             Entertainment
                         </Typography>
-                        <Typography className={classes.list} variant="subtitle2" color='secondary'>
-                            Covid
+
+                        <Typography onClick={()=>{dispatch(setOrdering("recent_first"))}} className={classes.list} variant="subtitle2" color='secondary'>
+                            Most recent
                         </Typography>
+    
                     </div>
                 </div>
                 
@@ -131,4 +136,4 @@ function returnDay(day){
     }
   }
 
-export default Dashboard
+export default connect()(Dashboard)
