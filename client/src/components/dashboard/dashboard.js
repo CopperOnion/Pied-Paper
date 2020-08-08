@@ -35,6 +35,7 @@ TODO: GIVE MORE POWER TO THE DASHBOARD ( make the background darker and font whi
 
 
 */
+
 function Dashboard({ dispatch, theme }) {
   const classes = useStyles();
   const date = `${returnDay(new Date().getDay())}, ${new Date().getDate()} ${returnMonth(new Date().getMonth())} ${new Date().getFullYear()}`;
@@ -59,27 +60,35 @@ function Dashboard({ dispatch, theme }) {
           <div className="smallbar">
             <Typography style={{ fontWeight: "600" }} className={classes.title} variant="h5" color='secondary'>
               Truth-based news aggregator
-                        </Typography>
+            </Typography>
           </div>
+
+          {/* 
+            dispatches the actions in index.js
+            @setCurrentTopic
+            @setOrdering
+          */}
 
           <div className="smallbar">
             <Typography onClick={() => { dispatch(setCurrentTopic("general")) }} className={classes.list} variant="subtitle2" color='secondary'>
               General
-                        </Typography>
+            </Typography>
+            
             <Typography onClick={() => { dispatch(setCurrentTopic("technology")) }} className={classes.list} variant="subtitle2" color='secondary'>
               Technology
-                        </Typography>
+            </Typography>
 
             <Typography onClick={() => { dispatch(setCurrentTopic("business")) }} className={classes.list} variant="subtitle2" color='secondary'>
               Business
-                        </Typography>
+            </Typography>
+            
             <Typography onClick={() => { dispatch(setCurrentTopic("entertainment")) }} className={classes.list} variant="subtitle2" color='secondary'>
               Entertainment
-                        </Typography>
+            </Typography>
 
-            <Typography onClick={() => { dispatch(setOrdering("recent_first")) }} className={classes.list} variant="subtitle2" color='secondary'>
+            <Typography onClick={() => { dispatch(setOrdering("DESC")) }} className={classes.list} variant="subtitle2" color='secondary'>
               Most recent
-                        </Typography>
+            </Typography>
 
           </div>
         </div>
