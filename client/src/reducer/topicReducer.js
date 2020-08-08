@@ -15,7 +15,8 @@ export default function(state = initialState, action) {
         case "SET_CURRENT_TOPIC":
             return {
                 ...state,
-                topic: action.topic
+                topic: action.topic,
+                order: ''
             };
         case "SET_ORDERING":
             return {

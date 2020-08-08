@@ -141,7 +141,7 @@ class Content extends Component {
 
                 <ul>
                     {news.map((e, i) => (
-                        <li onMouseOver={() => this.showmore("attached" + i)} onMouseOut={() => this.showless("attached" + i)} key={e.articles.title} >
+                        <li onMouseOver={() => this.showmore("attached" + i)} onMouseOut={() => this.showless("attached" + i)} key={i} >
                             <a href={e.articles.url}>
                                 <Card title={e.articles.title}
                                     description={e.articles.description}
