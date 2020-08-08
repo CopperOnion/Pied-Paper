@@ -86,7 +86,7 @@ function Dashboard({ dispatch, theme }) {
               Entertainment
             </Typography>
 
-            <Typography onClick={() => { dispatch(setOrdering("recent_first")) }} className={classes.list} variant="subtitle2" color='secondary'>
+            <Typography onClick={() => { dispatch(setOrdering("DESC")) }} className={classes.list} variant="subtitle2" color='secondary'>
               Most recent
             </Typography>
 

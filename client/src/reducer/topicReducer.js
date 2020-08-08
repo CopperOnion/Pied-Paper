@@ -1,8 +1,8 @@
 
 const initialState = {
     topic: 'all',
-    order:'',
-    time:"30"
+    order:'ASC',
+    time:"30 days"
 };
 
 /* 
