@@ -82,7 +82,7 @@ class Content extends Component {
         if (nprops.topic.topic) {
             //GET request to express server for the NEWS API to return new articles
             axios
-                .get("/api/news/retrievecat", nprops.topic, {
+                .post("/api/news/retrievecat", nprops.topic, {
                     headers: { Accept: 'application/json' }
                 }
                 )

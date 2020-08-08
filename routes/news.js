@@ -131,6 +131,7 @@ router.get("/retrieve", (req, res) => {
 
 
 //retrieve news by date interval of 1 day, 1 week, 1 month
+
 router.get("/retrievetime", (req, res) => {
   client.query(`SELECT * FROM news WHERE publish_date > now() - interval \'${req.body.time}\'`,
     (err, result) => {
@@ -144,7 +145,8 @@ router.get("/retrievetime", (req, res) => {
   this request is used for retrieving only certain kind of news
 
 */
-router.get("/retrievecat", (req, res) => {
+
+router.post("/retrievecat", (req, res) => {
   client.query(`SELECT * FROM news WHERE category = \'${req.body.topic}\' `, (err, result) => {
     if (err) throw err;
 
@@ -156,8 +158,9 @@ router.get("/retrievecat", (req, res) => {
   this request is used for retrieving news in order
 
 */
+
 router.get("/retrieveorder", (req, res) => {
-  client.query(`SELECT * FROM news ORDER BY publish_date DESC`, (err, result) => {
+  client.query(`SELECT * FROM news ORDER BY Publish_date DESC`, (err, result) => {
     if (err) throw err;
     console.log("googk")
     res.status(200).json(result.rows)
