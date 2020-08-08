@@ -122,14 +122,24 @@ router.get("/users", (req, res) => {
 //the express router receives a request from the react client, and pings the news api
 //for news articles. Then the packaged news articles are sent back as an object.
 router.get("/retrieve", (req, res) => {
-  client.query("SELECT * FROM news", (err, result) => {
+  const newsParam = req.query
+  /*
+  given the URL /api/news/retrieve?category=entertainment&time=30+days&sort=desc
+
+  newsParam = {
+    "category" = "entertainment",
+    "time" = "30 days"
+    "sort" = "desc" <- maybe this neds to be capitalized?
+  */
+
+  client.query(`SELECT * FROM news WHERE (\'${newsParam.category}\' IS NULL OR category = \'${newsParam.category}\') AND publish_date > now() - interval \'${newsParam.time}\' ORDER BY publish_date \'${newsParam.sort}\'`, (err, result) => {
     if (err) throw err;
 
     res.status(200).json(result.rows)
   })
 });
 
-
+/*
 //retrieve news by date interval of 1 day, 1 week, 1 month
 router.get("/retrievetime", (req, res) => {
   client.query(`SELECT * FROM news WHERE publish_date > now() - interval \'${req.body.time}\'`,
@@ -140,10 +150,8 @@ router.get("/retrievetime", (req, res) => {
     })
 });
 
-/* 
-  this request is used for retrieving only certain kind of news
+//this request is used for retrieving only certain kind of news
 
-*/
 router.get("/retrievecat", (req, res) => {
   client.query(`SELECT * FROM news WHERE category = \'${req.body.topic}\' `, (err, result) => {
     if (err) throw err;
@@ -152,10 +160,8 @@ router.get("/retrievecat", (req, res) => {
   })
 });
 
-/* 
-  this request is used for retrieving news in order
+//this request is used for retrieving news in order
 
-*/
 router.get("/retrieveorder", (req, res) => {
   client.query(`SELECT * FROM news ORDER BY publish_date DESC`, (err, result) => {
     if (err) throw err;
@@ -163,6 +169,6 @@ router.get("/retrieveorder", (req, res) => {
     res.status(200).json(result.rows)
   })
 });
-
+*/
 
 module.exports = router;
