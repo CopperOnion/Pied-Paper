@@ -65,7 +65,7 @@ class Content extends Component {
 
         //GET request to express server for the NEWS API to return new articles
         axios
-            .get("/api/news/retrieve", {
+            .get("/api/news/retrieveall", {
                 headers: { Accept: 'application/json' }
             }
             )
@@ -79,26 +79,16 @@ class Content extends Component {
     }
 
     componentWillReceiveProps(nprops) {
-        if (nprops.topic.topic) {
+        if (nprops.topic) {
             //GET request to express server for the NEWS API to return new articles
+            //FIXME: NO longer a POST request, but a GET request with query params
             axios
-                .get("/api/news/retrievecat", nprops.topic, {
-                    headers: { Accept: 'application/json' }
-                }
-                )
-                .then(res => {
-                    this.setState(
-                        { news: [...res.data] },
-                        () => console.log(this.state)
-                    )
-                })
-                .catch(err => console.log(err))
-        }
-        if (nprops.topic.order) {
-            //GET request to express server for the NEWS API to return new articles
-            axios
-                .get("/api/news/retrieveorder", {
-                    headers: { Accept: 'application/json' }
+                .get(`/api/news/retrieve` , {
+                    headers: { Accept: 'application/json' },
+                    params: { category: nprops.topic.topic , 
+                              time: nprops.topic.time,
+                              sort: nprops.topic.order
+                    }
                 }
                 )
                 .then(res => {
@@ -141,7 +131,7 @@ class Content extends Component {
 
                 <ul>
                     {news.map((e, i) => (
-                        <li onMouseOver={() => this.showmore("attached" + i)} onMouseOut={() => this.showless("attached" + i)} key={e.articles.title} >
+                        <li onMouseOver={() => this.showmore("attached" + i)} onMouseOut={() => this.showless("attached" + i)} key={i} >
                             <a href={e.articles.url}>
                                 <Card title={e.articles.title}
                                     description={e.articles.description}
@@ -166,7 +156,7 @@ class Content extends Component {
         TODO: Add a meta analysis factor: 
         Do users agree with the take of the ML? display the results
         
-        
+        TODO: Add a label at the top of cardlist : ALL news, TECHNOLOGY NEWS ... etc
         */
         return (
             <div className="content">
@@ -218,7 +208,8 @@ class Content extends Component {
 
 const mapStateToProps = state => ({
     topic: state.topic,
-    order: state.order
+    order: state.order,
+    time: state.time
 })
 
 export default connect(

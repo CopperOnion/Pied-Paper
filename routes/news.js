@@ -110,9 +110,6 @@ getNews();
 router.get("/users", (req, res) => {
   client.query("SELECT * FROM users", function (err, result) {
     if (err) throw err;
-    for (let row of result.rows) {
-      console.log(JSON.stringify(row));
-    }
     res.status(200).json(result.rows);
   });
 });
@@ -121,53 +118,38 @@ router.get("/users", (req, res) => {
 
 //the express router receives a request from the react client, and pings the news api
 //for news articles. Then the packaged news articles are sent back as an object.
+
+/*   
+given the URL /api/news/retrieve?category=entertainment&time=30+days&sort=desc
+*/
+ 
 router.get("/retrieve", (req, res) => {
-  const newsParam = req.query
-  /*
-  given the URL /api/news/retrieve?category=entertainment&time=30+days&sort=desc
-
-  newsParam = {
-    "category" = "entertainment",
-    "time" = "30 days"
-    "sort" = "desc" <- maybe this neds to be capitalized?
-  */
-
-  client.query(`SELECT * FROM news WHERE (\'${newsParam.category}\' IS NULL OR category = \'${newsParam.category}\') AND publish_date > now() - interval \'${newsParam.time}\' ORDER BY publish_date \'${newsParam.sort}\'`, (err, result) => {
-    if (err) throw err;
-
-    res.status(200).json(result.rows)
-  })
-});
-
-/*
-//retrieve news by date interval of 1 day, 1 week, 1 month
-router.get("/retrievetime", (req, res) => {
-  client.query(`SELECT * FROM news WHERE publish_date > now() - interval \'${req.body.time}\'`,
-    (err, result) => {
+ 
+  if (req.query){
+    const newsParam = req.query
+    client.query(`SELECT * FROM news 
+                  WHERE (\'${newsParam.category}\' IS NULL OR 
+                  category = \'${newsParam.category}\') AND 
+                  publish_date > now() - interval \'${newsParam.time}\' 
+                  ORDER BY publish_date ${newsParam.sort}`, (err, result) => {
       if (err) throw err;
 
       res.status(200).json(result.rows)
-    })
+    }) 
+  }
 });
 
-//this request is used for retrieving only certain kind of news
+/* 
+FIXME:Temporary, hopefully this can be done with /retrieve
+retreive all for the start of the application
 
-router.get("/retrievecat", (req, res) => {
-  client.query(`SELECT * FROM news WHERE category = \'${req.body.topic}\' `, (err, result) => {
+*/
+router.get("/retrieveall", (req, res) => {
+  client.query(`SELECT * FROM news`, (err, result) => {
     if (err) throw err;
 
     res.status(200).json(result.rows)
-  })
-});
-
-//this request is used for retrieving news in order
-
-router.get("/retrieveorder", (req, res) => {
-  client.query(`SELECT * FROM news ORDER BY publish_date DESC`, (err, result) => {
-    if (err) throw err;
-    console.log("googk")
-    res.status(200).json(result.rows)
-  })
+  }) 
 });
 */
 

@@ -1,7 +1,8 @@
 
 const initialState = {
     topic: 'all',
-    order:''
+    order:'ASC',
+    time:"30 days"
 };
 
 /* 
@@ -14,13 +15,19 @@ export default function(state = initialState, action) {
         case "SET_CURRENT_TOPIC":
             return {
                 ...state,
-                topic: action.topic
+                topic: action.topic,
+                order: ''
             };
         case "SET_ORDERING":
             return {
                 ...state,
                 order: action.ordering
             };
+        case "SET_TIME":
+            return{
+                ...state,
+                time: action.time
+            }
         default: return state;
     }
 }
