@@ -1,5 +1,7 @@
-import React , { } from 'react'
+import React, { } from 'react'
 import Dashboard from "../dashboard/dashboard"
+//import TimeMenu from "../searchfilters/timefilter"
+//import SortMenu from "../searchfilters/sortfilter"
 import Content from "../content/content"
 import About from "../content/about"
 import Team from '../content/team'
@@ -31,45 +33,51 @@ const theme = createMuiTheme({
 
 
 function Main() {
-    return (
-      <Provider store={store}>
+  return (
+    <Provider store={store}>
 
-        <Router>
-          <div className='main_container'> 
-      
-            <div className='main_left'>
-              <Dashboard theme={theme}/>
-            </div>
+      <Router>
+        <div className='main_container'>
 
-    
-            <div className='main_right'>
-              <Switch>
-                <Route exact path="/">
-                  <Content theme={theme}/>
-                </Route>
-                <Route path="/about">
-                  <About theme={theme}/>
-                </Route>
+          <div className='main_left'>
+            <Dashboard theme={theme} />
+          </div>
 
-                <Route path="/team">
-                  <Team theme={theme}/>
-                </Route>
-              </Switch>
-  
-            </div>
 
+          <div className='main_right'>
+            <Switch>
+              <Route exact path="/">
+                <div>
+                  {/*
+                  <TimeMenu />
+                  <SortMenu />
+                  */}
+                </div>
+                <Content theme={theme} />
+              </Route>
+              <Route path="/about">
+                <About theme={theme} />
+              </Route>
+
+              <Route path="/team">
+                <Team theme={theme} />
+              </Route>
+            </Switch>
 
           </div>
-          {/* <Footer theme={theme}/>*/}
-          
-          <Route exact path="/">
-            <Extra theme={theme}/> 
-          </Route>
 
-        </Router>
-        </Provider>
 
-    )
+        </div>
+        {/* <Footer theme={theme}/>*/}
+
+        <Route exact path="/">
+          <Extra theme={theme} />
+        </Route>
+
+      </Router>
+    </Provider>
+
+  )
 }
 
 export default Main

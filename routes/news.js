@@ -113,7 +113,7 @@ router.get("/users", (req, res) => {
 //for news articles. Then the packaged news articles are sent back as an object.
 
 /*   
-given the URL /api/news/retrieve?category=entertainment&time=30+days&sort=DESC
+given the URL /api/news/retrieve?category=entertainment&range=30+days&sort=DESC
 */
 
 router.get("/retrieve", (req, res) => {
