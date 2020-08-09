@@ -139,7 +139,6 @@ router.get("/retrieve", (req, res) => {
   }
 });
 
-
 /* 
 FIXME:Temporary, hopefully this can be done with /retrieve
 retreive all for the start of the application
@@ -152,6 +151,6 @@ router.get("/retrieveall", (req, res) => {
     res.status(200).json(result.rows)
   }) 
 });
-
+*/
 
 module.exports = router;

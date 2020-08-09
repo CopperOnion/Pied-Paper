@@ -19,7 +19,7 @@ app.use(
 // Cors
 app.use(cors());
 app.options("*", cors());
-  
+
 // Routes
 app.use("/api/news", News);
 
@@ -31,15 +31,6 @@ if (process.env.PORT) {
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
   });
 }
-
-// These stuff works locally but gotta make it work globally
-
-/*app.get("/api/news/users", db.getUsers);
-app.get("/users", localdb.getUsers);
-app.get("/users/:id", localdb.getUserById);
-app.post("/users", localdb.createUser);
-app.put("/users/:id", localdb.updateUser);
-app.delete("/users/:id", localdb.deleteUser); */
 
 app.listen(port);
 
