@@ -128,11 +128,11 @@ router.get("/retrieve", (req, res) => {
   */
 
   client.query(
-    `SELECT * FROM news ` +
-    `WHERE (\'${newsParam.category}\' IS NULL OR ` +
-    `category = \'${newsParam.category}\') AND ` +
-    `publish_date > now() - interval \'${newsParam.range}\' ` +
-    `ORDER BY publish_date ${newsParam.sort}`,
+    `SELECT * FROM news
+    WHERE (\'${newsParam.category}\' IS NULL OR
+    category = \'${newsParam.category}\') AND
+    publish_date > now() - interval \'${newsParam.range}\'
+    ORDER BY publish_date ${newsParam.sort}`,
     (err, result) => {
       if (err) throw err;
 
