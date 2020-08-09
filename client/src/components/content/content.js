@@ -44,12 +44,15 @@ function parseDate(date) {
 class Content extends Component {
     constructor(props) {
         super(props)
+        this.child = React.createRef();
 
         this.state = {
             news: '',
             postsperpage: 20,
             currentpage: 1,
         }
+
+
     }
 
     componentDidMount() {
@@ -79,6 +82,8 @@ class Content extends Component {
     }
 
     componentWillReceiveProps(nprops) {
+        console.log(this)
+
         if (nprops.topic) {
             //GET request to express server for the NEWS API to return new articles
             //FIXME: NO longer a POST request, but a GET request with query params
@@ -93,19 +98,17 @@ class Content extends Component {
                 )
                 .then(res => {
                     this.setState(
-                        { news: [...res.data] },
-                        () => console.log(this.state)
+                        { news: [...res.data] ,
+                          currentpage : 1 },
+                        () => {
+                            this.child.current.reset()
+                            console.log(this.state);
+                            window.scrollTo(0, 0);
+                        }
                     )
                 })
                 .catch(err => console.log(err))
         }
-    }
-
-    //Change page 
-    paginate = (page) => {
-        this.setState({
-            currentpage: page
-        })
     }
 
     showmore = (index) => {
@@ -164,9 +167,10 @@ class Content extends Component {
 
                     {cardlist}
                     <Pagination
+                        ref = {this.child }
                         postsPerPage={this.state.postsperpage}
                         totalPosts={this.state.news.length}
-                        paginate={this.paginate}
+                        paginate={(page) => {this.setState({currentpage: page}) }}
                         scrollup={() => { window.scrollTo(0, 0); }}
                     />
 

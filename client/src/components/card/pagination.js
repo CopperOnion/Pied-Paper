@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef , useImperativeHandle } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
 
@@ -23,33 +23,37 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function PaginationControlled({postsPerPage, totalPosts , paginate, scrollup}) {
+/* 
+  Pagination is built using the help of 
+  @Pagination from material-ui/lab
+  @React useref hook. ( Allows parent components to execute functions in the child component)
+*/
+const PaginationControlled = forwardRef((props,ref) => {
   const classes = useStyles();
-  const pageTotal = Math.ceil(totalPosts/ postsPerPage)
+  const pageTotal = Math.ceil(props.totalPosts/ props.postsPerPage)
   const [page, setPage] = React.useState(1);
   const handleChange = (event, value) => {
     setPage(value);
-    paginate(value);
-    scrollup();
+    props.paginate(value);
+    props.scrollup();
   };
+
+
+  // The component instance will be extended
+  // with whatever you return from the callback passed
+  // as the second argument
+  useImperativeHandle(ref, () => ({
+    reset() {
+      setPage(1);
+    }
+  }));
+
 
   return (
     <div className={classes.root}>
-
-      {/* <div>
-        <select classname={classes.selector} name="cars" id="cars">
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-        </select>
-
-        articles per page
-      </div> */}
-
       <Pagination showFirstButton showLastButton shape="rounded" size="small" count={pageTotal} page={page} onChange={handleChange} />
-
-      
-      
     </div>
   );
-}
+})
+
+export default PaginationControlled
