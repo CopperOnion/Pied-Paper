@@ -91,7 +91,7 @@ class Content extends Component {
                 .get(`/api/news/retrieve` , {
                     headers: { Accept: 'application/json' },
                     params: { category: nprops.topic.topic , 
-                              time: nprops.topic.time,
+                              range: nprops.topic.time,
                               sort: nprops.topic.order
                     }
                 }
