@@ -88,18 +88,21 @@ class Content extends Component {
             //GET request to express server for the NEWS API to return new articles
             //FIXME: NO longer a POST request, but a GET request with query params
             axios
-                .get(`/api/news/retrieve` , {
+                .get(`/api/news/retrieve`, {
                     headers: { Accept: 'application/json' },
-                    params: { category: nprops.topic.topic , 
-                              range: nprops.topic.time,
-                              sort: nprops.topic.order
+                    params: {
+                        category: nprops.topic.topic,
+                        range: nprops.topic.range,
+                        sort: nprops.topic.order
                     }
                 }
                 )
                 .then(res => {
                     this.setState(
-                        { news: [...res.data] ,
-                          currentpage : 1 },
+                        {
+                            news: [...res.data],
+                            currentpage: 1
+                        },
                         () => {
                             this.child.current.reset()
                             console.log(this.state);
@@ -167,10 +170,10 @@ class Content extends Component {
 
                     {cardlist}
                     <Pagination
-                        ref = {this.child }
+                        ref={this.child}
                         postsPerPage={this.state.postsperpage}
                         totalPosts={this.state.news.length}
-                        paginate={(page) => {this.setState({currentpage: page}) }}
+                        paginate={(page) => { this.setState({ currentpage: page }) }}
                         scrollup={() => { window.scrollTo(0, 0); }}
                     />
 
@@ -213,7 +216,7 @@ class Content extends Component {
 const mapStateToProps = state => ({
     topic: state.topic,
     order: state.order,
-    time: state.time
+    range: state.range
 })
 
 export default connect(
