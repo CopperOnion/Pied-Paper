@@ -1,7 +1,7 @@
 import React, { } from 'react'
 import Dashboard from "../dashboard/dashboard"
-//import TimeMenu from "../searchfilters/timefilter"
-//import SortMenu from "../searchfilters/sortfilter"
+import TimeMenu from "../searchfilters/timefilter"
+import SortMenu from "../searchfilters/sortfilter"
 import Content from "../content/content"
 import About from "../content/about"
 import Team from '../content/team'
@@ -48,10 +48,8 @@ function Main() {
             <Switch>
               <Route exact path="/">
                 <div>
-                  {/*
                   <TimeMenu />
                   <SortMenu />
-                  */}
                 </div>
                 <Content theme={theme} />
               </Route>

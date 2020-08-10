@@ -16,30 +16,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function TimeMenu(props) {
-
-  // from here
+function TimeMenu({ dispatch, range }) {
+  //initial setup
   const classes = useStyles();
   const [state, setState] = React.useState({
-    range: props.topic.range,
+    range: range,
   });
 
+  //event handler for changing time range
   const handleChange = (event) => {
-    const name = event.target.name;
+    //changes the local state of the button for the sake of rendering. not the most optimal solution but it works
     setState({
-      ...state,
-      [name]: event.target.value,
+      [event.target.name]: event.target.value,
     });
+
+    //dispatches a reducer to change the state variable for time range to retrieve new range of articles
     dispatch(setTimeRange(event.target.value));
   };
-  // to here ^ , I have NO CLUE AS TO WHAT IM DOING lmao
+
+  //JSX return values
   return (
     <div style={{ display: "inline-block" }}>
       <FormControl variant="outlined" className={classes.formControl}>
+
         <InputLabel>Time Range</InputLabel>
+
         <Select
           native
-          value={state.selectedOption}
+          value={state.range}
           onChange={handleChange}
           label={"Time Range"}
           inputProps={{
@@ -55,10 +59,12 @@ function TimeMenu(props) {
   )
 };
 
+//brings the state into the component to be used as props
 const mapStateToProps = state => ({
-  topic: state.topic,
-  order: state.order,
-  range: state.range
+  range: state.topic.range
 })
 
-export default connect(mapStateToProps, {})(TimeMenu);
+//connects the component to the store and bridges the props importer as well
+export default connect(
+  mapStateToProps
+)(TimeMenu);

@@ -2,7 +2,7 @@
 const initialState = {
     topic: 'all',
     order: 'DESC',
-    range: "30 days"
+    range: '30 days'
 };
 
 /* 
