@@ -2,6 +2,7 @@ const { Client } = require("pg");
 const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
+import { newsScraper } from '../scraper';
 
 //postgreSQL remote db connection point
 const cstring =
@@ -78,10 +79,15 @@ async function getNews() {
     .then((response) => {
       const news = response.articles
 
+      //filter out articles with less than 200 characters of content scraped by the api, because those are inaccessible articles.
+      const filteredNews = news.filter((article) => article.content.length >= 200);
+
       //this compares whether the fetched article has a source entry in the api
       //if the article does not have a registered category, then it is defaulted to 'general'
       //caching news articles into the postgreSQL database
-      news.map((article) => {
+      filteredNews.map((article) => {
+        //newsScraper(article)
+
         client.query(
           "INSERT INTO news (articles, truefalse, category, publish_date) VALUES ($1, $2, $3, $4) ON CONFLICT (articles) DO NOTHING",
           [article, 1, siteID[article.source.id] || siteName[article.source.name] || 'general', article.publishedAt],
