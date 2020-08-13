@@ -145,7 +145,7 @@ class Content extends Component {
                             <a href={e.articles.url}>
                                 <Card title={e.articles.title}
                                     description={e.articles.description}
-                                    image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
+                                    image={'https://assets-jpcust.jwpsrv.com/thumbnails/rytmbwxn-720.jpg'}
                                     theme={this.props.theme}
                                 />
                             </a>
@@ -185,27 +185,27 @@ class Content extends Component {
 
                 <div className="right">
                     <Opinion
-                        title={"Opinion"}
+                        title={"Stat 1 "}
                         description={"Lorem ipsum dolor sit amet"}
                         image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
                         theme={this.props.theme}
                     />
                     <Opinion
-                        title={"Opinion"}
-                        description={"Lorem ipsum dolor sit amet"}
-                        image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
-                        theme={this.props.theme}
-                    />
-
-                    <Opinion
-                        title={"Opinion"}
+                        title={"Stat 2 "}
                         description={"Lorem ipsum dolor sit amet"}
                         image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
                         theme={this.props.theme}
                     />
 
                     <Opinion
-                        title={"Opinion"}
+                        title={"Stat 3"}
+                        description={"Lorem ipsum dolor sit amet"}
+                        image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
+                        theme={this.props.theme}
+                    />
+
+                    <Opinion
+                        title={"Stat 4"}
                         description={"Lorem ipsum dolor sit amet"}
                         image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
                         theme={this.props.theme}

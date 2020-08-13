@@ -3,7 +3,6 @@
 }
 
 .content .left{
-    padding:2em 3em;
     flex: .71;
 }
 
@@ -11,7 +10,7 @@
     position: fixed;
     right: 0;
     margin: 4vh 0;
-    width: 21vw;
+    width: 18vw;
     height: 100vh;
     display: flex;
     flex-direction: column;

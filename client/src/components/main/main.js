@@ -47,7 +47,7 @@ function Main() {
           <div className='main_right'>
             <Switch>
               <Route exact path="/">
-                <div>
+                <div className='optionselector'>
                   <TimeMenu />
                   <SortMenu />
                   

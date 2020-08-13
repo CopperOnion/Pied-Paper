@@ -1,6 +1,6 @@
 .main_left{
     position: fixed;
-    width: 23vw;
+    width: 310px;
     left: 0;
     height: 100vh;
     top:0;
@@ -11,10 +11,15 @@
 
 .main_right{
     width:75vw;
+    margin-right: -3em;
+    margin-top: 4vh;
 }
 
 .main_container{
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
+}
+
+.optionselector{
 }

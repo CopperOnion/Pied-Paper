@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     },
     display: 'flex',
     flexDirection:'column',
-
+    margin: "2vh 0",
     padding: 0,
     transition:'transform .4s',
     overflow:'visible'
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 
   content: {
     display: 'flex',
-
+    marginRight: '2vw',
     flex: .7,
     flexDirection: 'column',
     alignItems: 'flex-start',
