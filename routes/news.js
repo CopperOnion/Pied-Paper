@@ -119,13 +119,6 @@ given the URL /api/news/retrieve?category=entertainment&range=30+days&sort=DESC
 router.get("/retrieve", (req, res) => {
 
   const newsParam = req.query
-  /*
-  no passed parameters = empty object
-  newsParam = {
-    "category" = "entertainment",
-    "range" = "30 days"
-    "sort" = "DESC"
-  */
 
   client.query(
     `SELECT * FROM news
