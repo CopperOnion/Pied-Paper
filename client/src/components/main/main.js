@@ -50,6 +50,7 @@ function Main() {
                 <div>
                   <TimeMenu />
                   <SortMenu />
+                  
                 </div>
                 <Content theme={theme} />
               </Route>

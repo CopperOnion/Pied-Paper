@@ -57,15 +57,6 @@ class Content extends Component {
 
     componentDidMount() {
 
-        //GET request to express server for the NEWS API users?
-        axios
-            .get("/api/news/users", {
-                headers: { Accept: 'application/json' }
-            }
-            )
-            .then(res => console.log(res.data)) // re-direct to login on successful register
-            .catch(err => console.log(err))
-
         //GET request to express server for the NEWS API to return new articles
         axios
             .get("/api/news/retrieveall", {
@@ -78,6 +69,19 @@ class Content extends Component {
                     () => console.log(this.state)
                 )
             })
+            .catch(err => console.log(err))
+
+        /* 
+            Testing the API connection to the model
+            check console log to see the data
+        */
+
+        axios
+            .post("/api/news/runmodel", {
+                headers: { Accept: 'application/json' }
+            }
+            )
+            .then(res => console.log(res.data)) 
             .catch(err => console.log(err))
     }
 
