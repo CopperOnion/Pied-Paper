@@ -23,6 +23,13 @@ Data fetching stuff
 import './content.css'
 import axios from "axios";
 
+/* 
+time menu
+*/
+import TimeMenu from "../searchfilters/timefilter"
+import SortMenu from "../searchfilters/sortfilter"
+
+
 
 /* 
 Date parser
@@ -40,6 +47,7 @@ function parseDate(date) {
 
     return xx
 }
+
 
 class Content extends Component {
     constructor(props) {
@@ -171,7 +179,11 @@ class Content extends Component {
         return (
             <div className="content">
                 <div className="left">
-
+                    <div className='optionselector'>
+                        <TimeMenu />
+                        <SortMenu />
+                    
+                    </div>
                     {cardlist}
                     <Pagination
                         ref={this.child}

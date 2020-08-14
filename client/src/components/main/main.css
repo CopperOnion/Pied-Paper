@@ -1,18 +1,16 @@
 .main_left{
     position: fixed;
-    width: 310px;
+    width: 23vw;
     left: 0;
     height: 100vh;
-    top:0;
-    /* background-color: #9d79bc; */
-    background-color:#861657;
-    color:white
+    top: 0;
+    background-color: #861657;
+    color: #fff;
 }
 
 .main_right{
     width:75vw;
-    margin-right: -3em;
-    margin-top: 4vh;
+    
 }
 
 .main_container{
@@ -21,5 +19,3 @@
     justify-content: flex-end;
 }
 
-.optionselector{
-}
