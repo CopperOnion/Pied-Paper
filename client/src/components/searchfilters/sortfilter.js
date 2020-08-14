@@ -13,6 +13,11 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin:0
   },
+  select:{
+    paddingTop:'3px'
+  },
+  
+  
 }));
 
 function SortMenu({ dispatch, order }) {
@@ -43,10 +48,12 @@ function SortMenu({ dispatch, order }) {
         <Select
           native
           value={state.sort}
+          className={classes.select}
           onChange={handleChange}
           label={"Sort By"}
           inputProps={{
             name: 'sort',
+            style:  { paddingTop: "6px", paddingBottom: "6px" , fontSize: '12px', height: 'inherit'}
           }}
         >
           <option value={'DESC'}>Newest</option>

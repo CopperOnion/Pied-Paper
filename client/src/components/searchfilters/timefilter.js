@@ -13,6 +13,10 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin:0
   },
+  select:{
+    paddingTop:'3px'
+  },
+
 }));
 
 function TimeMenu({ dispatch, range }) {
@@ -43,10 +47,13 @@ function TimeMenu({ dispatch, range }) {
         <Select
           native
           value={state.range}
+          className={classes.select}
           onChange={handleChange}
           label={"Time Range"}
           inputProps={{
             name: 'range',
+            style:  { paddingTop: "6px", paddingBottom: "6px" , fontSize: '12px', height: 'inherit'}
+
           }}
         >
           <option value={'1 day'}>1 day</option>
