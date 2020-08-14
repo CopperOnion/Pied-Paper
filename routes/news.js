@@ -2,7 +2,7 @@ const { Client } = require("pg");
 const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
-import { newsScraper } from '../scraper';
+const scraper = require("../scraper/scraper");
 
 //postgreSQL remote db connection point
 const cstring =
@@ -32,25 +32,51 @@ const siteID = {}
 const siteName = {}
 
 async function getCategories() {
-  newsapi.v2.
-    sources({
+
+  try {
+    const response = await newsapi.v2.sources({
       language: "en",
     })
-    .then((response) => {
-      const sources = response.sources
-      sources.map((source) => {
-        siteID[source.id] = source.category
-        siteName[source.name] = source.category
-      })
+    const sources = response.sources
+    sources.map((source) => {
+      siteID[source.id] = source.category
+      siteName[source.name] = source.category
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    console.log("middle")
+  } catch (err) {
+    throw err;
+  }
+
+  // newsapi.v2.
+  //   sources({
+  //     language: "en",
+  //   })
+  //   .then((response) => {
+  //     const sources = response.sources
+  //     sources.map((source) => {
+  //       siteID[source.id] = source.category
+  //       siteName[source.name] = source.category
+  //     })
+  //     console.log("middle")
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })
 };
 
 // the news api is pinged everytime the app gets started, which should be however often heroku shuts down and has to restart.
 async function getNews() {
+
+  // setTimeout(() => {
+  //   console.log('before')
+  // }, 0);
   await getCategories();
+
+  // setTimeout(() => {
+  //   console.log(siteID)
+  //   console.log('after')
+  //   console.log(siteID)
+  // }, 0);
 
   //get today's date
   let currentDate = new Date()
@@ -69,39 +95,57 @@ async function getNews() {
   currentDate = yyyy1 + "-" + mm1 + "-" + dd1
   monthDate = yyyy2 + "-" + mm2 + "-" + dd2
 
-  newsapi.v2
-    .topHeadlines({
+  console.log(monthDate)
+  console.log(currentDate)
+
+  try {
+    const response = await newsapi.v2.topHeadlines({
       //q: "covid",
+      // V this doesnt actually work bc theres no date filter implemented
       from: monthDate,
       to: currentDate,
+      pageSize: 100,
       language: "en",
     })
-    .then((response) => {
-      const news = response.articles
 
-      //filter out articles with less than 200 characters of content scraped by the api, because those are inaccessible articles.
-      const filteredNews = news.filter((article) => article.content.length >= 200);
+    const news = response.articles
 
-      //this compares whether the fetched article has a source entry in the api
-      //if the article does not have a registered category, then it is defaulted to 'general'
-      //caching news articles into the postgreSQL database
-      filteredNews.map((article) => {
-        //newsScraper(article)
+    //filter out articles with less than 200 characters of content scraped by the api, because those are inaccessible articles.
+    const filteredNews = news.filter((article) => article.content && article.content.length >= 200)
 
-        client.query(
-          "INSERT INTO news (articles, truefalse, category, publish_date) VALUES ($1, $2, $3, $4) ON CONFLICT (articles) DO NOTHING",
-          [article, 1, siteID[article.source.id] || siteName[article.source.name] || 'general', article.publishedAt],
-          (err, result) => {
-            if (err) throw err;
-          })
-      })
+    const urlScrapedArticle = await scraper.newsScraper(filteredNews)
+    // console.log(filteredNews)
+    // console.log(urlScrapedArticle)
+
+    /*
+    TO DO:
+      - urlScrapedArticle is an object with key value pairs of url: articletext. this needs to be sent through sagemaker, and be returned with an ML metric of TRUE FALSE
+      - newsapi call needs to be reverted to "everything", since the site categories are independent from article retrieval, and non-categorized sites are defaulted to "general"
+        - reverting to everything will allow us to fetch news of specific time window rather than of that day with top headlines.
+      - pageSize = 100, but that means 100 articles are retrieved for each day's worth? might be too many articles
+      - database still needs some work
+        - each unique article identified by the url, do other columns need to be "not null"?
+      - menus for sort and date doesn't work without selecting category first NEEDS FIX
+    */
+
+    //this compares whether the fetched article has a source entry in the api
+    //if the article does not have a registered category, then it is defaulted to 'general'
+    //caching news articles into the postgreSQL database
+    filteredNews.map((article) => {
+
+      client.query(
+        "INSERT INTO news (articles, truefalse, category, publish_date, url) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (url) DO NOTHING",
+        [article, 1, siteID[article.source.id] || siteName[article.source.name] || 'general', article.publishedAt, article.url],
+        (err, result) => {
+          if (err) throw err;
+        })
     })
-    .catch((err) => {
-      console.log(err);
-    })
+  } catch (err) {
+    throw err;
+  }
+
 };
 
-getCategories();
 getNews();
 
 //the express router receives a rquest from the react client, and pings the database
