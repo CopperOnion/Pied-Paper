@@ -3,14 +3,14 @@
     width: 23vw;
     left: 0;
     height: 100vh;
-    top:0;
-    /* background-color: #9d79bc; */
-    background-color:#861657;
-    color:white
+    top: 0;
+    background-color: #861657;
+    color: #fff;
 }
 
 .main_right{
     width:75vw;
+    
 }
 
 .main_container{
@@ -18,3 +18,4 @@
     align-items: flex-end;
     justify-content: flex-end;
 }
+

@@ -23,6 +23,13 @@ Data fetching stuff
 import './content.css'
 import axios from "axios";
 
+/* 
+time menu
+*/
+import TimeMenu from "../searchfilters/timefilter"
+import SortMenu from "../searchfilters/sortfilter"
+
+
 
 /* 
 Date parser
@@ -41,6 +48,7 @@ function parseDate(date) {
     return xx
 }
 
+
 class Content extends Component {
     constructor(props) {
         super(props)
@@ -57,15 +65,6 @@ class Content extends Component {
 
     componentDidMount() {
 
-        //GET request to express server for the NEWS API users?
-        axios
-            .get("/api/news/users", {
-                headers: { Accept: 'application/json' }
-            }
-            )
-            .then(res => console.log(res.data)) // re-direct to login on successful register
-            .catch(err => console.log(err))
-
         //GET request to express server for the NEWS API to return new articles
         axios
             .get("/api/news/retrieveall", {
@@ -78,6 +77,19 @@ class Content extends Component {
                     () => console.log(this.state)
                 )
             })
+            .catch(err => console.log(err))
+
+        /* 
+            Testing the API connection to the model
+            check console log to see the data
+        */
+
+        axios
+            .post("/api/news/runmodel", {
+                headers: { Accept: 'application/json' }
+            }
+            )
+            .then(res => console.log(res.data)) 
             .catch(err => console.log(err))
     }
 
@@ -141,7 +153,7 @@ class Content extends Component {
                             <a href={e.articles.url}>
                                 <Card title={e.articles.title}
                                     description={e.articles.description}
-                                    image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
+                                    image={'https://assets-jpcust.jwpsrv.com/thumbnails/rytmbwxn-720.jpg'}
                                     theme={this.props.theme}
                                 />
                             </a>
@@ -167,7 +179,11 @@ class Content extends Component {
         return (
             <div className="content">
                 <div className="left">
-
+                    <div className='optionselector'>
+                        <TimeMenu />
+                        <SortMenu />
+                    
+                    </div>
                     {cardlist}
                     <Pagination
                         ref={this.child}
@@ -181,27 +197,27 @@ class Content extends Component {
 
                 <div className="right">
                     <Opinion
-                        title={"Opinion"}
+                        title={"Stat 1 "}
                         description={"Lorem ipsum dolor sit amet"}
                         image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
                         theme={this.props.theme}
                     />
                     <Opinion
-                        title={"Opinion"}
-                        description={"Lorem ipsum dolor sit amet"}
-                        image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
-                        theme={this.props.theme}
-                    />
-
-                    <Opinion
-                        title={"Opinion"}
+                        title={"Stat 2 "}
                         description={"Lorem ipsum dolor sit amet"}
                         image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
                         theme={this.props.theme}
                     />
 
                     <Opinion
-                        title={"Opinion"}
+                        title={"Stat 3"}
+                        description={"Lorem ipsum dolor sit amet"}
+                        image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
+                        theme={this.props.theme}
+                    />
+
+                    <Opinion
+                        title={"Stat 4"}
                         description={"Lorem ipsum dolor sit amet"}
                         image={'https://1.bp.blogspot.com/-xrbmj2o-Vq8/XmH-CVY9mTI/AAAAAAAAAAs/J2LdsfRnhHchXuDuQyCcKLCqcSgFCwQNACLcBGAsYHQ/s1600/6.jpg'}
                         theme={this.props.theme}

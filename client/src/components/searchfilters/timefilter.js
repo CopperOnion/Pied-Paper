@@ -11,9 +11,12 @@ import { setTimeRange } from '../../actions'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 90,
+    margin:0
   },
+  select:{
+    paddingTop:'3px'
+  },
+
 }));
 
 function TimeMenu({ dispatch, range }) {
@@ -36,7 +39,7 @@ function TimeMenu({ dispatch, range }) {
 
   //JSX return values
   return (
-    <div style={{ display: "inline-block" }}>
+    <div style={{ display: "inline-block",marginRight: "1em" }}>
       <FormControl variant="outlined" className={classes.formControl}>
 
         <InputLabel>Time Range</InputLabel>
@@ -44,10 +47,13 @@ function TimeMenu({ dispatch, range }) {
         <Select
           native
           value={state.range}
+          className={classes.select}
           onChange={handleChange}
           label={"Time Range"}
           inputProps={{
             name: 'range',
+            style:  { paddingTop: "6px", paddingBottom: "6px" , fontSize: '12px', height: 'inherit'}
+
           }}
         >
           <option value={'1 day'}>1 day</option>

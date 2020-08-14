@@ -24,6 +24,7 @@
   "dependencies": {
     "@material-ui/lab": "^4.0.0-alpha.56",
     "cheerio": "^1.0.0-rc.3",
+    "axios": "^0.19.2",
     "concurrently": "^5.2.0",
     "cors": "^2.8.5",
     "emoji-regex": "^9.0.0",

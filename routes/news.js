@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
 const scraper = require("../scraper/scraper");
+const axios = require('axios')
 
 //postgreSQL remote db connection point
 const cstring =
@@ -54,7 +55,6 @@ async function getCategories() {
   //   .then((response) => {
   //     const sources = response.sources
   //     sources.map((source) => {
-  //       siteID[source.id] = source.category
   //       siteName[source.name] = source.category
   //     })
   //     console.log("middle")
@@ -169,13 +169,6 @@ given the URL /api/news/retrieve?category=entertainment&range=30+days&sort=DESC
 router.get("/retrieve", (req, res) => {
 
   const newsParam = req.query
-  /*
-  no passed parameters = empty object
-  newsParam = {
-    "category" = "entertainment",
-    "range" = "30 days"
-    "sort" = "DESC"
-  */
 
   client.query(
     `SELECT * FROM news
@@ -202,5 +195,24 @@ router.get("/retrieveall", (req, res) => {
     res.status(200).json(result.rows)
   })
 });
+
+
+/* 
+FIXME: Example API call to the AWS gateway api. use the same /predictnews directory.
+  any json file can go as the second argument. In our case, it will be news content.
+
+  Currently the model running with the API is image classification not news classification. 
+  Put images of stuff and see what the model thinks.
+*/
+router.post("/runmodel", (req, res) => {
+  axios.post('  https://lwhm795rcg.execute-api.us-east-2.amazonaws.com/test/predictnews', {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/09/TheCheethcat.jpg"
+  })
+  .then((result) => {
+    res.send(result.data)
+  },
+  )
+});
+
 
 module.exports = router;

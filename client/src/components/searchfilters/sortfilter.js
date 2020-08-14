@@ -11,9 +11,13 @@ import { setOrdering } from '../../actions'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 90,
+    margin:0
   },
+  select:{
+    paddingTop:'3px'
+  },
+  
+  
 }));
 
 function SortMenu({ dispatch, order }) {
@@ -36,7 +40,7 @@ function SortMenu({ dispatch, order }) {
 
   //JSX return values
   return (
-    <div style={{ display: "inline-block" }}>
+    <div style={{ display: "inline-block" , marginRight: "1em"}}>
       <FormControl variant="outlined" className={classes.formControl}>
 
         <InputLabel>Sort By</InputLabel>
@@ -44,10 +48,12 @@ function SortMenu({ dispatch, order }) {
         <Select
           native
           value={state.sort}
+          className={classes.select}
           onChange={handleChange}
           label={"Sort By"}
           inputProps={{
             name: 'sort',
+            style:  { paddingTop: "6px", paddingBottom: "6px" , fontSize: '12px', height: 'inherit'}
           }}
         >
           <option value={'DESC'}>Newest</option>
