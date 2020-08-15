@@ -43,7 +43,6 @@ async function getCategories() {
       siteID[source.id] = source.category
       siteName[source.name] = source.category
     })
-    console.log("middle")
   } catch (err) {
     throw err;
   }
@@ -95,8 +94,8 @@ async function getNews() {
   currentDate = yyyy1 + "-" + mm1 + "-" + dd1
   monthDate = yyyy2 + "-" + mm2 + "-" + dd2
 
-  console.log(monthDate)
-  console.log(currentDate)
+  // console.log(monthDate)
+  // console.log(currentDate)
 
   try {
     const response = await newsapi.v2.topHeadlines({
@@ -120,12 +119,8 @@ async function getNews() {
     /*
     TO DO:
       - urlScrapedArticle is an object with key value pairs of url: articletext. this needs to be sent through sagemaker, and be returned with an ML metric of TRUE FALSE
-      - newsapi call needs to be reverted to "everything", since the site categories are independent from article retrieval, and non-categorized sites are defaulted to "general"
-        - reverting to everything will allow us to fetch news of specific time window rather than of that day with top headlines.
-      - pageSize = 100, but that means 100 articles are retrieved for each day's worth? might be too many articles
       - database still needs some work
         - each unique article identified by the url, do other columns need to be "not null"?
-      - menus for sort and date doesn't work without selecting category first NEEDS FIX
     */
 
     //this compares whether the fetched article has a source entry in the api
@@ -172,7 +167,7 @@ router.get("/retrieve", (req, res) => {
 
   client.query(
     `SELECT * FROM news
-    WHERE (\'${newsParam.category}\' IS NULL OR
+    WHERE (${newsParam.category} IS NULL OR
     category = \'${newsParam.category}\') AND
     publish_date > now() - interval \'${newsParam.range}\'
     ORDER BY publish_date ${newsParam.sort}`,
@@ -208,10 +203,10 @@ router.post("/runmodel", (req, res) => {
   axios.post('  https://lwhm795rcg.execute-api.us-east-2.amazonaws.com/test/predictnews', {
     "url": "https://upload.wikimedia.org/wikipedia/commons/0/09/TheCheethcat.jpg"
   })
-  .then((result) => {
-    res.send(result.data)
-  },
-  )
+    .then((result) => {
+      res.send(result.data)
+    },
+    )
 });
 
 
