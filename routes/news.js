@@ -158,7 +158,7 @@ router.get("/users", (req, res) => {
 //for news articles. Then the packaged news articles are sent back as an object.
 
 /*   
-given the URL /api/news/retrieve?category=entertainment&range=30+days&sort=DESC
+given the URL /api/news/retrieve?category=\'entertainment\'&range=30+days&sort=DESC
 */
 
 router.get("/retrieve", (req, res) => {
@@ -168,7 +168,7 @@ router.get("/retrieve", (req, res) => {
   client.query(
     `SELECT * FROM news
     WHERE (${newsParam.category} IS NULL OR
-    category = \'${newsParam.category}\') AND
+    category = ${newsParam.category}) AND
     publish_date > now() - interval \'${newsParam.range}\'
     ORDER BY publish_date ${newsParam.sort}`,
     (err, result) => {
