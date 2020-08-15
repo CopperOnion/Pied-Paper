@@ -11,10 +11,10 @@ import { setTimeRange } from '../../actions'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin:0
+    margin: 0
   },
-  select:{
-    paddingTop:'3px'
+  select: {
+    paddingTop: '3px'
   },
 
 }));
@@ -39,7 +39,7 @@ function TimeMenu({ dispatch, range }) {
 
   //JSX return values
   return (
-    <div style={{ display: "inline-block",marginRight: "1em" }}>
+    <div style={{ display: "inline-block", marginRight: "1em" }}>
       <FormControl variant="outlined" className={classes.formControl}>
 
         <InputLabel>Time Range</InputLabel>
@@ -52,13 +52,13 @@ function TimeMenu({ dispatch, range }) {
           label={"Time Range"}
           inputProps={{
             name: 'range',
-            style:  { paddingTop: "6px", paddingBottom: "6px" , fontSize: '12px', height: 'inherit'}
+            style: { paddingTop: "6px", paddingBottom: "6px", fontSize: '12px', height: 'inherit' }
 
           }}
         >
-          <option value={'1 day'}>1 day</option>
-          <option value={'7 days'}>7 days</option>
-          <option value={'30 days'}>30 days</option>
+          <option value={'12 hours'}>12 hours</option>
+          <option value={'24 hours'}>24 hours</option>
+          <option value={'48 hours'}>48 hours</option>
         </Select>
       </FormControl>
     </div>
