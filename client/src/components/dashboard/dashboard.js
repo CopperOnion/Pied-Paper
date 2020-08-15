@@ -70,19 +70,19 @@ function Dashboard({ dispatch, theme }) {
           */}
 
           <div className="smallbar">
-            <Typography onClick={() => { dispatch(setCurrentTopic("general")) }} className={classes.list} variant="subtitle2" color='secondary'>
+            <Typography onClick={() => { dispatch(setCurrentTopic("NULL")) }} className={classes.list} variant="subtitle2" color='secondary'>
               General
             </Typography>
 
-            <Typography onClick={() => { dispatch(setCurrentTopic("technology")) }} className={classes.list} variant="subtitle2" color='secondary'>
+            <Typography onClick={() => { dispatch(setCurrentTopic("\'technology\'")) }} className={classes.list} variant="subtitle2" color='secondary'>
               Technology
             </Typography>
 
-            <Typography onClick={() => { dispatch(setCurrentTopic("business")) }} className={classes.list} variant="subtitle2" color='secondary'>
+            <Typography onClick={() => { dispatch(setCurrentTopic("\'business\'")) }} className={classes.list} variant="subtitle2" color='secondary'>
               Business
             </Typography>
 
-            <Typography onClick={() => { dispatch(setCurrentTopic("entertainment")) }} className={classes.list} variant="subtitle2" color='secondary'>
+            <Typography onClick={() => { dispatch(setCurrentTopic("\'entertainment\'")) }} className={classes.list} variant="subtitle2" color='secondary'>
               Entertainment
             </Typography>
 
