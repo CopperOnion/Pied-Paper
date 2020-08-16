@@ -170,7 +170,7 @@ router.get("/retrieve", (req, res) => {
     WHERE (${newsParam.category} IS NULL OR
     category = ${newsParam.category}) AND
     publish_date > now() - interval \'${newsParam.range}\'
-    ORDER BY publish_date ${newsParam.sort}`,
+    ORDER BY publish_date ${newsParam.sort};`,
     (err, result) => {
       if (err) throw err;
 
@@ -191,6 +191,19 @@ router.get("/retrieveall", (req, res) => {
   })
 });
 
+/*
+User vote handler
+*/
+router.put("/uservote", (req, res) => {
+  const vote = req.body.type
+  const url = req.body.url
+
+  client.query(`UPDATE news SET ${vote} = ${vote}+1 WHERE url = ${url};`, (err, result) => {
+    if (err) throw err;
+
+    res.status(200).json(`user has voted ${vote} on article = \'${url}\'`)
+  })
+});
 
 /* 
 FIXME: Example API call to the AWS gateway api. use the same /predictnews directory.
@@ -208,6 +221,5 @@ router.post("/runmodel", (req, res) => {
     },
     )
 });
-
 
 module.exports = router;
