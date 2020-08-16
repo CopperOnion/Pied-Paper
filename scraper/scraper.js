@@ -26,7 +26,7 @@ async function newsScraper(newsDump) {
         //place scraped article in an object with 'url': 'scraped text' key value pair
         scrapedArticles[articleObj.url] = rawArticle
       } catch (err) {
-        console.log(`error ${err.statusCode} at this site article: ${articleObj.url}`)
+        console.log(`ERROR: ${err.statusCode} at this site article: ${articleObj.url}`)
         if (err.statusCode !== 403) {
           throw err
         }
@@ -35,7 +35,7 @@ async function newsScraper(newsDump) {
   } catch (err) {
     throw err;
   }
-
+  // console.log(Object.keys(scrapedArticles))
   return scrapedArticles
 };
 
