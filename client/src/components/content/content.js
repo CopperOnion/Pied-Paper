@@ -85,10 +85,7 @@ class Content extends Component {
         */
 
         axios
-            .post("/api/news/runmodel", {
-                headers: { Accept: 'application/json' }
-            }
-            )
+            .post("/api/news/runmodel" )
             .then(res => console.log(res.data)) 
             .catch(err => console.log(err))
     }

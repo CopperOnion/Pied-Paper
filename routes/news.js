@@ -114,8 +114,9 @@ async function getNews() {
     const filteredNews = news.filter((article) => article.content && article.content.length >= 200)
 
     const urlScrapedArticle = await scraper.newsScraper(filteredNews)
+
     // console.log(filteredNews)
-    // console.log(urlScrapedArticle)
+    console.log(urlScrapedArticle['https://www.cbsnews.com/news/misssissippi-flag-mosquito-themed-joke-thomas-rosete/'])
 
     /*
     TO DO:
@@ -205,11 +206,11 @@ FIXME: Example API call to the AWS gateway api. use the same /predictnews direct
   Put images of stuff and see what the model thinks.
 */
 router.post("/runmodel", (req, res) => {
-  axios.post('  https://lwhm795rcg.execute-api.us-east-2.amazonaws.com/test/predictnews', {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/0/09/TheCheethcat.jpg"
-  })
+  axios.post('https://lwhm795rcg.execute-api.us-east-2.amazonaws.com/test/predictnews', {
+    "content": "At an event aimed at highlighting the"})
   .then((result) => {
-    res.send(result.data)
+    res.status(200).json(result.data);
+
   },
   )
 });
