@@ -73,6 +73,20 @@ class Content extends Component {
             )
             .then(res => {
                 this.setState(
+                    /*the news route returns an array of objects with keys	
+                        res.data = [	
+                            {	
+                                articles: {"foo bar"},
+                                truefalse: 0 or 1,
+                                category: "general",
+                                publish_date: ISO8601 format,
+                                url: "http://foo.bar",
+                                user_true: 12345,
+                                user_false: 12345
+                            }	
+                            ... and so on	
+                        ]	
+                    */
                     { news: [...res.data] },
                     () => console.log(this.state)
                 )
@@ -85,8 +99,11 @@ class Content extends Component {
         */
 
         axios
-            .post("/api/news/runmodel" )
-            .then(res => console.log(res.data)) 
+            .post("/api/news/runmodel", {
+                headers: { Accept: 'application/json' }
+            }
+            )
+            .then(res => console.log(res.data))
             .catch(err => console.log(err))
     }
 
@@ -135,6 +152,27 @@ class Content extends Component {
         element[0].classList.add("notdisplayed");
     }
 
+    //handler for user voting on articles
+    uservote = (votetype, url) => {
+        axios
+            .post('/api/news/uservote', {
+                headers: { Accept: 'application/json' },
+                params: {
+                    url: url,
+                    type: votetype
+                }
+            })
+            .then(res => {
+                /*
+                    res = {
+                        user_true: 123,
+                        user_false: 123
+                    }
+                */
+                console.log(res)
+            })
+    }
+
     render() {
         let cardlist = <ul></ul>
         if (this.state.news) {
@@ -156,9 +194,9 @@ class Content extends Component {
                             </a>
                             <div className={`attached` + i + ' notdisplayed'}>
                                 <h6>{parseDate(e.publish_date)}</h6>
-                                <h6>This is very certainly fake news</h6>
-                                <button>Agree</button>
-                                <button>Disagree</button>
+                                <h6>Do you think this article was True or False?</h6>
+                                <button onClick={this.uservote("user_true", e.url)}>True</button>
+                                <button onClick={this.uservote("user_false", e.url)}>False</button>
                                 <h4 onMouseOver={() => this.showmore("source" + i)} >Hover to see source</h4>
                                 <h4 className={`source` + i + ' notdisplayed'}>{e.articles.source.name}</h4>
                             </div>
@@ -179,7 +217,7 @@ class Content extends Component {
                     <div className='optionselector'>
                         <TimeMenu />
                         <SortMenu />
-                    
+
                     </div>
                     {cardlist}
                     <Pagination

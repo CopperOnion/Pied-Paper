@@ -1,8 +1,8 @@
 
 const initialState = {
-    topic: 'all',
+    topic: 'NULL',
     order: 'DESC',
-    range: '30 days'
+    range: '48 hours'
 };
 
 /* 

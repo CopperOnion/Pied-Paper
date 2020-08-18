@@ -43,7 +43,6 @@ async function getCategories() {
       siteID[source.id] = source.category
       siteName[source.name] = source.category
     })
-    console.log("middle")
   } catch (err) {
     throw err;
   }
@@ -95,8 +94,8 @@ async function getNews() {
   currentDate = yyyy1 + "-" + mm1 + "-" + dd1
   monthDate = yyyy2 + "-" + mm2 + "-" + dd2
 
-  console.log(monthDate)
-  console.log(currentDate)
+  // console.log(monthDate)
+  // console.log(currentDate)
 
   try {
     const response = await newsapi.v2.topHeadlines({
@@ -121,12 +120,6 @@ async function getNews() {
     /*
     TO DO:
       - urlScrapedArticle is an object with key value pairs of url: articletext. this needs to be sent through sagemaker, and be returned with an ML metric of TRUE FALSE
-      - newsapi call needs to be reverted to "everything", since the site categories are independent from article retrieval, and non-categorized sites are defaulted to "general"
-        - reverting to everything will allow us to fetch news of specific time window rather than of that day with top headlines.
-      - pageSize = 100, but that means 100 articles are retrieved for each day's worth? might be too many articles
-      - database still needs some work
-        - each unique article identified by the url, do other columns need to be "not null"?
-      - menus for sort and date doesn't work without selecting category first NEEDS FIX
     */
 
     //this compares whether the fetched article has a source entry in the api
@@ -164,7 +157,7 @@ router.get("/users", (req, res) => {
 //for news articles. Then the packaged news articles are sent back as an object.
 
 /*   
-given the URL /api/news/retrieve?category=entertainment&range=30+days&sort=DESC
+given the URL /api/news/retrieve?category=\'entertainment\'&range=30+days&sort=DESC
 */
 
 router.get("/retrieve", (req, res) => {
@@ -173,10 +166,10 @@ router.get("/retrieve", (req, res) => {
 
   client.query(
     `SELECT * FROM news
-    WHERE (\'${newsParam.category}\' IS NULL OR
-    category = \'${newsParam.category}\') AND
+    WHERE (${newsParam.category} IS NULL OR
+    category = ${newsParam.category}) AND
     publish_date > now() - interval \'${newsParam.range}\'
-    ORDER BY publish_date ${newsParam.sort}`,
+    ORDER BY publish_date ${newsParam.sort};`,
     (err, result) => {
       if (err) throw err;
 
@@ -197,6 +190,29 @@ router.get("/retrieveall", (req, res) => {
   })
 });
 
+/*
+User vote handler
+*/
+router.post("/uservote", (req, res) => {
+  /*
+  req.body = {
+    header: {}
+    params: {}
+  }
+  */
+  const vote = req.body.params.type
+  const url = req.body.params.url
+
+  client.query(`UPDATE news SET ${vote} = ${vote}+1 WHERE url = \'${url}\' RETURNING user_true, user_false;`, (err, result) => {
+    if (err) throw err;
+
+    res.status(200).json({
+      url: url,
+      votes: result.rows[0]
+    })
+    // console.log(result.rows[0])
+  })
+});
 
 /* 
 FIXME: Example API call to the AWS gateway api. use the same /predictnews directory.
@@ -214,6 +230,5 @@ router.post("/runmodel", (req, res) => {
   },
   )
 });
-
 
 module.exports = router;

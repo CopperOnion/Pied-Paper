@@ -8,7 +8,7 @@ async function newsScraper(newsDump) {
   try {
     //Promise.all makes the async code run through all articles and scrape their text before returning the scraped text data.
     await Promise.all(newsDump.map(async (articleObj) => {
-      //console.log(articleObj.url)
+      // console.log(articleObj.url)
       try {
         //sent a rq GET request to article url, receive an article that is loaded into var $ by cheerio.load()
         const $ = await rp({
@@ -26,14 +26,16 @@ async function newsScraper(newsDump) {
         //place scraped article in an object with 'url': 'scraped text' key value pair
         scrapedArticles[articleObj.url] = rawArticle
       } catch (err) {
-        console.log("error at this site article: " + articleObj.url)
-        throw err
+        console.log(`ERROR: ${err.statusCode} at this site article: ${articleObj.url}`)
+        if (err.statusCode !== 403) {
+          throw err
+        }
       }
     }));
   } catch (err) {
     throw err;
   }
-
+  // console.log(Object.keys(scrapedArticles))
   return scrapedArticles
 };
 
