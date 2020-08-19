@@ -88,6 +88,12 @@ function Dashboard({ dispatch, theme }) {
 
 
           </div>
+
+          <div className="smallbar">
+            <Typography style={{ fontWeight: "600" }} className={classes.title} variant="h5" color='secondary'>
+              Data
+            </Typography>
+          </div>
         </div>
 
 

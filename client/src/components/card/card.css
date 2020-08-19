@@ -29,15 +29,15 @@ p{
 
 .displayed{
     overflow: hidden;
-    max-height: 100px;
-    transition: max-height .3s;
+    max-height: 300px;
+    transition: max-height .6s;
 
 }
 
 .notdisplayed{
     overflow: hidden;
     max-height: 0;
-    transition: max-height .3s ease-out;
+    transition: max-height .6s ease-out;
 
 }
 

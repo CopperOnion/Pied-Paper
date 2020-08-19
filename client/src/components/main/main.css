@@ -1,7 +1,7 @@
 .main_left{
     position: fixed;
     width: 23vw;
-    left: 0;
+    left: 6vw;
     height: 100vh;
     top: 0;
     background-color: #861657;
@@ -9,8 +9,8 @@
 }
 
 .main_right{
-    width:75vw;
-    
+    width:62vw;
+    margin-right: 6vw;
 }
 
 .main_container{

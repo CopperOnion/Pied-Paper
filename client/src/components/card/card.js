@@ -17,7 +17,8 @@ const useStyles = makeStyles({
     margin: "2vh 0",
     padding: 0,
     transition:'transform .4s',
-    overflow:'visible'
+    overflow:'visible',
+    height:"20vh"
   },
   '.MuiCardContent-root:last-child': {
     padding: 0
@@ -27,7 +28,7 @@ const useStyles = makeStyles({
     
   },
   media: {
-    height: '100px',
+    height: '20vh',
     flex: .3,
     right: 0
   },
