@@ -113,14 +113,13 @@ async function getNews() {
     const filteredNews = news.filter((article) => article.content && article.content.length >= 200)
 
     const urlScrapedArticle = await scraper.newsScraper(filteredNews)
+
     // console.log(filteredNews)
-    // console.log(urlScrapedArticle)
+    // console.log(urlScrapedArticle['https://'])
 
     /*
     TO DO:
       - urlScrapedArticle is an object with key value pairs of url: articletext. this needs to be sent through sagemaker, and be returned with an ML metric of TRUE FALSE
-      - database still needs some work
-        - each unique article identified by the url, do other columns need to be "not null"?
     */
 
     //this compares whether the fetched article has a source entry in the api
@@ -194,14 +193,24 @@ router.get("/retrieveall", (req, res) => {
 /*
 User vote handler
 */
-router.put("/uservote", (req, res) => {
-  const vote = req.body.type
-  const url = req.body.url
+router.post("/uservote", (req, res) => {
+  /*
+  req.body = {
+    header: {}
+    params: {}
+  }
+  */
+  const vote = req.body.params.type
+  const url = req.body.params.url
 
-  client.query(`UPDATE news SET ${vote} = ${vote}+1 WHERE url = ${url};`, (err, result) => {
+  client.query(`UPDATE news SET ${vote} = ${vote}+1 WHERE url = \'${url}\' RETURNING user_true, user_false;`, (err, result) => {
     if (err) throw err;
 
-    res.status(200).json(`user has voted ${vote} on article = \'${url}\'`)
+    res.status(200).json({
+      url: url,
+      votes: result.rows[0]
+    })
+    // console.log(result.rows[0])
   })
 });
 
@@ -213,11 +222,13 @@ FIXME: Example API call to the AWS gateway api. use the same /predictnews direct
   Put images of stuff and see what the model thinks.
 */
 router.post("/runmodel", (req, res) => {
-  axios.post('  https://lwhm795rcg.execute-api.us-east-2.amazonaws.com/test/predictnews', {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/0/09/TheCheethcat.jpg"
-  })
+  axios
+    .post('https://lwhm795rcg.execute-api.us-east-2.amazonaws.com/test/predictnews', {
+      "content": "At an event aimed at highlighting the"
+    })
     .then((result) => {
-      res.send(result.data)
+      res.status(200).json(result.data);
+
     },
     )
 });
