@@ -185,8 +185,9 @@ class Content extends Component {
                 <ul>
                     {news.map((e, i) => (
                         <li onMouseOver={() => this.showmore("attached" + i)} onMouseOut={() => this.showless("attached" + i)} key={i} >
-                            <a href={e.articles.url} target="_blank">
-                                <Card title={e.articles.title}
+                            <a href={e.url}>
+                                <Card
+                                    title={e.articles.title}
                                     description={e.articles.description}
                                     image={'https://assets-jpcust.jwpsrv.com/thumbnails/rytmbwxn-720.jpg'}
                                     theme={this.props.theme}
@@ -195,14 +196,11 @@ class Content extends Component {
                             <div className={`attached` + i + ' notdisplayed'}>
                                 <h6>{parseDate(e.publish_date)}</h6>
                                 <h6>Do you think this article was True or False?</h6>
-                                <button onClick={this.uservote("user_true", e.url)}>True</button>
-                                <button onClick={this.uservote("user_false", e.url)}>False</button>
-                                {/*                             
-                                Don't know if we need these anymore
+                                <button onClick={() => this.uservote("user_true", e.url)}>True</button>
+                                <button onClick={() => this.uservote("user_false", e.url)}>False</button>
                                 <h4 onMouseOver={() => this.showmore("source" + i)} >Hover to see source</h4>
                                 <h4 className={`source` + i + ' notdisplayed'}>{e.articles.source.name}</h4> 
                             
-                                */}
                             </div>
                         </li>
                     ))}
