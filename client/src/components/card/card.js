@@ -13,12 +13,12 @@ const useStyles = makeStyles({
       marginBottom: "1em"
     },
     display: 'flex',
-    flexDirection:'column',
-    margin: "2vh 0",
+    flexDirection:'row',
     padding: 0,
     transition:'transform .4s',
     overflow:'visible',
-    height:"20vh"
+    height:"20vh",
+    marginBottom:"2vh"
   },
   '.MuiCardContent-root:last-child': {
     padding: 0
@@ -41,19 +41,6 @@ const useStyles = makeStyles({
     alignItems: 'flex-start',
   },
 
-  cardaction: {
-    paddingTop: "3%",
-    width: '100%',
-    display: 'flex',
-    transition:'transform 1s',
-
-    '&:hover': {
-      cursor: "pointer",
-      transform: ''
-
-    }
-  },
-
   title: {
     marginBottom: "1em"
   },
@@ -63,7 +50,7 @@ const useStyles = makeStyles({
 TODO: Add a detail tab that expands upon hover ( separate from the original card)
 
 */
-export default function MediaCard({ title, description, image, theme}) {
+export default function MediaCard({ title, description, image, theme ,date}) {
   const classes = useStyles();
 
   return (
@@ -71,20 +58,21 @@ export default function MediaCard({ title, description, image, theme}) {
 
       <Card elevation={0} className={classes.root}>
 
-        <div  className={classes.cardaction}>
 
           <div className={classes.content}>
             <div className={classes.title}>
               <h3>  {title} </h3>
+              <h6>{date}</h6>
+
             </div>
 
 
-            <p>
+            <p style={{marginBottom:"50px"}}>
               {description}
             </p>
 
-
-
+            
+            <h4>Lot's of disagreement</h4>
           </div>
 
 
@@ -95,7 +83,6 @@ export default function MediaCard({ title, description, image, theme}) {
             image={image}
             title="Contemplative Reptile"
           />
-        </div>
 
         
 

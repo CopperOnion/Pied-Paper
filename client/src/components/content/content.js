@@ -1,40 +1,26 @@
 import React, { Component } from 'react'
+/* material UI button*/
+import Button from '@material-ui/core/Button';
 
-/* 
-Importing components
-
-*/
+/* Importing components */
 import Card from '../card/card'
 import Pagination from '../card/pagination'
 import Opinion from '../card/opinion'
 
-/* 
-Redux related stuff
-
-*/
+/* redux related stuff */
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
 
-/* 
-Data fetching stuff
-
-*/
+/* Data fetching stuff */
 import './content.css'
 import axios from "axios";
 
-/* 
-time menu
-*/
+/* Time menu */
 import TimeMenu from "../searchfilters/timefilter"
 import SortMenu from "../searchfilters/sortfilter"
 
-
-
-/* 
-Date parser
-
-*/
+/* Date parser */
 
 function parseDate(date) {
     const MM = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -58,6 +44,10 @@ class Content extends Component {
             news: '',
             postsperpage: 20,
             currentpage: 1,
+            currentvotes :{
+                current_true: 0,
+                current_false: 0
+            }
         }
 
 
@@ -153,7 +143,7 @@ class Content extends Component {
     }
 
     //handler for user voting on articles
-    uservote = (votetype, url) => {
+    uservote = (votetype, url, i) => {
         axios
             .post('/api/news/uservote', {
                 headers: { Accept: 'application/json' },
@@ -169,7 +159,13 @@ class Content extends Component {
                         user_false: 123
                     }
                 */
-                console.log(res)
+                console.log(res.data.votes)
+                this.setState({
+                    currentvotes:{
+                        current_true: res.data.votes.user_true,
+                        current_false: res.data.votes.user_false
+                    }
+                },() => this.showmore("stats" + i))
             })
     }
 
@@ -184,23 +180,32 @@ class Content extends Component {
 
                 <ul>
                     {news.map((e, i) => (
-                        <li onMouseOver={() => this.showmore("attached" + i)} onMouseOut={() => this.showless("attached" + i)} key={i} >
-                            <a href={e.url}>
-                                <Card
-                                    title={e.articles.title}
+                        <li className="cardlist" key={i} >
+                            <a  onClick={() => this.showmore("attached" + i)} href={e.url} target="_blank">
+                                <Card title={e.articles.title}
                                     description={e.articles.description}
                                     image={'https://assets-jpcust.jwpsrv.com/thumbnails/rytmbwxn-720.jpg'}
                                     theme={this.props.theme}
+                                    date= {parseDate(e.publish_date)}
                                 />
                             </a>
                             <div className={`attached` + i + ' notdisplayed'}>
-                                <h6>{parseDate(e.publish_date)}</h6>
-                                <h6>Do you think this article was True or False?</h6>
-                                <button onClick={() => this.uservote("user_true", e.url)}>True</button>
-                                <button onClick={() => this.uservote("user_false", e.url)}>False</button>
-                                <h4 onMouseOver={() => this.showmore("source" + i)} >Hover to see source</h4>
-                                <h4 className={`source` + i + ' notdisplayed'}>{e.articles.source.name}</h4> 
-                            
+                                <div className='details'>
+                                    <h3>Do you think this article was <button className='details_buttons' onClick={() => this.uservote("user_true", e.url, i)}>True</button> or <button className='details_buttons' onClick={() => this.uservote("user_false", e.url, i)}>False</button> ?
+                                    </h3>
+                                     
+                                     <div className={'stats' + i+' notdisplayed'}>
+                                        {this.state.currentvotes.current_true}
+                                        {this.state.currentvotes.current_false}
+
+                                     </div>
+                                    {/* Do not know if we need these anymore
+                                    <h4 onMouseOver={() => this.showmore("source" + i)} >Hover to see source</h4>
+                                    <h4 className={`source` + i + ' notdisplayed'}>{e.articles.source.name}</h4>  
+                                    */}
+                                </div>
+                                <button onClick={() => this.showless("attached" + i)}>Hide</button>
+
                             </div>
                         </li>
                     ))}

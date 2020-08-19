@@ -23,6 +23,35 @@
     list-style-type: none;
 }
 
+.content .cardlist{
+    margin: 6vh 0;
+    transition: all .4s;
+    border: solid 1px;
+    padding: 2em;
+}
+
+.content .cardlist:hover {
+    transform: scale(1.04);
+}
+
+.content .cardlist .details_buttons{
+    font-Size: 32px;
+    background-color:transparent;
+    border:none;
+    cursor: pointer;
+    transition: all .2s;
+
+}
+
+.content .cardlist .stats{
+    transition: all .2s;
+}
+
+.content .cardlist .details_buttons:hover {
+    color:white;
+    background-color:black;
+}
+
 .left ul{
     margin-block-start:0;
     margin-block-end: 0;

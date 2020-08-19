@@ -210,7 +210,7 @@ router.post("/uservote", (req, res) => {
       url: url,
       votes: result.rows[0]
     })
-    // console.log(result.rows[0])
+    console.log(result.rows[0])
   })
 });
 
