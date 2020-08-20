@@ -2,8 +2,8 @@ import React, { } from 'react'
 import Dashboard from "../dashboard/dashboard"
 
 import Content from "../content/content"
-import About from "../content/about"
-import Team from '../content/team'
+import About from "../content/about/about"
+import Team from '../content/team/team'
 
 import Extra from "../nav/extra"
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -46,7 +46,7 @@ function Main() {
           <div className='main_right'>
             <Switch>
               <Route exact path="/">
-                
+
                 <Content theme={theme} />
               </Route>
               <Route path="/about">

@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
 
   },
   list: {
-    marginBottom: '1vh'
+    marginBottom: '1vh',
+    cursor: 'pointer',
   },
   h2: {
     fontWeight: "500"

@@ -44,7 +44,7 @@ class Content extends Component {
             news: '',
             postsperpage: 20,
             currentpage: 1,
-            currentvotes :{
+            currentvotes: {
                 current_true: 0,
                 current_false: 0
             }
@@ -130,45 +130,6 @@ class Content extends Component {
         }
     }
 
-    showmore = (index) => {
-        var element = document.getElementsByClassName(index);
-        element[0].classList.remove("notdisplayed");
-        element[0].classList.add("displayed");
-    }
-
-    showless = (index) => {
-        var element = document.getElementsByClassName(index);
-        element[0].classList.remove("displayed");
-        element[0].classList.add("notdisplayed");
-    }
-
-    //handler for user voting on articles
-    uservote = (votetype, url, i) => {
-        axios
-            .post('/api/news/uservote', {
-                headers: { Accept: 'application/json' },
-                params: {
-                    url: url,
-                    type: votetype
-                }
-            })
-            .then(res => {
-                /*
-                    res = {
-                        user_true: 123,
-                        user_false: 123
-                    }
-                */
-                console.log(res.data.votes)
-                this.setState({
-                    currentvotes:{
-                        current_true: res.data.votes.user_true,
-                        current_false: res.data.votes.user_false
-                    }
-                },() => this.showmore("stats" + i))
-            })
-    }
-
     render() {
         let cardlist = <ul></ul>
         if (this.state.news) {
@@ -181,32 +142,15 @@ class Content extends Component {
                 <ul>
                     {news.map((e, i) => (
                         <li className="cardlist" key={i} >
-                            <a  onClick={() => this.showmore("attached" + i)} href={e.url} target="_blank">
-                                <Card title={e.articles.title}
-                                    description={e.articles.description}
-                                    image={'https://assets-jpcust.jwpsrv.com/thumbnails/rytmbwxn-720.jpg'}
-                                    theme={this.props.theme}
-                                    date= {parseDate(e.publish_date)}
-                                />
-                            </a>
-                            <div className={`attached` + i + ' notdisplayed'}>
-                                <div className='details'>
-                                    <h3>Do you think this article was <button className='details_buttons' onClick={() => this.uservote("user_true", e.url, i)}>True</button> or <button className='details_buttons' onClick={() => this.uservote("user_false", e.url, i)}>False</button> ?
-                                    </h3>
-                                     
-                                     <div className={'stats' + i+' notdisplayed'}>
-                                        {this.state.currentvotes.current_true}
-                                        {this.state.currentvotes.current_false}
-
-                                     </div>
-                                    {/* Do not know if we need these anymore
-                                    <h4 onMouseOver={() => this.showmore("source" + i)} >Hover to see source</h4>
-                                    <h4 className={`source` + i + ' notdisplayed'}>{e.articles.source.name}</h4>  
-                                    */}
-                                </div>
-                                <button onClick={() => this.showless("attached" + i)}>Hide</button>
-
-                            </div>
+                            <Card
+                                title={e.articles.title}
+                                description={e.articles.description}
+                                url={e.url}
+                                i={i}
+                                image={'https://assets-jpcust.jwpsrv.com/thumbnails/rytmbwxn-720.jpg'}
+                                theme={this.props.theme}
+                                date={parseDate(e.publish_date)}
+                            />
                         </li>
                     ))}
                 </ul>
@@ -237,7 +181,7 @@ class Content extends Component {
 
                 </div>
 
-           
+
             </div>
         )
     }
