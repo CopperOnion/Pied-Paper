@@ -1,10 +1,10 @@
 .content{
-    display:flex;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .content .left{
-    flex: .71;
-    padding: 3em;
+    padding: 1.5em;
 }
 
 .content .right{
@@ -21,6 +21,35 @@
 
 .content li{
     list-style-type: none;
+}
+
+.content .cardlist{
+    margin: 6vh 0;
+    transition: all .4s;
+    border: solid 1px;
+    padding: 2em;
+}
+
+.content .cardlist:hover {
+    transform: scale(1.04);
+}
+
+.content .cardlist .details_buttons{
+    font-Size: 32px;
+    background-color:transparent;
+    border:none;
+    cursor: pointer;
+    transition: all .2s;
+
+}
+
+.content .cardlist .stats{
+    transition: all .2s;
+}
+
+.content .cardlist .details_buttons:hover {
+    color:white;
+    background-color:black;
 }
 
 .left ul{
