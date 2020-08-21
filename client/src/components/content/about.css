@@ -1,9 +1,14 @@
 .about{
     position: fixed;
     background-color: white;
+    color:black;
     right: 0;
     top: 0;
-    width: 77vw;
+    width: 70vw;
     height: 100vw;
     transition: right 1s;
+}
+
+.about p{
+    margin:2em;
 }
