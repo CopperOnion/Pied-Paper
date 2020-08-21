@@ -1,7 +1,7 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography';
 import { ThemeProvider } from '@material-ui/styles';
-import logo from "../../files/logo.svg";
+import logo from "./logo.svg";
 import './about.css'
 function About( {theme}) {
     return (
