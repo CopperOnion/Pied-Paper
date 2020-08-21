@@ -159,7 +159,6 @@ export default function MediaCard({ title, description, url, i, image, theme, da
             <h3 className='details_machine'>
               Our ML algorithm has determined that this article has <br />
               {roboTF}% chances of being <b>True News</b> and {roboFalse}% chances of being <b>Fake News</b>
-
             </h3>
           </div>
 
