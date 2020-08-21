@@ -24,7 +24,9 @@ async function newsScraper(newsDump) {
         const rawArticle = $('p').text().replace(/\s+/g, ' ');
 
         //place scraped article in an object with 'url': 'scraped text' key value pair
-        scrapedArticles[articleObj.url] = rawArticle
+        if (rawArticle != "") {
+          scrapedArticles[articleObj.url] = rawArticle
+        }
       } catch (err) {
         console.log(`ERROR: ${err.statusCode} at this site article: ${articleObj.url}`)
         if (err.statusCode !== 403) {

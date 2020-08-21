@@ -54,7 +54,7 @@ class Content extends Component {
     }
 
     componentDidMount() {
-        this.setState({isLoading:true})
+        this.setState({ isLoading: true })
         //GET request to express server for the NEWS API to return new articles
         axios
             .get("/api/news/retrieveall", {
@@ -77,9 +77,10 @@ class Content extends Component {
                             ... and so on	
                         ]	
                     */
-                    { news: [...res.data],
-                      isLoading:false
-                     },
+                    {
+                        news: [...res.data],
+                        isLoading: false
+                    },
                     () => console.log(this.state)
                 )
             })
@@ -120,7 +121,7 @@ class Content extends Component {
                             currentpage: 1,
                         },
                         () => {
-                            
+
                             this.child.current.reset()
                             console.log(this.state);
                             window.scrollTo(0, 0);
@@ -132,15 +133,15 @@ class Content extends Component {
     }
 
     render() {
-        
-        let cardlist = <ul></ul>
-        let loadingscreen = <img src= {loadinggif} alt="Girl in a jacket" style={{marginTop:"10vh"}} width="200" height="30"/>
 
-        if (!this.state.isLoading){
+        let cardlist = <ul></ul>
+        let loadingscreen = <img src={loadinggif} alt="Girl in a jacket" style={{ marginTop: "10vh" }} width="200" height="30" />
+
+        if (!this.state.isLoading) {
             loadingscreen = <></>
 
         }
-            
+
         if (this.state.news) {
             let news = this.state.news;
             let indexLast = this.state.currentpage * this.state.postsperpage
@@ -151,17 +152,18 @@ class Content extends Component {
                 <ul>
                     {news.map((e, i) => (
                         <li className="cardlist" key={i} >
-                            <Card 
-                                title={e.articles.title}
+                            <Card
                                 description={e.articles.description}
-                                theme={this.props.theme}
+                                author={e.articles.author}
+                                image={e.articles.urlToImage}
+                                title={e.title}
+                                roboTF={e.truefalse}
                                 url={e.url}
+                                date={parseDate(e.publish_date)}
+                                theme={this.props.theme}
                                 i={i}
-                                date= {parseDate(e.publish_date)}
-                                author = {e.articles.author}
-                                image = {e.articles.urlToImage}
                             />
-                        
+
                         </li>
                     ))}
                 </ul>
@@ -176,7 +178,7 @@ class Content extends Component {
         return (
             <div className="content">
                 <div className="left">
-                    
+
                     <div className='optionselector'>
                         <TimeMenu />
                         <SortMenu />
