@@ -7,12 +7,28 @@ function Team({ theme }) {
     return (
         <ThemeProvider theme={theme}>
             <div className="about">
-                <Typography style={{ margin: '4vw' }} variant="h1" color='secondary'>
-                    Team members
+                <Typography style={{ margin: '2vw' }} variant="h4" color='primary'>
+                    Team members -
+                    Our team is composed of three members, all recent graduates from the Cooper Union for the Advancement of Science and Art.
                     <ul>
-                        <li>Donghyun Park</li>
-                        <li>Minyoung Na</li>
-                        <li>Paul Kang</li>
+                        <li>Minyoung Na
+                            <ul>
+                                <li>Fullstack dev + Design + AWS</li>
+                                <li>https://github.com/flyingonionman</li>
+                            </ul>
+                        </li>
+                        <li>Donghyun Park
+                            <ul>
+                                <li>Fullstack dev + Database management</li>
+                                <li>https://github.com/dhyunpark</li>
+                            </ul>
+                        </li>
+                        <li>Paul Kang
+                            <ul>
+                                <li>Machine Learning Model Development</li>
+                                <li>https://github.com/paulhkang</li>
+                            </ul>
+                        </li>
                     </ul>
                 </Typography>
             </div>

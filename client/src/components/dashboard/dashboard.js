@@ -114,9 +114,7 @@ function Dashboard({ dispatch, theme }) {
           
         </div>
 
-        <a href="https://pixabay.com/">
-                <img src="https://pixabay.com/static/img/public/leaderboard_b.png" style={{width:"15vw" , marginBottom:"7vh"}} alt="Pixabay"/>
-            </a>
+
 
       </div>
     </ThemeProvider>
