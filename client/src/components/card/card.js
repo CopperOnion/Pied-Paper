@@ -60,6 +60,7 @@ export default function MediaCard({ title, description, url, i, image, theme, da
   let num_votes = current_true + current_false
   let true_rate = parseFloat((current_true / (num_votes)) * 100).toFixed(2)
   let false_rate = parseFloat((current_false / (num_votes)) * 100).toFixed(2)
+  let roboFalse = parseFloat(100 - roboTF).toFixed(2)
 
   const showmore = useCallback((index) => {
     var element = document.getElementsByClassName(index);
@@ -156,9 +157,8 @@ export default function MediaCard({ title, description, url, i, image, theme, da
               {true_rate}% <sub>({current_true})</sub> thought this was <i>True News</i> while {false_rate}% <sub>({current_false})</sub> thought this article was <i>Fake News</i>
             </h2>
             <h3 className='details_machine'>
-              Our ML algorithm has determined that this article had <br />
-              {roboTF}% chances of being <b>True News</b> and {100 - roboTF}% chances of being <b>Fake News</b>
-
+              Our ML algorithm has determined that this article has <br />
+              {roboTF}% chances of being <b>True News</b> and {roboFalse}% chances of being <b>Fake News</b>
             </h3>
           </div>
 
