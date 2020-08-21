@@ -3,7 +3,8 @@ const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
 const scraper = require("../scraper/scraper");
-const axios = require('axios')
+const robot = require("../robot/analysis");
+const axios = require('axios');
 
 //postgreSQL remote db connection point
 const cstring =
@@ -112,27 +113,36 @@ async function getNews() {
     //filter out articles with less than 200 characters of content scraped by the api, because those are inaccessible articles.
     const filteredNews = news.filter((article) => article.content && article.content.length >= 200)
 
+    /*
+    urlScrapedArticle{
+      url: string scrapedtext
+    }
+    urlMetric{
+      url: integer metric
+    }
+    */
     const urlScrapedArticle = await scraper.newsScraper(filteredNews)
-
+    const urlMetric = await robot.robotAnalysis(urlScrapedArticle)
     // console.log(filteredNews)
     // console.log(urlScrapedArticle['https://'])
-
-    /*
-    TO DO:
-      - urlScrapedArticle is an object with key value pairs of url: articletext. this needs to be sent through sagemaker, and be returned with an ML metric of TRUE FALSE
-    */
 
     //this compares whether the fetched article has a source entry in the api
     //if the article does not have a registered category, then it is defaulted to 'general'
     //caching news articles into the postgreSQL database
     filteredNews.map((article) => {
 
-      client.query(
-        "INSERT INTO news (articles, truefalse, category, publish_date, url) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (url) DO NOTHING",
-        [article, 1, siteID[article.source.id] || siteName[article.source.name] || 'general', article.publishedAt, article.url],
-        (err, result) => {
-          if (err) throw err;
-        })
+      if (urlMetric[article.url]) {
+        client.query(
+          "INSERT INTO news (articles, truefalse, category, publish_date, url, title) VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT (url) DO NOTHING",
+          [article, urlMetric[article.url], siteID[article.source.id] || siteName[article.source.name] || 'general', article.publishedAt, article.url, article.title],
+          (err, result) => {
+            if (err) throw err;
+          })
+      } else {
+        console.log(`ARTICLE: ${article.url} does not have an associated metric. SKIPPING...`)
+      }
+
+
     })
   } catch (err) {
     throw err;
@@ -211,25 +221,6 @@ router.post("/uservote", (req, res) => {
     })
     console.log(result.rows[0])
   })
-});
-
-/* 
-FIXME: Example API call to the AWS gateway api. use the same /predictnews directory.
-  any json file can go as the second argument. In our case, it will be news content.
-
-  Currently the model running with the API is image classification not news classification. 
-  Put images of stuff and see what the model thinks.
-*/
-router.post("/runmodel", (req, res) => {
-  axios
-    .post('https://lwhm795rcg.execute-api.us-east-2.amazonaws.com/test/predictnews', {
-      "content": "At an event aimed at highlighting the"
-    })
-    .then((result) => {
-      res.status(200).json(result.data);
-
-    },
-    )
 });
 
 module.exports = router;

@@ -52,13 +52,14 @@ const useStyles = makeStyles({
 TODO: Add a detail tab that expands upon hover ( separate from the original card)
 
 */
-export default function MediaCard({ title, description, url, i, image, theme, date ,author }) {
+export default function MediaCard({ title, description, url, i, image, theme, date, author, roboTF }) {
   const classes = useStyles();
   const [current_true, setTrue] = useState(0)
   const [current_false, setFalse] = useState(0)
 
   let num_votes = current_true + current_false
   let true_rate = parseFloat((current_true / (num_votes)) * 100).toFixed(2)
+  let false_rate = parseFloat((current_false / (num_votes)) * 100).toFixed(2)
 
   const showmore = useCallback((index) => {
     var element = document.getElementsByClassName(index);
@@ -89,7 +90,7 @@ export default function MediaCard({ title, description, url, i, image, theme, da
                 user_false: 123
             }
         */
-       showless("details_question" + i)
+        showless("details_question" + i)
 
         console.log(res.data.votes)
         setTrue(res.data.votes.user_true)
@@ -106,7 +107,7 @@ export default function MediaCard({ title, description, url, i, image, theme, da
   Use effect hook to fetch image using an 
   
   */
-  
+
 
 
   return (
@@ -126,11 +127,11 @@ export default function MediaCard({ title, description, url, i, image, theme, da
               </div>
 
 
-              <p style={{marginBottom:"50px"}}>
+              <p style={{ marginBottom: "50px" }}>
                 {description}
               </p>
 
-              
+
             </div>
 
 
@@ -147,11 +148,18 @@ export default function MediaCard({ title, description, url, i, image, theme, da
 
       <div className={'attached' + i + ' notdisplayed'}>
         <div className='details'>
-          <h3 className={"details_question" + i +" displayed"}>Do you think this article is <button className='details_buttons' onClick={() => uservote("user_true", url, i)}>True News</button> or <button className='details_buttons' onClick={() => uservote("user_false", url, i)}>Fake News</button> ?</h3>
+          <h3 className={"details_question" + i + " displayed"}>Do you think this article is <button className='details_buttons' onClick={() => uservote("user_true", url, i)}>True News</button> or <button className='details_buttons' onClick={() => uservote("user_false", url, i)}>Fake News</button> ?</h3>
 
           <div className={'stats' + i + ' notdisplayed'}>
-              <h2 className='details_people'>With {num_votes} votes , {true_rate}% of the people believe this article is true</h2>
-              <h3 className='details_machine'></h3>
+            <h2 className='details_people'>
+              Out of {num_votes} reader(s) <br />
+              {true_rate}% <sub>({current_true})</sub> thought this was <i>True News</i> while {false_rate}% <sub>({current_false})</sub> thought this article was <i>Fake News</i>
+            </h2>
+            <h3 className='details_machine'>
+              Our ML algorithm has determined that this article had <br />
+              {roboTF}% chances of being <b>True News</b> and {100 - roboTF}% chances of being <b>Fake News</b>
+
+            </h3>
           </div>
 
           {/* Do not know if we need these anymore
