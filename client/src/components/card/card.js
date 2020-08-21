@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -6,6 +6,7 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import './card.css'
 
+import axios from "axios";
 
 const useStyles = makeStyles({
   root: {
@@ -50,8 +51,20 @@ const useStyles = makeStyles({
 TODO: Add a detail tab that expands upon hover ( separate from the original card)
 
 */
-export default function MediaCard({ title, description, image, theme ,date}) {
+export default function MediaCard({ title, description, theme ,date , author , image}) {
   const classes = useStyles();
+
+  const urlcleanse = /^(?!.*(https))\w+/g;
+  let cleansed_author = ""
+  /* 
+  
+  Use effect hook to fetch image using an 
+  
+  */
+  
+  
+
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -61,7 +74,9 @@ export default function MediaCard({ title, description, image, theme ,date}) {
 
           <div className={classes.content}>
             <div className={classes.title}>
-              <h3>  {title} </h3>
+              <h3 className='article_title'>  {title} </h3>
+              <h5>{author}</h5>
+
               <h6>{date}</h6>
 
             </div>
@@ -72,7 +87,6 @@ export default function MediaCard({ title, description, image, theme ,date}) {
             </p>
 
             
-            <h4>Lot's of disagreement</h4>
           </div>
 
 

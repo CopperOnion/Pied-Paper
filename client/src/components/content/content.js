@@ -20,6 +20,9 @@ import axios from "axios";
 import TimeMenu from "../searchfilters/timefilter"
 import SortMenu from "../searchfilters/sortfilter"
 
+/* Import image */
+import loadinggif from "../../files/808.gif"
+
 /* Date parser */
 
 function parseDate(date) {
@@ -41,20 +44,21 @@ class Content extends Component {
         this.child = React.createRef();
 
         this.state = {
-            news: '',
+            news: [],
             postsperpage: 20,
             currentpage: 1,
             currentvotes :{
                 current_true: 0,
                 current_false: 0
-            }
+            },
+            isLoading: null
         }
 
 
     }
 
     componentDidMount() {
-
+        this.setState({isLoading:true})
         //GET request to express server for the NEWS API to return new articles
         axios
             .get("/api/news/retrieveall", {
@@ -77,7 +81,9 @@ class Content extends Component {
                             ... and so on	
                         ]	
                     */
-                    { news: [...res.data] },
+                    { news: [...res.data],
+                      isLoading:false
+                     },
                     () => console.log(this.state)
                 )
             })
@@ -98,8 +104,6 @@ class Content extends Component {
     }
 
     componentWillReceiveProps(nprops) {
-        console.log(this)
-
         if (nprops.topic) {
             //GET request to express server for the NEWS API to return new articles
             //FIXME: NO longer a POST request, but a GET request with query params
@@ -117,9 +121,10 @@ class Content extends Component {
                     this.setState(
                         {
                             news: [...res.data],
-                            currentpage: 1
+                            currentpage: 1,
                         },
                         () => {
+                            
                             this.child.current.reset()
                             console.log(this.state);
                             window.scrollTo(0, 0);
@@ -165,12 +170,28 @@ class Content extends Component {
                         current_true: res.data.votes.user_true,
                         current_false: res.data.votes.user_false
                     }
-                },() => this.showmore("stats" + i))
+                },() => {
+                       this.showless("details_question" + i)
+                       this.showmore("stats" + i)
+                })
             })
     }
 
     render() {
+        const people_true = this.state.currentvotes.current_true
+        const people_false = this.state.currentvotes.current_false
+
+        let num_votes = people_true + people_false
+        let true_rate = parseFloat((people_true / (num_votes)) * 100).toFixed(2)
+
         let cardlist = <ul></ul>
+        let loadingscreen = <img src= {loadinggif} alt="Girl in a jacket" style={{marginTop:"10vh"}} width="200" height="30"/>
+
+        if (!this.state.isLoading){
+            loadingscreen = <></>
+
+        }
+            
         if (this.state.news) {
             let news = this.state.news;
             let indexLast = this.state.currentpage * this.state.postsperpage
@@ -184,19 +205,21 @@ class Content extends Component {
                             <a  onClick={() => this.showmore("attached" + i)} href={e.url} target="_blank">
                                 <Card title={e.articles.title}
                                     description={e.articles.description}
-                                    image={'https://assets-jpcust.jwpsrv.com/thumbnails/rytmbwxn-720.jpg'}
                                     theme={this.props.theme}
                                     date= {parseDate(e.publish_date)}
+                                    author = {e.articles.author}
+                                    image = {e.articles.urlToImage}
                                 />
                             </a>
                             <div className={`attached` + i + ' notdisplayed'}>
                                 <div className='details'>
-                                    <h3>Do you think this article was <button className='details_buttons' onClick={() => this.uservote("user_true", e.url, i)}>True</button> or <button className='details_buttons' onClick={() => this.uservote("user_false", e.url, i)}>False</button> ?
+                                    <h3 className={"details_question" + i +" displayed"}>Do you think this article was <button className='details_buttons' onClick={() => this.uservote("user_true", e.url, i)}>True</button> or <button className='details_buttons' onClick={() => this.uservote("user_false", e.url, i)}>False</button> ?
                                     </h3>
                                      
                                      <div className={'stats' + i+' notdisplayed'}>
-                                        {this.state.currentvotes.current_true}
-                                        {this.state.currentvotes.current_false}
+                                        <h2 className='details_people'>With {num_votes} votes , {true_rate}% of the people believe this article is true</h2>
+                                        <h3 className='details_machine'></h3>
+
 
                                      </div>
                                     {/* Do not know if we need these anymore
@@ -221,11 +244,14 @@ class Content extends Component {
         return (
             <div className="content">
                 <div className="left">
+                    
                     <div className='optionselector'>
                         <TimeMenu />
                         <SortMenu />
 
                     </div>
+                    {loadingscreen}
+
                     {cardlist}
                     <Pagination
                         ref={this.child}

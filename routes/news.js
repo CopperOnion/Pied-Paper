@@ -185,7 +185,6 @@ retreive all for the start of the application
 router.get("/retrieveall", (req, res) => {
   client.query(`SELECT * FROM news`, (err, result) => {
     if (err) throw err;
-
     res.status(200).json(result.rows)
   })
 });

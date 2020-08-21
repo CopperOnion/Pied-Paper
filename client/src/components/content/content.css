@@ -52,6 +52,21 @@
     background-color:black;
 }
 
+.details{
+    border-Top:solid 1px;
+
+    height:200px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content .cardlist .details_question{
+    transition: all .2s;
+}
+
+
 .left ul{
     margin-block-start:0;
     margin-block-end: 0;
@@ -73,6 +88,10 @@
 
 }
 
+.sponsor{
+    width:0;
+    display:inline-block
+}
 a{
     text-decoration: none;
 }
