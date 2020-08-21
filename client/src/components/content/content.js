@@ -20,6 +20,9 @@ import axios from "axios";
 import TimeMenu from "../searchfilters/timefilter"
 import SortMenu from "../searchfilters/sortfilter"
 
+/* Import image */
+import loadinggif from "../../files/808.gif"
+
 /* Date parser */
 
 function parseDate(date) {
@@ -41,20 +44,17 @@ class Content extends Component {
         this.child = React.createRef();
 
         this.state = {
-            news: '',
+            news: [],
             postsperpage: 20,
             currentpage: 1,
-            currentvotes: {
-                current_true: 0,
-                current_false: 0
-            }
+            isLoading: null
         }
 
 
     }
 
     componentDidMount() {
-
+        this.setState({isLoading:true})
         //GET request to express server for the NEWS API to return new articles
         axios
             .get("/api/news/retrieveall", {
@@ -77,7 +77,9 @@ class Content extends Component {
                             ... and so on	
                         ]	
                     */
-                    { news: [...res.data] },
+                    { news: [...res.data],
+                      isLoading:false
+                     },
                     () => console.log(this.state)
                 )
             })
@@ -98,8 +100,6 @@ class Content extends Component {
     }
 
     componentWillReceiveProps(nprops) {
-        console.log(this)
-
         if (nprops.topic) {
             //GET request to express server for the NEWS API to return new articles
             //FIXME: NO longer a POST request, but a GET request with query params
@@ -117,9 +117,10 @@ class Content extends Component {
                     this.setState(
                         {
                             news: [...res.data],
-                            currentpage: 1
+                            currentpage: 1,
                         },
                         () => {
+                            
                             this.child.current.reset()
                             console.log(this.state);
                             window.scrollTo(0, 0);
@@ -131,7 +132,15 @@ class Content extends Component {
     }
 
     render() {
+        
         let cardlist = <ul></ul>
+        let loadingscreen = <img src= {loadinggif} alt="Girl in a jacket" style={{marginTop:"10vh"}} width="200" height="30"/>
+
+        if (!this.state.isLoading){
+            loadingscreen = <></>
+
+        }
+            
         if (this.state.news) {
             let news = this.state.news;
             let indexLast = this.state.currentpage * this.state.postsperpage
@@ -142,15 +151,17 @@ class Content extends Component {
                 <ul>
                     {news.map((e, i) => (
                         <li className="cardlist" key={i} >
-                            <Card
+                            <Card 
                                 title={e.articles.title}
                                 description={e.articles.description}
+                                theme={this.props.theme}
                                 url={e.url}
                                 i={i}
-                                image={'https://assets-jpcust.jwpsrv.com/thumbnails/rytmbwxn-720.jpg'}
-                                theme={this.props.theme}
-                                date={parseDate(e.publish_date)}
+                                date= {parseDate(e.publish_date)}
+                                author = {e.articles.author}
+                                image = {e.articles.urlToImage}
                             />
+                        
                         </li>
                     ))}
                 </ul>
@@ -165,11 +176,14 @@ class Content extends Component {
         return (
             <div className="content">
                 <div className="left">
+                    
                     <div className='optionselector'>
                         <TimeMenu />
                         <SortMenu />
 
                     </div>
+                    {loadingscreen}
+
                     {cardlist}
                     <Pagination
                         ref={this.child}

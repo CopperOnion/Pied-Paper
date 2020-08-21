@@ -6,8 +6,7 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import './card.css'
 
-import axios from 'axios';
-
+import axios from "axios";
 
 const useStyles = makeStyles({
   root: {
@@ -53,10 +52,13 @@ const useStyles = makeStyles({
 TODO: Add a detail tab that expands upon hover ( separate from the original card)
 
 */
-export default function MediaCard({ title, description, url, i, image, theme, date }) {
+export default function MediaCard({ title, description, url, i, image, theme, date ,author }) {
   const classes = useStyles();
   const [current_true, setTrue] = useState(0)
   const [current_false, setFalse] = useState(0)
+
+  let num_votes = current_true + current_false
+  let true_rate = parseFloat((current_true / (num_votes)) * 100).toFixed(2)
 
   const showmore = useCallback((index) => {
     var element = document.getElementsByClassName(index);
@@ -87,12 +89,25 @@ export default function MediaCard({ title, description, url, i, image, theme, da
                 user_false: 123
             }
         */
+       showless("details_question" + i)
+
         console.log(res.data.votes)
         setTrue(res.data.votes.user_true)
         setFalse(res.data.votes.user_false)
         showmore("stats" + i)
+
       })
   }, []);
+
+  const urlcleanse = /^(?!.*(https))\w+/g;
+  let cleansed_author = ""
+  /* 
+  
+  Use effect hook to fetch image using an 
+  
+  */
+  
+
 
   return (
     <div>
@@ -100,20 +115,25 @@ export default function MediaCard({ title, description, url, i, image, theme, da
         <ThemeProvider theme={theme}>
           <Card elevation={0} className={classes.root}>
 
+
             <div className={classes.content}>
               <div className={classes.title}>
-                <h3>{title}</h3>
+                <h3 className='article_title'>  {title} </h3>
+                <h5>{author}</h5>
+
                 <h6>{date}</h6>
 
               </div>
 
-              <p style={{ marginBottom: "50px" }}>
+
+              <p style={{marginBottom:"50px"}}>
                 {description}
               </p>
 
-
-              <h4>Lot's of disagreement</h4>
+              
             </div>
+
+
 
             <CardMedia
               className={classes.media}
@@ -127,11 +147,11 @@ export default function MediaCard({ title, description, url, i, image, theme, da
 
       <div className={'attached' + i + ' notdisplayed'}>
         <div className='details'>
-          <h3>Do you think this article is <button className='details_buttons' onClick={() => uservote("user_true", url, i)}>True News</button> or <button className='details_buttons' onClick={() => uservote("user_false", url, i)}>Fake News</button> ?</h3>
+          <h3 className={"details_question" + i +" displayed"}>Do you think this article is <button className='details_buttons' onClick={() => uservote("user_true", url, i)}>True News</button> or <button className='details_buttons' onClick={() => uservote("user_false", url, i)}>Fake News</button> ?</h3>
 
           <div className={'stats' + i + ' notdisplayed'}>
-            {current_true}
-            {current_false}
+              <h2 className='details_people'>With {num_votes} votes , {true_rate}% of the people believe this article is true</h2>
+              <h3 className='details_machine'></h3>
           </div>
 
           {/* Do not know if we need these anymore
