@@ -113,6 +113,11 @@ export default function MediaCard({ title, description, url, i, image, theme, da
 
   return (
     <div>
+      {/* 
+      Open tab unfocused
+
+      Something on the right side of the cards to give it more jazz
+      */}
       <a onClick={() => showmore('attached' + i)} href={url} target="_blank">
         <ThemeProvider theme={theme}>
           <Card elevation={0} className={classes.root}>
@@ -152,13 +157,16 @@ export default function MediaCard({ title, description, url, i, image, theme, da
           <h3 className={"details_question" + i + " displayed"}>Do you think this article is <button className='details_buttons' onClick={() => uservote("user_true", url, i)}>True News</button> or <button className='details_buttons' onClick={() => uservote("user_false", url, i)}>Fake News</button> ?</h3>
 
           <div className={'stats' + i + ' notdisplayed'}>
-            <h2 className='details_people'>
+            <h3 className='details_people'>
               Out of {num_votes} reader(s) <br />
               {true_rate}% <sub>({current_true})</sub> thought this was <i>True News</i> while {false_rate}% <sub>({current_false})</sub> thought this article was <i>Fake News</i>
-            </h2>
+            </h3>
             <h3 className='details_machine'>
+              {/* 
+                False and True values are flipped on purpose !
+              */}
               Our ML algorithm has determined that this article has <br />
-              {roboTF}% chances of being <b>True News</b> and {roboFalse}% chances of being <b>Fake News</b>
+              {roboFalse}% chances of being <b>True News</b> and {roboTF}% chances of being <b>Fake News</b>
             </h3>
           </div>
 
