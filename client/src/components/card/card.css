@@ -31,6 +31,7 @@ p{
     overflow: hidden;
     max-height: 300px;
     transition: all .6s;
+    padding:2em;
 }
 
 .notdisplayed{

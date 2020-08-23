@@ -16,9 +16,10 @@ import { connect } from "react-redux";
 import './content.css'
 import axios from "axios";
 
-/* Time menu */
+/* Sorting and Searching */
 import TimeMenu from "../searchfilters/timefilter"
 import SortMenu from "../searchfilters/sortfilter"
+import TitleSearch from "../searchfilters/titlesearch"
 
 /* Import image */
 import loadinggif from "../../files/808.gif"
@@ -182,7 +183,7 @@ class Content extends Component {
                     <div className='optionselector'>
                         <TimeMenu />
                         <SortMenu />
-
+                        <TitleSearch/>
                     </div>
                     {loadingscreen}
 

@@ -15,11 +15,13 @@ const useStyles = makeStyles({
     },
     display: 'flex',
     flexDirection: 'row',
-    padding: 0,
+    padding: '2em',
     transition: 'transform .4s',
     overflow: 'visible',
     height: "20vh",
-    marginBottom: "2vh"
+    
+
+
   },
   '.MuiCardContent-root:last-child': {
     padding: 0
@@ -114,9 +116,11 @@ export default function MediaCard({ title, description, url, i, image, theme, da
   return (
     <div>
       {/* 
-      Open tab unfocused
+      TODO: Open tab unfocused (This might actually be impossible)
 
       Something on the right side of the cards to give it more jazz
+
+      added shadows to the card
       */}
       <a onClick={() => showmore('attached' + i)} href={url} target="_blank">
         <ThemeProvider theme={theme}>
@@ -175,7 +179,7 @@ export default function MediaCard({ title, description, url, i, image, theme, da
             <h4 className={`source` + i + ' notdisplayed'}>{e.articles.source.name}</h4>  
           */}
         </div>
-        <button onClick={() => showless("attached" + i)}>Hide</button>
+        <button className = 'details_hide' onClick={() => showless("attached" + i)}>Hide</button>
 
       </div>
     </div>
