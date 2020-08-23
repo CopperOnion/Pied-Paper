@@ -70,12 +70,8 @@ function Dashboard({ dispatch, theme }) {
           */}
 
           <div className="smallbar">
-            <Typography onClick={() => { dispatch(setCurrentTopic("\'general\'")) }} className={classes.list} variant="subtitle2" color='secondary'>
-              <Link style={{ color: '#90FFDC' }} to="/">General</Link>
-            </Typography>
-
-            <Typography onClick={() => { dispatch(setCurrentTopic("\'technology\'")) }} className={classes.list} variant="subtitle2" color='secondary'>
-              <Link style={{ color: '#90FFDC' }} to="/">Technology</Link>
+            <Typography onClick={() => { dispatch(setCurrentTopic("NULL")) }} className={classes.list} variant="subtitle1" color='secondary'>
+              <Link style={{ color: '#90FFDC' }} to="/">All</Link>
             </Typography>
 
             <Typography onClick={() => { dispatch(setCurrentTopic("\'business\'")) }} className={classes.list} variant="subtitle2" color='secondary'>
@@ -84,6 +80,26 @@ function Dashboard({ dispatch, theme }) {
 
             <Typography onClick={() => { dispatch(setCurrentTopic("\'entertainment\'")) }} className={classes.list} variant="subtitle2" color='secondary'>
               <Link style={{ color: '#90FFDC' }} to="/">Entertainment</Link>
+            </Typography>
+
+            <Typography onClick={() => { dispatch(setCurrentTopic("\'general\'")) }} className={classes.list} variant="subtitle2" color='secondary'>
+              <Link style={{ color: '#90FFDC' }} to="/">General</Link>
+            </Typography>
+
+            <Typography onClick={() => { dispatch(setCurrentTopic("\'health\'")) }} className={classes.list} variant="subtitle2" color='secondary'>
+              <Link style={{ color: '#90FFDC' }} to="/">Health</Link>
+            </Typography>
+
+            <Typography onClick={() => { dispatch(setCurrentTopic("\'science\'")) }} className={classes.list} variant="subtitle2" color='secondary'>
+              <Link style={{ color: '#90FFDC' }} to="/">Science</Link>
+            </Typography>
+
+            <Typography onClick={() => { dispatch(setCurrentTopic("\'sports\'")) }} className={classes.list} variant="subtitle2" color='secondary'>
+              <Link style={{ color: '#90FFDC' }} to="/">Sports</Link>
+            </Typography>
+
+            <Typography onClick={() => { dispatch(setCurrentTopic("\'technology\'")) }} className={classes.list} variant="subtitle2" color='secondary'>
+              <Link style={{ color: '#90FFDC' }} to="/">Technology</Link>
             </Typography>
 
 
