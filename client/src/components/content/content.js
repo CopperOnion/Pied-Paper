@@ -57,10 +57,14 @@ class Content extends Component {
         this.setState({ isLoading: true })
         //GET request to express server for the NEWS API to return new articles
         axios
-            .get("/api/news/retrieveall", {
-                headers: { Accept: 'application/json' }
-            }
-            )
+            .get(`/api/news/retrieve`, {
+                headers: { Accept: 'application/json' },
+                params: {
+                    category: this.props.topic,
+                    range: this.props.range,
+                    sort: this.props.order
+                }
+            })
             .then(res => {
                 this.setState(
                     /*the news route returns an array of objects with keys	
@@ -85,19 +89,6 @@ class Content extends Component {
                 )
             })
             .catch(err => console.log(err))
-
-        /* 
-            Testing the API connection to the model
-            check console log to see the data
-        */
-
-        axios
-            .post("/api/news/runmodel", {
-                headers: { Accept: 'application/json' }
-            }
-            )
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err))
     }
 
     componentWillReceiveProps(nprops) {
@@ -108,9 +99,9 @@ class Content extends Component {
                 .get(`/api/news/retrieve`, {
                     headers: { Accept: 'application/json' },
                     params: {
-                        category: nprops.topic.topic,
-                        range: nprops.topic.range,
-                        sort: nprops.topic.order
+                        category: nprops.topic,
+                        range: nprops.range,
+                        sort: nprops.order
                     }
                 }
                 )
@@ -157,7 +148,7 @@ class Content extends Component {
                                 author={e.articles.author}
                                 image={e.articles.urlToImage}
                                 title={e.title}
-                                roboTF={e.truefalse}
+                                roboFalse={e.truefalse}
                                 url={e.url}
                                 date={parseDate(e.publish_date)}
                                 theme={this.props.theme}
@@ -205,9 +196,9 @@ class Content extends Component {
 
 
 const mapStateToProps = state => ({
-    topic: state.topic,
-    order: state.order,
-    range: state.range
+    topic: state.topic.topic,
+    order: state.topic.order,
+    range: state.topic.range
 })
 
 export default connect(

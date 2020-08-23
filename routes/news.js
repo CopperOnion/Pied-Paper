@@ -4,13 +4,14 @@ const router = express.Router();
 const fetch = require("node-fetch");
 const scraper = require("../scraper/scraper");
 const robot = require("../robot/analysis");
-const axios = require('axios');
+
+if (process.env.NODE_ENV !== 'production') {
+  require("dotenv").config();
+}
 
 //postgreSQL remote db connection point
-const cstring =
-  "postgres://wejgjhiuiahuhh:8de3f710eb110c9ed94d3fee5c28617b33926452a53a3ad54d236f02adb68566@ec2-34-193-117-204.compute-1.amazonaws.com:5432/de20i26pohuek0";
 const client = new Client({
-  connectionString: cstring,
+  connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
@@ -19,7 +20,7 @@ client.connect();
 
 //newsAPI and its key
 const NewsAPI = require("newsapi");
-const newsapi = new NewsAPI("e5bc086901ee4a3fbda77b9c49634c3a");
+const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
 //garbage collection of news articles older than 30 days of publishing to maintain space on db
 client.query(
@@ -185,18 +186,6 @@ router.get("/retrieve", (req, res) => {
 
       res.status(200).json(result.rows)
     })
-});
-
-/* 
-FIXME:Temporary, hopefully this can be done with /retrieve
-retreive all for the start of the application
-
-*/
-router.get("/retrieveall", (req, res) => {
-  client.query(`SELECT * FROM news`, (err, result) => {
-    if (err) throw err;
-    res.status(200).json(result.rows)
-  })
 });
 
 /*
