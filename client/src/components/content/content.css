@@ -26,8 +26,14 @@
 .content .cardlist{
     margin: 3.8vh 0 6vh 0;
     transition: all .4s;
-    border: solid 1px;
-    box-shadow: 5px 10px;
+    border-right: solid 20px;
+    border-image: 
+    linear-gradient(
+      to bottom, 
+      grey, 
+      rgba(0, 0, 0, 0)
+    ) 1 100%;
+    box-shadow: 0px 5px 10px 0px;
 }
 
 .content .cardlist:hover {
