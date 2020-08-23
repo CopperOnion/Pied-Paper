@@ -52,7 +52,7 @@ const useStyles = makeStyles({
 TODO: Add a detail tab that expands upon hover ( separate from the original card)
 
 */
-export default function MediaCard({ title, description, url, i, image, theme, date, author, roboTF }) {
+export default function MediaCard({ title, description, url, i, image, theme, date, author, roboFalse }) {
   const classes = useStyles();
   const [current_true, setTrue] = useState(0)
   const [current_false, setFalse] = useState(0)
@@ -60,7 +60,7 @@ export default function MediaCard({ title, description, url, i, image, theme, da
   let num_votes = current_true + current_false
   let true_rate = parseFloat((current_true / (num_votes)) * 100).toFixed(2)
   let false_rate = parseFloat((current_false / (num_votes)) * 100).toFixed(2)
-  let roboFalse = parseFloat(100 - roboTF).toFixed(2)
+  let roboTrue = parseFloat(100 - roboFalse).toFixed(2)
 
   const showmore = useCallback((index) => {
     var element = document.getElementsByClassName(index);
@@ -158,7 +158,7 @@ export default function MediaCard({ title, description, url, i, image, theme, da
             </h2>
             <h3 className='details_machine'>
               Our ML algorithm has determined that this article has <br />
-              {roboTF}% chances of being <b>True News</b> and {roboFalse}% chances of being <b>Fake News</b>
+              {roboTrue}% chances of being <i>True News</i> and {roboFalse}% chances of being <i>Fake News</i>
             </h3>
           </div>
 
