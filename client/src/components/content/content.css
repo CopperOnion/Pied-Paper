@@ -23,17 +23,19 @@
     list-style-type: none;
 }
 
+/* 
+    Add a discrepancy metric
+*/
 .content .cardlist{
     margin: 3.8vh 0 6vh 0;
     transition: all .4s;
     border-right: solid 20px;
     border-image: 
-    linear-gradient(
-      to bottom, 
-      grey, 
-      rgba(0, 0, 0, 0)
-    ) 1 100%;
-    box-shadow: 0px 5px 10px 0px;
+        linear-gradient(
+        to bottom, 
+        #9198e5 20%,
+        rgb(144, 255, 220)
+        ) 2 100%;
 }
 
 .content .cardlist:hover {

@@ -19,7 +19,10 @@ const useStyles = makeStyles({
     transition: 'transform .4s',
     overflow: 'visible',
     height: "20vh",
-    
+    borderBottom: "solid 1px",
+    borderLeft: "solid 1px",
+    borderTop: "solid 1px",
+    borderRadius:0
 
 
   },
