@@ -9,9 +9,6 @@ import { useDispatch } from 'react-redux'
 
 
 /* 
-Add serach function + change coloring based on discrepancy metric
-
-add search function
 gradient indicates discrepancy metric
 add some sort of data visualization
 */
