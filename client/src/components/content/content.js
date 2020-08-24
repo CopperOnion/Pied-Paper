@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 /* material UI button*/
-import Button from '@material-ui/core/Button';
 
 /* Importing components */
 import Card from '../card/card'
 import Pagination from '../card/pagination'
-import Opinion from '../card/opinion'
 
 /* redux related stuff */
 import { withRouter } from "react-router";
@@ -155,7 +153,6 @@ class Content extends Component {
                                 theme={this.props.theme}
                                 i={i}
                             />
-
                         </li>
                     ))}
                 </ul>

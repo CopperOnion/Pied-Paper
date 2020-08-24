@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState,useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -15,14 +15,12 @@ const useStyles = makeStyles({
     },
     display: 'flex',
     flexDirection: 'row',
-    padding: '2em',
+    padding: '4vh',
     transition: 'transform .4s',
     overflow: 'visible',
     height: "20vh",
-    borderBottom: "solid 1px",
-    borderLeft: "solid 1px",
-    borderTop: "solid 1px",
-    borderRadius:0
+    borderRadius:0,
+    paddingLeft:0
 
 
   },
@@ -33,11 +31,23 @@ const useStyles = makeStyles({
   'root:hover': {
 
   },
-  media: {
+
+  media: cardhover => cardhover 
+  ? {
     height: '20vh',
     flex: .3,
-    right: 0
-  },
+    boxShadow: "2px 2px 15px",
+    right: 0,
+    transition:"all .5s"
+
+  } :
+  {
+    height: '20vh',
+    flex: .3,
+    right: 0,
+    transition:"all .5s"
+  }
+  ,
 
   content: {
     display: 'flex',
@@ -50,6 +60,10 @@ const useStyles = makeStyles({
   title: {
     marginBottom: "1em"
   },
+  paragraph:{
+    marginBottom: "50px",
+    fontSize:'1.5vh'
+  }
 
 });
 
@@ -58,9 +72,17 @@ TODO: Add a detail tab that expands upon hover ( separate from the original card
 
 */
 export default function MediaCard({ title, description, url, i, image, theme, date, author, roboFalse }) {
-  const classes = useStyles();
+  /* 
+  States for true / false for users
+  */
   const [current_true, setTrue] = useState(0)
   const [current_false, setFalse] = useState(0)
+
+  /* 
+  Use styles with state passed down
+  */
+  const [cardhover, setCardhover] = useState(false)
+  const classes = useStyles(cardhover);
 
   let num_votes = current_true + current_false
   let true_rate = parseFloat((current_true / (num_votes)) * 100).toFixed(2)
@@ -106,15 +128,18 @@ export default function MediaCard({ title, description, url, i, image, theme, da
       })
   }, []);
 
-  const urlcleanse = /^(?!.*(https))\w+/g;
-  let cleansed_author = ""
   /* 
   
-  Use effect hook to fetch image using an 
+  Use effect hook so the cards reset when categories change
   
   */
 
-
+  useEffect(() => {
+    
+    return () => {
+      
+    }
+  }, [])
 
   return (
     <div>
@@ -125,7 +150,7 @@ export default function MediaCard({ title, description, url, i, image, theme, da
 
       added shadows to the card
       */}
-      <a onClick={() => showmore('attached' + i)} href={url} target="_blank">
+      <a onMouseOver={()=>setCardhover(true)} onMouseOut={()=> setCardhover(false)}   onClick={() => showmore('attached' + i)} href={url} rel="noopener noreferrer" target="_blank">
         <ThemeProvider theme={theme}>
           <Card elevation={0} className={classes.root}>
 
@@ -140,7 +165,7 @@ export default function MediaCard({ title, description, url, i, image, theme, da
               </div>
 
 
-              <p style={{ marginBottom: "50px" }}>
+              <p className={classes.paragraph}>
                 {description}
               </p>
 
@@ -152,7 +177,6 @@ export default function MediaCard({ title, description, url, i, image, theme, da
             <CardMedia
               className={classes.media}
               image={image}
-              title="Contemplative Reptile"
             />
 
           </Card>
@@ -173,7 +197,7 @@ export default function MediaCard({ title, description, url, i, image, theme, da
                 False and True values are flipped on purpose !
               */}
               Our ML algorithm has determined that this article has <br />
-              {roboFalse}% chances of being <b>True News</b> and {roboTF}% chances of being <b>Fake News</b>
+              {roboTrue}% chances of being <b>True News</b> and {roboFalse}% chances of being <b>Fake News</b>
             </h3>
           </div>
 

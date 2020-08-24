@@ -1,7 +1,7 @@
 .dashboard{
     display: flex;
     flex-direction: column;
-    padding: 3vh 2vw;
+    padding: 6vh 4vw 3vh 8vw;
     height: 100vh;
 }
 
@@ -9,7 +9,7 @@
     flex: 1;
     display: flex;
     align-items: flex-end;
-    margin-bottom: 6vh;
+    margin-bottom: 11vh;
 }
 
 .dashboard .info h6{
@@ -20,3 +20,14 @@
 .dashboard .top {
     margin-bottom: 2vh;
 }
+
+.topic_highlight{
+    border-bottom: solid 2px;
+    transition: all .2s;
+}
+
+.topic_highlight_hidden{
+    border-bottom: 0;
+    transition: all .2s;
+}
+

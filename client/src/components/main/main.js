@@ -19,7 +19,6 @@ import {
   Route,
 } from "react-router-dom";
 
-import {createBrowserHistory} from 'history';
 
 const theme = createMuiTheme({
   palette: {
@@ -32,13 +31,12 @@ const theme = createMuiTheme({
   },
 });
 
-const browserHistory = createBrowserHistory();
 
 function Main() {
   return (
     <Provider store={store}>
 
-      <Router history={browserHistory}>
+      <Router>
         <div className='main_container'>
 
           <div className='main_left'>

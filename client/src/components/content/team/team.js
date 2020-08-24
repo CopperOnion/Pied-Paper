@@ -9,7 +9,7 @@ function Team({ theme }) {
             <div className="about">
                 <Typography style={{ margin: '2vw' }} variant="h4" color='primary'>
                     Team members -
-                    Our team is composed of three members, all recent graduates from the Cooper Union for the Advancement of Science and Art.
+                    Our team is composed of three members, former and current students from the Cooper Union for the Advancement of Science and Art.
                     <ul>
                         <li>Minyoung Na
                             <ul>

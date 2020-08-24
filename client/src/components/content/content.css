@@ -4,7 +4,7 @@
 }
 
 .content .left{
-    padding: 1em 1.5em;
+    padding: 5vh;
 }
 
 .content .right{
@@ -27,7 +27,7 @@
     Add a discrepancy metric
 */
 .content .cardlist{
-    margin: 3.8vh 0 6vh 0;
+    margin: 3.8vh 0 8vh 0;
     transition: all .4s;
     border-right: solid 20px;
     border-image: 
@@ -39,7 +39,7 @@
 }
 
 .content .cardlist:hover {
-    transform: scale(1.04);
+    
 }
 
 .content .cardlist .details_buttons{

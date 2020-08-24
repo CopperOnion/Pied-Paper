@@ -1,6 +1,7 @@
 .article_title{
     margin-block-start: 0em;
-    margin-block-end: 1em;
+    margin-block-end: 2vh;
+    font-size:2.8vh;
 }
 
 h4{
@@ -41,3 +42,7 @@ p{
 
 }
 
+h3{
+    margin-block-start:0em;
+    margin-block-end : 0em;
+}
