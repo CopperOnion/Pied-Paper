@@ -18,3 +18,10 @@ export const setTimeRange = timerange => {
     range: timerange
   };
 };
+
+export const setSearchValue = searchvalue => {
+  return {
+    type: 'SET_SEARCH',
+    search: searchvalue
+  };
+};

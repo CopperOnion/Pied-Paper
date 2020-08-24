@@ -105,7 +105,7 @@ function Dashboard({ dispatch, theme }) {
           </Typography>
 
           <div className="top">
-            <Typography onClick={() => { dispatch(setCurrentTopic("NULL"));}} style={{ fontWeight: "500" ,    fontSize: '7vh' }} className={classes.title} variant="h2" color='secondary'>
+            <Typography onClick={() => { dispatch(setCurrentTopic("NULL")); showline("All") }} style={{ fontWeight: "500" ,    fontSize: '7vh' }} className={classes.title} variant="h2" color='secondary'>
               <Link style={{ color: '#90FFDC' }} to="/">Pied Paper</Link>
             </Typography>
           </div>

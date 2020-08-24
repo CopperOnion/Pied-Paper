@@ -135,11 +135,11 @@ export default function MediaCard({ title, description, url, i, image, theme, da
   */
 
   useEffect(() => {
-    
+    showless("attached" + i)
     return () => {
       
     }
-  }, [])
+  }, [title])
 
   return (
     <div>
