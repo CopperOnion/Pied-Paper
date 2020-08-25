@@ -27,19 +27,15 @@
     Add a discrepancy metric
 */
 .content .cardlist{
-    margin: 3.8vh 0 8vh 0;
+    margin: 7vh 0 7vh 0;
+    border-radius:0;
+    border-left: solid 20px;
+    border-image: linear-gradient( to bottom, #9198e5 20%, #90FFDC ) 2 100%;
     transition: all .4s;
-    border-right: solid 20px;
-    border-image: 
-        linear-gradient(
-        to bottom, 
-        #9198e5 20%,
-        rgb(144, 255, 220)
-        ) 2 100%;
 }
 
 .content .cardlist:hover {
-    
+    box-shadow: 5px 5px 10px;
 }
 
 .content .cardlist .details_buttons{

@@ -9,7 +9,6 @@ import { useDispatch } from 'react-redux'
 
 
 /* 
-gradient indicates discrepancy metric
 add some sort of data visualization
 */
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +44,7 @@ function TitleSearch() {
         return () => {
             
         }
-    }, [searchval])
+    }, [searchval,dispatch])
 
     return (
         <div className={classes.root}>

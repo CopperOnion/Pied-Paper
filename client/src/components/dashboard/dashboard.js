@@ -70,7 +70,7 @@ function Dashboard({ dispatch, theme }) {
     element[0].classList.add("topic_highlight");
 
 
-  }, []);
+  }, [topics]);
 
 
   /* 
@@ -80,13 +80,13 @@ function Dashboard({ dispatch, theme }) {
   let topiclist = 
     <>
       {topics.map((e,i)=>{
-        if (e=="All"){
-          return (<Typography key={i} onClick={() => { dispatch(setCurrentTopic("NULL")); showline(e) }} className={classes.list + " topic_highlight" + " All"} variant="subtitle2" color='secondary'>
+        if (e==="All"){
+          return (<Typography key={i} onClick={() => { dispatch(setCurrentTopic("NULL")); showline(e) }} className={classes.list + " topic_highlight All"} variant="subtitle2" color='secondary'>
             <Link style={{ color: '#90FFDC' }} to="/">All</Link>
           </Typography>)
         }
         else{
-          return (<Typography key={i} onClick={() => { dispatch(setCurrentTopic(`\'${e.toLowerCase()}\'`)) ; showline(e)}} className={classes.list + " topic_highlight_hidden " + e} variant="subtitle2" color='secondary'>
+          return (<Typography key={i} onClick={() => { dispatch(setCurrentTopic(`'${e.toLowerCase()}'`)) ; showline(e)}} className={classes.list + " topic_highlight_hidden " + e} variant="subtitle2" color='secondary'>
             <Link style={{ color: '#90FFDC' }} to="/">{e}</Link>
           </Typography>)
         }
@@ -132,7 +132,7 @@ function Dashboard({ dispatch, theme }) {
 
         <div className="info">
         <Typography className={classes.info} variant="h6" color='secondary'>
-            <Link style={{ color: '#90FFDC' }} to="/about">Data.</Link>
+            <Link style={{ color: '#90FFDC' }} to="/data">Data.</Link>
           </Typography>
 
           <Typography className={classes.info} variant="h6" color='secondary'>

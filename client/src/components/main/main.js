@@ -4,6 +4,7 @@ import Dashboard from "../dashboard/dashboard"
 import Content from "../content/content"
 import About from "../content/about/about"
 import Team from '../content/team/team'
+import Data from '../content/data/dataviz'
 
 import Extra from "../nav/extra"
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -56,6 +57,10 @@ function Main() {
 
               <Route exact path="/team">
                 <Team theme={theme} />
+              </Route>
+
+              <Route exact path="/data">
+                <Data theme={theme} />
               </Route>
             </Switch>
 

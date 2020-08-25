@@ -9,7 +9,7 @@ import './card.css'
 import axios from "axios";
 
 const useStyles = makeStyles({
-  root: {
+  root:{
     '.MuiTypography-gutterBottom': {
       marginBottom: "1em"
     },
@@ -19,11 +19,8 @@ const useStyles = makeStyles({
     transition: 'transform .4s',
     overflow: 'visible',
     height: "20vh",
-    borderRadius:0,
-    paddingLeft:0
-
-
   },
+
   '.MuiCardContent-root:last-child': {
     padding: 0
   },
@@ -32,22 +29,13 @@ const useStyles = makeStyles({
 
   },
 
-  media: cardhover => cardhover 
-  ? {
+  media: {
     height: '20vh',
     flex: .3,
-    boxShadow: "2px 2px 15px",
     right: 0,
     transition:"all .5s"
 
-  } :
-  {
-    height: '20vh',
-    flex: .3,
-    right: 0,
-    transition:"all .5s"
-  }
-  ,
+  },
 
   content: {
     display: 'flex',
@@ -77,18 +65,23 @@ export default function MediaCard({ title, description, url, i, image, theme, da
   */
   const [current_true, setTrue] = useState(0)
   const [current_false, setFalse] = useState(0)
-
-  /* 
-  Use styles with state passed down
-  */
-  const [cardhover, setCardhover] = useState(false)
-  const classes = useStyles(cardhover);
+  const [robot_true ,setRobot] = useState(0)
+  const [discrepancy,  setDiscrepancy] = useState(false)
+ 
 
   let num_votes = current_true + current_false
   let true_rate = parseFloat((current_true / (num_votes)) * 100).toFixed(2)
   let false_rate = parseFloat((current_false / (num_votes)) * 100).toFixed(2)
   let roboTrue = parseFloat(100 - roboFalse).toFixed(2)
 
+  /* 
+  Use styles with state passed down
+  */
+  const classes = useStyles(discrepancy);
+  /* 
+  Hides and reveals the uservote section
+  
+  */
   const showmore = useCallback((index) => {
     var element = document.getElementsByClassName(index);
     element[0].classList.remove("notdisplayed");
@@ -120,13 +113,13 @@ export default function MediaCard({ title, description, url, i, image, theme, da
         */
         showless("details_question" + i)
 
-        console.log(res.data.votes)
         setTrue(res.data.votes.user_true)
         setFalse(res.data.votes.user_false)
         showmore("stats" + i)
 
       })
   }, []);
+
 
   /* 
   
@@ -136,8 +129,9 @@ export default function MediaCard({ title, description, url, i, image, theme, da
 
   useEffect(() => {
     showless("attached" + i)
-    return () => {
-      
+    
+    return function cleanup() {
+      showless("attached" + i)
     }
   }, [title])
 
@@ -150,15 +144,15 @@ export default function MediaCard({ title, description, url, i, image, theme, da
 
       added shadows to the card
       */}
-      <a onMouseOver={()=>setCardhover(true)} onMouseOut={()=> setCardhover(false)}   onClick={() => showmore('attached' + i)} href={url} rel="noopener noreferrer" target="_blank">
+      <a onClick={() => showmore('attached' + i)} href={url} rel="noopener noreferrer" target="_blank">
         <ThemeProvider theme={theme}>
-          <Card elevation={0} className={classes.root}>
+          <Card elevation={0} className={`${classes.root} ${classes.metric}`}>
 
 
             <div className={classes.content}>
               <div className={classes.title}>
                 <h3 className='article_title'>  {title} </h3>
-                <h5>{author}</h5>
+                <h6>{author}</h6>
 
                 <h6>{date}</h6>
 
