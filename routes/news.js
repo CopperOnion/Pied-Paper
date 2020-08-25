@@ -213,4 +213,23 @@ router.post("/uservote", (req, res) => {
   })
 });
 
+/* 
+Retrieve all for data visualization
+
+*/
+router.get("/retrieve_all", (req, res) => {
+
+  const newsParam = req.query
+
+  client.query(
+    `SELECT * FROM news`,
+    (err, result) => {
+      if (err) throw err;
+
+      res.status(200).json(result.rows)
+    })
+});
+
+
+
 module.exports = router;

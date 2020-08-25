@@ -23,10 +23,12 @@
   "homepage": "https://github.com/CopperOnion/Pied-Paper#readme",
   "dependencies": {
     "@material-ui/lab": "^4.0.0-alpha.56",
-    "cheerio": "^1.0.0-rc.3",
     "axios": "^0.19.2",
+    "chart.js": "^2.9.3",
+    "cheerio": "^1.0.0-rc.3",
     "concurrently": "^5.2.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "emoji-regex": "^9.0.0",
     "express": "^4.17.1",
     "newsapi": "^2.4.1",
@@ -39,8 +41,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "request": "^2.88.2",
-    "request-promise": "^4.2.6",
-    "dotenv": "^8.2.0"
+    "request-promise": "^4.2.6"
   },
   "devDependencies": {}
 }

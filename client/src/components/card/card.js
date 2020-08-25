@@ -65,8 +65,6 @@ export default function MediaCard({ title, description, url, i, image, theme, da
   */
   const [current_true, setTrue] = useState(0)
   const [current_false, setFalse] = useState(0)
-  const [robot_true ,setRobot] = useState(0)
-  const [discrepancy,  setDiscrepancy] = useState(false)
  
 
   let num_votes = current_true + current_false
@@ -77,7 +75,7 @@ export default function MediaCard({ title, description, url, i, image, theme, da
   /* 
   Use styles with state passed down
   */
-  const classes = useStyles(discrepancy);
+  const classes = useStyles();
   /* 
   Hides and reveals the uservote section
   
@@ -118,7 +116,7 @@ export default function MediaCard({ title, description, url, i, image, theme, da
         showmore("stats" + i)
 
       })
-  }, []);
+  }, [showless,showmore]);
 
 
   /* 
