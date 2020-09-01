@@ -151,7 +151,7 @@ async function getNews() {
 
 };
 
-getNews();
+getNews()
 
 //the express router receives a rquest from the react client, and pings the database
 //for user data. Then the rows of data are sent back.
