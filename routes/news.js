@@ -22,9 +22,9 @@ client.connect();
 const NewsAPI = require("newsapi");
 const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
-//garbage collection of news articles older than 30 days of publishing to maintain space on db
+//garbage collection of news articles older than 5 days of publishing to maintain space on db
 client.query(
-  "DELETE FROM news WHERE publish_date < now() - interval \'30 days\'",
+  "DELETE FROM news WHERE publish_date < now() - interval \'5 days\'",
   function (err, result) {
     if (err) throw err;
   }
