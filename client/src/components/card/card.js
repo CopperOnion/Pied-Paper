@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState,useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -9,18 +9,18 @@ import './card.css'
 import axios from "axios";
 
 const useStyles = makeStyles({
-  root: {
+  root:{
     '.MuiTypography-gutterBottom': {
       marginBottom: "1em"
     },
     display: 'flex',
     flexDirection: 'row',
-    padding: 0,
+    padding: '4vh',
     transition: 'transform .4s',
     overflow: 'visible',
     height: "20vh",
-    marginBottom: "2vh"
   },
+
   '.MuiCardContent-root:last-child': {
     padding: 0
   },
@@ -28,10 +28,13 @@ const useStyles = makeStyles({
   'root:hover': {
 
   },
+
   media: {
     height: '20vh',
     flex: .3,
-    right: 0
+    right: 0,
+    transition:"all .5s"
+
   },
 
   content: {
@@ -45,6 +48,10 @@ const useStyles = makeStyles({
   title: {
     marginBottom: "1em"
   },
+  paragraph:{
+    marginBottom: "50px",
+    fontSize:'1.5vh'
+  }
 
 });
 
@@ -53,15 +60,26 @@ TODO: Add a detail tab that expands upon hover ( separate from the original card
 
 */
 export default function MediaCard({ title, description, url, i, image, theme, date, author, roboFalse }) {
-  const classes = useStyles();
+  /* 
+  States for true / false for users
+  */
   const [current_true, setTrue] = useState(0)
   const [current_false, setFalse] = useState(0)
+ 
 
   let num_votes = current_true + current_false
   let true_rate = parseFloat((current_true / (num_votes)) * 100).toFixed(2)
   let false_rate = parseFloat((current_false / (num_votes)) * 100).toFixed(2)
   let roboTrue = parseFloat(100 - roboFalse).toFixed(2)
 
+  /* 
+  Use styles with state passed down
+  */
+  const classes = useStyles();
+  /* 
+  Hides and reveals the uservote section
+  
+  */
   const showmore = useCallback((index) => {
     var element = document.getElementsByClassName(index);
     element[0].classList.remove("notdisplayed");
@@ -93,42 +111,53 @@ export default function MediaCard({ title, description, url, i, image, theme, da
         */
         showless("details_question" + i)
 
-        console.log(res.data.votes)
         setTrue(res.data.votes.user_true)
         setFalse(res.data.votes.user_false)
         showmore("stats" + i)
 
       })
-  }, []);
+  }, [showless,showmore]);
 
-  const urlcleanse = /^(?!.*(https))\w+/g;
-  let cleansed_author = ""
+
   /* 
   
-  Use effect hook to fetch image using an 
+  Use effect hook so the cards reset when categories change
   
   */
 
-
+  useEffect(() => {
+    showless("attached" + i)
+    
+    return function cleanup() {
+      showless("attached" + i)
+    }
+  }, [title])
 
   return (
     <div>
-      <a onClick={() => showmore('attached' + i)} href={url} target="_blank">
+      {/* 
+      TODO: Open tab unfocused (This might actually be impossible)
+
+      Something on the right side of the cards to give it more jazz
+
+      added shadows to the card
+      */}
+      <a onClick={() => showmore('attached' + i)} href={url} rel="noopener noreferrer" target="_blank">
         <ThemeProvider theme={theme}>
-          <Card elevation={0} className={classes.root}>
+          <Card elevation={0} className={`${classes.root} ${classes.metric}`}>
 
 
             <div className={classes.content}>
               <div className={classes.title}>
                 <h3 className='article_title'>  {title} </h3>
-                <h5>{author}</h5>
+                <h6>{author}</h6>
 
                 <h6>{date}</h6>
 
               </div>
 
 
-              <p style={{ marginBottom: "50px" }}>
+              <p className={classes.paragraph}>
                 {description}
               </p>
 
@@ -140,7 +169,6 @@ export default function MediaCard({ title, description, url, i, image, theme, da
             <CardMedia
               className={classes.media}
               image={image}
-              title="Contemplative Reptile"
             />
 
           </Card>
@@ -152,13 +180,16 @@ export default function MediaCard({ title, description, url, i, image, theme, da
           <h3 className={"details_question" + i + " displayed"}>Do you think this article is <button className='details_buttons' onClick={() => uservote("user_true", url, i)}>True News</button> or <button className='details_buttons' onClick={() => uservote("user_false", url, i)}>Fake News</button> ?</h3>
 
           <div className={'stats' + i + ' notdisplayed'}>
-            <h2 className='details_people'>
+            <h3 className='details_people'>
               Out of {num_votes} reader(s) <br />
               {true_rate}% <sub>({current_true})</sub> thought this was <i>True News</i> while {false_rate}% <sub>({current_false})</sub> thought this article was <i>Fake News</i>
-            </h2>
+            </h3>
             <h3 className='details_machine'>
+              {/* 
+                False and True values are flipped on purpose !
+              */}
               Our ML algorithm has determined that this article has <br />
-              {roboTrue}% chances of being <i>True News</i> and {roboFalse}% chances of being <i>Fake News</i>
+              {roboTrue}% chances of being <b>True News</b> and {roboFalse}% chances of being <b>Fake News</b>
             </h3>
           </div>
 
@@ -167,7 +198,7 @@ export default function MediaCard({ title, description, url, i, image, theme, da
             <h4 className={`source` + i + ' notdisplayed'}>{e.articles.source.name}</h4>  
           */}
         </div>
-        <button onClick={() => showless("attached" + i)}>Hide</button>
+        <button className = 'details_hide' onClick={() => showless("attached" + i)}>Hide</button>
 
       </div>
     </div>

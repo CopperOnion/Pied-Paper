@@ -1,6 +1,7 @@
 .article_title{
     margin-block-start: 0em;
-    margin-block-end: 1em;
+    margin-block-end: 1vh;
+    font-size:2.1vh;
 }
 
 h4{
@@ -31,6 +32,7 @@ p{
     overflow: hidden;
     max-height: 300px;
     transition: all .6s;
+    padding:2em;
 }
 
 .notdisplayed{
@@ -40,3 +42,7 @@ p{
 
 }
 
+h3{
+    margin-block-start:0em;
+    margin-block-end : 0em;
+}

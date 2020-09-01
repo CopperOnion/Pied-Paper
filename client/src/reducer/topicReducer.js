@@ -2,7 +2,8 @@
 const initialState = {
     topic: 'NULL',
     order: 'DESC',
-    range: '48 hours'
+    range: '48 hours',
+    search: 'NULL'
 };
 
 /* 
@@ -27,6 +28,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 range: action.range
+            }
+        case "SET_SEARCH":
+            return{
+                ...state,
+                search: action.search
             }
         default: return state;
     }

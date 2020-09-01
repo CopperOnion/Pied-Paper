@@ -151,7 +151,7 @@ async function getNews() {
 
 };
 
-getNews();
+getNews()
 
 //the express router receives a rquest from the react client, and pings the database
 //for user data. Then the rows of data are sent back.
@@ -179,6 +179,7 @@ router.get("/retrieve", (req, res) => {
     `SELECT * FROM news
     WHERE (${newsParam.category} IS NULL OR
     category = ${newsParam.category}) AND
+    (title ~* \'${newsParam.title}\') AND
     publish_date > now() - interval \'${newsParam.range}\'
     ORDER BY publish_date ${newsParam.sort};`,
     (err, result) => {
@@ -211,5 +212,24 @@ router.post("/uservote", (req, res) => {
     console.log(result.rows[0])
   })
 });
+
+/* 
+Retrieve all for data visualization
+
+*/
+router.get("/retrieve_all", (req, res) => {
+
+  const newsParam = req.query
+
+  client.query(
+    `SELECT * FROM news`,
+    (err, result) => {
+      if (err) throw err;
+
+      res.status(200).json(result.rows)
+    })
+});
+
+
 
 module.exports = router;

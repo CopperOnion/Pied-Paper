@@ -11,7 +11,9 @@ import { setTimeRange } from '../../actions'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: 0
+    margin: 0,
+    verticalAlign:"baseline"
+
   },
   select: {
     paddingTop: '3px'

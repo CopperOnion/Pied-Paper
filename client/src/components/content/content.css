@@ -4,7 +4,7 @@
 }
 
 .content .left{
-    padding: 1.5em;
+    padding: 5vh;
 }
 
 .content .right{
@@ -23,19 +23,32 @@
     list-style-type: none;
 }
 
+/* 
+    Add a discrepancy metric
+*/
 .content .cardlist{
-    margin: 6vh 0;
+    margin: 7vh 0 7vh 0;
+    border-radius:0;
+    border-left: solid 20px;
+    border-image: linear-gradient( to bottom, #9198e5 20%, #90FFDC ) 2 100%;
     transition: all .4s;
-    border: solid 1px;
-    padding: 2em;
 }
 
 .content .cardlist:hover {
-    transform: scale(1.04);
+    box-shadow: 5px 5px 10px;
 }
 
 .content .cardlist .details_buttons{
     font-Size: 32px;
+    background-color:transparent;
+    border:none;
+    cursor: pointer;
+    transition: all .2s;
+
+}
+
+.content .cardlist .details_hide{
+    font-Size: 20px;
     background-color:transparent;
     border:none;
     cursor: pointer;
@@ -48,6 +61,11 @@
 }
 
 .content .cardlist .details_buttons:hover {
+    color:white;
+    background-color:black;
+}
+
+.content .cardlist .details_hide:hover {
     color:white;
     background-color:black;
 }
@@ -65,6 +83,7 @@
 .content .cardlist .details_question{
     transition: all .2s;
 }
+
 
 
 .left ul{
@@ -92,6 +111,12 @@
     width:0;
     display:inline-block
 }
+
+.optionselector{
+    display: flex;
+    align-items: flex-end;
+}
+
 a{
     text-decoration: none;
 }

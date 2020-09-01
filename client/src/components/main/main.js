@@ -4,6 +4,7 @@ import Dashboard from "../dashboard/dashboard"
 import Content from "../content/content"
 import About from "../content/about/about"
 import Team from '../content/team/team'
+import Data from '../content/data/dataviz'
 
 import Extra from "../nav/extra"
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -19,7 +20,6 @@ import {
   Route,
 } from "react-router-dom";
 
-import {createBrowserHistory} from 'history';
 
 const theme = createMuiTheme({
   palette: {
@@ -32,13 +32,12 @@ const theme = createMuiTheme({
   },
 });
 
-const browserHistory = createBrowserHistory();
 
 function Main() {
   return (
     <Provider store={store}>
 
-      <Router history={browserHistory}>
+      <Router>
         <div className='main_container'>
 
           <div className='main_left'>
@@ -58,6 +57,10 @@ function Main() {
 
               <Route exact path="/team">
                 <Team theme={theme} />
+              </Route>
+
+              <Route exact path="/data">
+                <Data theme={theme} />
               </Route>
             </Switch>
 

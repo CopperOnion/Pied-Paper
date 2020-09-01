@@ -14,7 +14,7 @@ function About( {theme}) {
                 <img src={logo} alt="Kiwi standing on oval" height="200px" width="200px"/>
 
                 <Typography  style={{marginLeft: '2vw', marginTop:'1.5vh'}}variant="body1" color='primary'>
-                    This project was made as a submission to the PyTorch Summer Hackathon 2020. The task was to build a web application using PyTorch libraries.
+                    This project was made as a submission to the <a color="orange" href="https://devpost.com/software/pied-paper?ref_content=user-portfolio&ref_feature=in_progress">PyTorch Summer Hackathon 2020</a>. The task was to build a web application using PyTorch libraries.
                     Our project is a truth-based news aggregator. With the rise of smaller, internet-based news publications, and political value in controlling the spread of information, fake news has become a genuine problem. Pied Paper seeks to provide a clearer view of online news, using real news articles scraped from the web.
                     Our website aggregates news from various media sites, and uses a PyTorch-based neural net model to classify articles as fake or real. This model is trained on a fake/real news dataset obtained from Kaggle. The model’s prediction is shown to the user, and user input is also taken to measure users’ agreement with the model. Articles can be sorted by genre and date.
 

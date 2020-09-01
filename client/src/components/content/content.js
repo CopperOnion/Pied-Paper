@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 /* material UI button*/
-import Button from '@material-ui/core/Button';
 
 /* Importing components */
 import Card from '../card/card'
 import Pagination from '../card/pagination'
-import Opinion from '../card/opinion'
 
 /* redux related stuff */
 import { withRouter } from "react-router";
@@ -16,9 +14,10 @@ import { connect } from "react-redux";
 import './content.css'
 import axios from "axios";
 
-/* Time menu */
+/* Sorting and Searching */
 import TimeMenu from "../searchfilters/timefilter"
 import SortMenu from "../searchfilters/sortfilter"
+import TitleSearch from "../searchfilters/titlesearch"
 
 /* Import image */
 import loadinggif from "../../files/808.gif"
@@ -62,7 +61,8 @@ class Content extends Component {
                 params: {
                     category: this.props.topic,
                     range: this.props.range,
-                    sort: this.props.order
+                    sort: this.props.order,
+                    title : this.props.search
                 }
             })
             .then(res => {
@@ -93,6 +93,10 @@ class Content extends Component {
 
     componentWillReceiveProps(nprops) {
         if (nprops.topic) {
+            this.setState({
+                isLoading: true,
+                news:[]
+            })
             //GET request to express server for the NEWS API to return new articles
             //FIXME: NO longer a POST request, but a GET request with query params
             axios
@@ -101,7 +105,8 @@ class Content extends Component {
                     params: {
                         category: nprops.topic,
                         range: nprops.range,
-                        sort: nprops.order
+                        sort: nprops.order,
+                        title: nprops.search
                     }
                 }
                 )
@@ -110,6 +115,7 @@ class Content extends Component {
                         {
                             news: [...res.data],
                             currentpage: 1,
+                            isLoading:false
                         },
                         () => {
 
@@ -126,7 +132,7 @@ class Content extends Component {
     render() {
 
         let cardlist = <ul></ul>
-        let loadingscreen = <img src={loadinggif} alt="Girl in a jacket" style={{ marginTop: "10vh" }} width="200" height="30" />
+        let loadingscreen = <img src={loadinggif} alt="Loading..." style={{ marginTop: "10vh" }} width="200" height="30" />
 
         if (!this.state.isLoading) {
             loadingscreen = <></>
@@ -154,7 +160,6 @@ class Content extends Component {
                                 theme={this.props.theme}
                                 i={i}
                             />
-
                         </li>
                     ))}
                 </ul>
@@ -173,7 +178,7 @@ class Content extends Component {
                     <div className='optionselector'>
                         <TimeMenu />
                         <SortMenu />
-
+                        <TitleSearch/>
                     </div>
                     {loadingscreen}
 
@@ -198,7 +203,8 @@ class Content extends Component {
 const mapStateToProps = state => ({
     topic: state.topic.topic,
     order: state.topic.order,
-    range: state.topic.range
+    range: state.topic.range,
+    search: state.topic.search
 })
 
 export default connect(
