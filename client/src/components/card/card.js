@@ -15,7 +15,6 @@ const useStyles = makeStyles({
     },
     display: 'flex',
     flexDirection: 'row',
-    padding: '4vh',
     transition: 'transform .4s',
     overflow: 'visible',
     height: "20vh",
@@ -144,7 +143,7 @@ export default function MediaCard({ title, description, url, i, image, theme, da
       */}
       <a onClick={() => showmore('attached' + i)} href={url} rel="noopener noreferrer" target="_blank">
         <ThemeProvider theme={theme}>
-          <Card elevation={0} className={`${classes.root} ${classes.metric}`}>
+          <Card elevation={0} className={`${classes.root} ${classes.metric} card_element`}>
 
 
             <div className={classes.content}>

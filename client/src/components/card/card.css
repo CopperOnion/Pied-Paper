@@ -46,3 +46,26 @@ h3{
     margin-block-start:0em;
     margin-block-end : 0em;
 }
+
+.card_element{
+    padding: 4vh;
+
+}
+
+@media only screen and (max-width: 500px) {
+    .card_element{
+        padding:2vh;
+    }
+
+    .article_title{
+        margin-block-start: 0em;
+        margin-block-end: 1vh;
+        font-size:1.7vh;
+    }
+    
+    .card_element h6{
+        font-size:1.1vh;
+
+    }
+
+}

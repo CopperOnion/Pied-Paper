@@ -22,10 +22,14 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    fontWeight: "500" ,    
+    fontSize: '7vh' 
   },
   subtitle:{
     flexGrow: 1,
-    marginBottom:"10vh"
+    marginBottom:"10vh",
+    fontWeight: "500" ,
+    fontSize:"3vh"
 
   },
   list: {
@@ -105,14 +109,14 @@ function Dashboard({ dispatch, theme }) {
           </Typography>
 
           <div className="top">
-            <Typography onClick={() => { dispatch(setCurrentTopic("NULL")); showline("All") }} style={{ fontWeight: "500" ,    fontSize: '7vh' }} className={classes.title} variant="h2" color='secondary'>
+            <Typography onClick={() => { dispatch(setCurrentTopic("NULL")); showline("All") }} className={classes.title} variant="h2" color='secondary'>
               <Link style={{ color: '#90FFDC' }} to="/">Pied Paper</Link>
             </Typography>
           </div>
 
 
           <div className="smallbar">
-            <Typography style={{ fontWeight: "500" ,fontSize:"3vh"}} className={classes.subtitle} variant="h5" color='secondary'>
+            <Typography className={classes.subtitle} variant="h5" color='secondary'>
               Truth-based news aggregator
             </Typography>
           </div>
@@ -123,10 +127,8 @@ function Dashboard({ dispatch, theme }) {
             @setOrdering
           */}
 
-          <div className="smallbar">
+          <div className="smallbar categories">
             {topiclist}
-
-
           </div>
         </div>
 

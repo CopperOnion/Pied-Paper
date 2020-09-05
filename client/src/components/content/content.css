@@ -7,6 +7,12 @@
     padding: 5vh;
 }
 
+@media only screen and (max-width: 500px) {
+    .content .left{
+        padding: 2vh;
+    }
+}
+
 .content .right{
     position: fixed;
     right: 0;
@@ -32,6 +38,16 @@
     border-left: solid 20px;
     border-image: linear-gradient( to bottom, #9198e5 20%, #90FFDC ) 2 100%;
     transition: all .4s;
+}
+
+@media only screen and (max-width: 500px) {
+    .content .cardlist{
+        margin: 5vh 0 5vh 0;
+        border-radius:0;
+        border-left: solid 10px;
+        border-image: linear-gradient( to bottom, #9198e5 20%, #90FFDC ) 2 100%;
+        transition: all .4s;
+    }
 }
 
 .content .cardlist:hover {
