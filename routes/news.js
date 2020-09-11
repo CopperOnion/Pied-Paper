@@ -169,18 +169,27 @@ router.get("/users", (req, res) => {
 
 /*   
 given the URL /api/news/retrieve?category=\'entertainment\'&range=30+days&sort=DESC
+@FIXME: figure this bug out...
 */
 
 router.get("/retrieve", (req, res) => {
 
   const newsParam = req.query
-
+  console.log(newsParam)
+  /*  publish_date interval was causing a bug...
+  `SELECT * FROM news
+    WHERE (${newsParam.category} IS NULL OR
+    category = ${newsParam.category}) AND
+    (title ~* \'${newsParam.title}\') AND
+    publish_date > now() - interval \'${newsParam.range}\'
+    ORDER BY publish_date ${newsParam.sort};`
+   */
   client.query(
     `SELECT * FROM news
     WHERE (${newsParam.category} IS NULL OR
     category = ${newsParam.category}) AND
     (title ~* \'${newsParam.title}\') AND
-    publish_date > now() - interval \'${newsParam.range}\'
+    publish_date > now() - interval '10 days'
     ORDER BY publish_date ${newsParam.sort};`,
     (err, result) => {
       if (err) throw err;
