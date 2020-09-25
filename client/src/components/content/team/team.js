@@ -94,7 +94,7 @@ function Team({ theme }) {
                     </CardContent>
                     <CardMedia
                             className={classes.media}
-                            image="https://media-exp1.licdn.com/dms/image/C5603AQG7EdICWm4KZg/profile-displayphoto-shrink_400_400/0?e=1603929600&v=beta&t=OtT_nKn0yINzf_zV2lBXVuCHx3AAR05qtHIMZAPxZ8Y"
+                            image="https://media-exp1.licdn.com/dms/image/C4D03AQH2Uw60OAawEw/profile-displayphoto-shrink_400_400/0?e=1606348800&v=beta&t=X9xmeGl1b-SmCJWlT90oyYLml5dQHOGutJcRZzyQHAg"
                             title="photo"
                         />
                 </Card>
